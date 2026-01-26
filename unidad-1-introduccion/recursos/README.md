@@ -70,11 +70,9 @@
 
 #### QCon Presentations
 1. **"Microservices at Netflix Scale" - Adrian Cockcroft**
-   - Duración: 45 minutos
    - Enfoque: Lecciones aprendidas en transformación
 
 2. **"From Monolith to Microservices at Uber" - Matt Ranney**
-   - Duración: 40 minutos
    - Enfoque: Desafíos de escalabilidad global
 
 #### AWS re:Invent Sessions
@@ -86,12 +84,10 @@
 
 #### Coursera - "Microservices Architecture"
 - **Universidad:** University of Alberta
-- **Duración:** 4 semanas
 - **Enfoque:** Fundamentos teóricos y prácticos
 
 #### edX - "Microservices Development"
 - **Universidad:** IBM
-- **Duración:** 6 semanas
 - **Enfoque:** Implementación práctica con contenedores
 
 ---

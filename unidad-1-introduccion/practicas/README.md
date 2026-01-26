@@ -18,7 +18,6 @@ Las prácticas de la Unidad 1 están diseñadas para consolidar los conceptos fu
 ## 📚 Lista de Prácticas
 
 ### [Práctica 1.1: Análisis Comparativo de Estilos Arquitectónicos](practica-1-1.md)
-- **Duración:** 2 horas
 - **Modalidad:** Individual
 - **Objetivo:** Crear matriz comparativa detallada entre Monolitos, SOA y Microservicios
 - **Entregables:** 
@@ -27,7 +26,6 @@ Las prácticas de la Unidad 1 están diseñadas para consolidar los conceptos fu
   - Matriz de decisión con criterios ponderados
 
 ### [Práctica 1.2: Estudio de Caso - Desacoplamiento de un Monolito](practica-1-2.md) 
-- **Duración:** 3 horas
 - **Modalidad:** Equipos de 2-3 personas
 - **Objetivo:** Analizar transformación arquitectónica real y crear mapa conceptual
 - **Entregables:**
@@ -110,15 +108,14 @@ Las prácticas de la Unidad 1 establecen la base conceptual para el proyecto fin
 
 ### Formato de Presentaciones Finales
 - **Fecha:** Viernes de la semana 2
-- **Duración:** 10 min + 5 min preguntas por equipo
-- **Audiencia:** Clase completa + profesor
+- **Modalidad:** Clase completa + profesor
 - **Evaluación:** Peer review + evaluación docente
 
 ### Agenda Sugerida
 1. **Casos de Netflix** (2 equipos)
 2. **Casos de Uber** (2 equipos)  
 3. **Casos de Amazon** (2 equipos)
-4. **Síntesis grupal** (30 min) - Identificación de patrones comunes
+4. **Síntesis grupal** - Identificación de patrones comunes
 
 ---
 

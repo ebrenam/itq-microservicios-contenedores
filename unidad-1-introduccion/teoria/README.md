@@ -2,7 +2,6 @@
 
 ## 📋 Información General
 
-- **Duración:** 2 semanas (10 horas académicas)
 - **Modalidad:** 2 horas teoría + 3 horas práctica + 5 horas trabajo independiente
 - **Competencias:** Fundamentos conceptuales y diferenciación arquitectónica
 

@@ -7,7 +7,6 @@ Elaborar un cuadro comparativo detallado que contraste Monolitos, SOA y Microser
 
 ## 📋 Información General
 
-- **Duración:** 2 horas (1 sesión de laboratorio)
 - **Modalidad:** Individual con discusión grupal
 - **Prerrequisitos:** Lectura de material teórico de la Unidad 1
 - **Herramientas:** Editor de texto, navegador web
@@ -30,7 +29,7 @@ Elaborar un cuadro comparativo detallado que contraste Monolitos, SOA y Microser
 
 ---
 
-## 📚 Parte 1: Análisis Teórico Comparativo (45 minutos)
+## 📚 Parte 1: Análisis Teórico Comparativo
 
 ### Instrucciones
 
@@ -103,7 +102,7 @@ Elaborar un cuadro comparativo detallado que contraste Monolitos, SOA y Microser
 
 ---
 
-## 🎯 Parte 2: Aplicación a Casos Reales (60 minutos)
+## 🎯 Parte 2: Aplicación a Casos Reales
 
 ### Actividad: Recomendación Arquitectónica
 
@@ -187,7 +186,7 @@ Justificación:
 
 ---
 
-## 🧠 Parte 3: Síntesis y Reflexión (15 minutos)
+## 🧠 Parte 3: Síntesis y Reflexión
 
 ### Actividad de Cierre
 
@@ -220,7 +219,6 @@ Justificación:
   - Reflexión personal (máximo 500 palabras)
 
 ### 2. Presentación Ejecutiva
-- **Duración:** 5 minutos
 - **Contenido:**
   - 3 hallazgos principales del análisis
   - 1 recomendación general para toma de decisiones

@@ -13,17 +13,17 @@ Elaborar un cuadro comparativo detallado que contraste las características prin
 
 ### Instrucciones
 
-1. **Investigación** (30 minutos)
+1. **Investigación**
    - Revisar material teórico de la unidad
    - Consultar al menos 2 fuentes adicionales
    - Tomar notas sobre cada arquitectura
 
-2. **Elaboración del Cuadro** (45 minutos)
+2. **Elaboración del Cuadro**
    - Utilizar la plantilla proporcionada
    - Completar cada celda con información precisa y concisa
    - Incluir ejemplos específicos donde corresponda
 
-3. **Análisis Crítico** (15 minutos)
+3. **Análisis Crítico**
    - Agregar una columna de "Casos de Uso Ideales"
    - Justificar cada recomendación
 
@@ -66,17 +66,17 @@ Crear un mapa conceptual que visualice los componentes fundamentales de un micro
 
 ### Instrucciones
 
-1. **Identificación de Conceptos** (20 minutos)
+1. **Identificación de Conceptos**
    - Listar todos los componentes mencionados en la teoría
    - Identificar las relaciones entre conceptos
    - Priorizar por importancia y frecuencia de uso
 
-2. **Construcción del Mapa** (40 minutos)
+2. **Construcción del Mapa**
    - Utilizar herramienta digital (Miro, Lucidchart, draw.io)
    - Organizar conceptos jerárquicamente
    - Conectar con líneas etiquetadas que expliquen relaciones
 
-3. **Validación y Refinamiento** (20 minutos)
+3. **Validación y Refinamiento**
    - Revisar completitud del mapa
    - Verificar coherencia de las conexiones
    - Añadir ejemplos concretos donde sea útil
@@ -212,12 +212,12 @@ Investigar y analizar en detalle la transformación arquitectónica de una empre
 
 ## 📅 Cronograma de Actividades
 
-| Semana | Actividad          | Modalidad      | Duración |
-| ------ | ------------------ | -------------- | -------- |
-| 1      | Cuadro Comparativo | Individual     | 90 min   |
-| 1      | Mapa Conceptual    | Individual     | 80 min   |
-| 2      | Caso de Estudio    | Equipos de 2-3 | 3 horas  |
-| 2      | Presentaciones     | Grupal         | 2 horas  |
+| Semana | Actividad          | Modalidad      |
+| ------ | ------------------ | -------------- |
+| 1      | Cuadro Comparativo | Individual     |
+| 1      | Mapa Conceptual    | Individual     |
+| 2      | Caso de Estudio    | Equipos de 2-3 |
+| 2      | Presentaciones     | Grupal         |
 
 ---
 

@@ -1,14 +1,5 @@
 # Unidad 1: Introducción a los microservicios y arquitecturas evolutivas
 
-## 📋 Información general
-
-- **Código:** CDD-2601-U1
-- **Duración:** 2 semanas (10 horas académicas)
-- **Modalidad:** 2h teoría + 3h práctica + 5h trabajo independiente
-- **Peso en curso:** 20% de la evaluación total
-
----
-
 ## 🎯 Objetivos de aprendizaje
 
 Al finalizar esta unidad, el estudiante será capaz de:
@@ -60,12 +51,12 @@ Ejercicios de consolidación conceptual:
 Dos prácticas evaluadas que preparan para el proyecto final:
 
 #### [Práctica 1.1: Análisis comparativo](practicas/practica-1-1.md)
-- **Duración:** 2 horas | **Modalidad:** Individual
+- **Modalidad:** Individual
 - **Objetivo:** Desarrollar criterio técnico para selección arquitectónica
 - **Entregables:** Matriz comparativa + análisis de casos + matriz de decisión
 
 #### [Práctica 1.2: Estudio de caso](practicas/practica-1-2.md)  
-- **Duración:** 3 horas | **Modalidad:** Equipos 2-3 personas
+- **Modalidad:** Equipos 2-3 personas
 - **Objetivo:** Analizar desacoplamiento real y crear mapa conceptual
 - **Entregables:** Análisis completo + mapa interactivo + aplicación al proyecto
 
@@ -83,21 +74,21 @@ Material de apoyo y referencias:
 
 ### Semana 1: Fundamentos y principios
 
-| Día                       | Actividad                                               | Duración | Modalidad   |
-| ------------------------- | ------------------------------------------------------- | -------- | ----------- |
-| Lunes                     | **Teoría:** Contexto histórico y SOA vs Microservicios  | 2h       | Presencial  |
-| Miércoles                 | **Práctica 1.1:** Análisis comparativo de arquitecturas | 2h       | Laboratorio |
-| Viernes                   | **Actividades:** Cuadro comparativo + Mapa conceptual   | 1h       | Presencial  |
-| **Trabajo Independiente** | Lectura Newman Cap. 1-3 + Fowler article                | 5h       | Autónomo    |
+| Día                       | Actividad                                               | Modalidad   |
+| ------------------------- | ------------------------------------------------------- | ----------- |
+| Lunes                     | **Teoría:** Contexto histórico y SOA vs Microservicios  | Presencial  |
+| Miércoles                 | **Práctica 1.1:** Análisis comparativo de arquitecturas | Laboratorio |
+| Viernes                   | **Actividades:** Cuadro comparativo + Mapa conceptual   | Presencial  |
+| **Trabajo Independiente** | Lectura Newman Cap. 1-3 + Fowler article                | Autónomo    |
 
 ### Semana 2: Casos de Estudio y Aplicación
 
-| Día                       | Actividad                                               | Duración | Modalidad   |
-| ------------------------- | ------------------------------------------------------- | -------- | ----------- |
-| Lunes                     | **Teoría:** Casos Netflix, Uber, Amazon + Ley de Conway | 2h       | Presencial  |
-| Miércoles                 | **Práctica 1.2:** Análisis de transformación (Parte 1)  | 1.5h     | Laboratorio |
-| Viernes                   | **Práctica 1.2:** Mapa conceptual + Presentaciones      | 1.5h     | Laboratorio |
-| **Trabajo Independiente** | Investigación de caso + preparación presentación        | 5h       | Autónomo    |
+| Día                       | Actividad                                               | Modalidad   |
+| ------------------------- | ------------------------------------------------------- | ----------- |
+| Lunes                     | **Teoría:** Casos Netflix, Uber, Amazon + Ley de Conway | Presencial  |
+| Miércoles                 | **Práctica 1.2:** Análisis de transformación (Parte 1)  | Laboratorio |
+| Viernes                   | **Práctica 1.2:** Mapa conceptual + Presentaciones      | Laboratorio |
+| **Trabajo Independiente** | Investigación de caso + preparación presentación        | Autónomo    |
 
 ---
 
@@ -184,15 +175,15 @@ Al finalizar la Unidad 1, deberías poder:
 
 ## 📚 Recursos de Inicio Rápido
 
-### Lectura Esencial (1 hora)
+### Lectura Esencial
 1. [Fowler, M. "Microservices"](https://martinfowler.com/articles/microservices.html)
 2. Newman, S. "Building Microservices" - Chapter 1
 
-### Videos Introductorios (30 minutos)
-1. "Microservices Explained" - Tech Primers (15 min)
-2. "Netflix Microservices Architecture" - InfoQ (15 min)
+### Videos Introductorios
+1. "Microservices Explained" - Tech Primers
+2. "Netflix Microservices Architecture" - InfoQ
 
-### Preparación de Herramientas (15 minutos)
+### Preparación de Herramientas
 1. Cuenta en Miro o Lucidchart
 2. Editor Markdown (Typora, Mark Text, o VS Code)
 3. Acceso a Netflix Tech Blog y Uber Engineering

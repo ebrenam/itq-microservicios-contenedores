@@ -7,7 +7,6 @@ Analizar un caso de estudio real de transformación arquitectónica y elaborar u
 
 ## 📋 Información General
 
-- **Duración:** 3 horas (1.5 sesiones de laboratorio)
 - **Modalidad:** Equipos de 2-3 personas
 - **Prerrequisitos:** Práctica 1.1 completada
 - **Herramientas:** Miro/Lucidchart, navegador web, editor de texto
@@ -39,11 +38,11 @@ Analizar un caso de estudio real de transformación arquitectónica y elaborar u
 
 ---
 
-## 🔍 Parte 1: Investigación y Análisis del Caso (90 minutos)
+## 🔍 Parte 1: Investigación y Análisis del Caso
 
 ### Metodología de Investigación
 
-#### 1. Recopilación de Información (30 min)
+#### 1. Recopilación de Información
 **Fuentes primarias recomendadas:**
 
 **Para Netflix:**
@@ -64,7 +63,7 @@ Analizar un caso de estudio real de transformación arquitectónica y elaborar u
 - "The Everything Store" - Brad Stone
 - Werner Vogels' blog (Amazon CTO)
 
-#### 2. Análisis Estructurado (60 min)
+#### 2. Análisis Estructurado
 Completar la siguiente plantilla de análisis:
 
 ```markdown
@@ -128,7 +127,7 @@ Completar la siguiente plantilla de análisis:
 
 ---
 
-## 🗺️ Parte 2: Creación del Mapa Conceptual (60 minutos)
+## 🗺️ Parte 2: Creación del Mapa Conceptual
 
 ### Objetivo del Mapa
 Visualizar la estrategia de desacoplamiento específica utilizada en el caso seleccionado, mostrando:
@@ -198,7 +197,7 @@ Para cada empresa, incluir elementos específicos:
 - ➡️ Comunicación síncrona
 - 📡 Comunicación asíncrona
 - 🔄 Procesos de transformación
-- ⏰ Líneas de tiempo
+- Líneas de tiempo
 
 #### Anotaciones
 - 💡 Decisiones clave
@@ -208,7 +207,7 @@ Para cada empresa, incluir elementos específicos:
 
 ---
 
-## 📊 Parte 3: Análisis de Impacto y Métricas (30 minutos)
+## 📊 Parte 3: Análisis de Impacto y Métricas
 
 ### Métricas de Transformación
 
@@ -251,7 +250,7 @@ Documentar el impacto cuantitativo de la transformación:
 
 ---
 
-## 🎯 Parte 4: Aplicación al Proyecto Final (20 minutos)
+## 🎯 Parte 4: Aplicación al Proyecto Final
 
 ### Conexión Estratégica
 
@@ -313,25 +312,24 @@ Basándose en el caso analizado, definir:
 ## 🎤 Presentación Final
 
 ### Formato
-- **Duración:** 10 minutos + 5 min preguntas
 - **Modalidad:** Todos los miembros del equipo participan
 - **Herramientas:** Presentación + demo del mapa conceptual
 
 ### Estructura Sugerida
-1. **Contexto del caso** (2 min)
+1. **Contexto del caso**
    - Situación inicial y problemas
    - Evento catalizador
 
-2. **Proceso de transformación** (4 min)
+2. **Proceso de transformación**
    - Estrategia de migración
    - Desafíos principales y soluciones
    - Demo del mapa conceptual
 
-3. **Resultados e impacto** (2 min)
+3. **Resultados e impacto**
    - Métricas de mejora
    - Beneficios alcanzados
 
-4. **Aplicación al proyecto final** (2 min)
+4. **Aplicación al proyecto final**
    - Patrones seleccionados
    - Lecciones aplicables
 
