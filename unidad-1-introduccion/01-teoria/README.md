@@ -14,14 +14,14 @@ Al finalizar esta unidad, el estudiante será capaz de:
 
 ---
 
-## 📚 **Estructura del Contenido**
+## 📚 **Estructura del contenido**
 
 ```text
 unidad-1-introduccion/
 ├── teoria/           # Material conceptual y fundamentos
-├── actividades/      # Ejercicios de consolidación
-├── practicas/        # Laboratorios prácticos evaluados
-└── recursos/         # Material complementario y referencias
+├── 02-actividades/   # Ejercicios de consolidación
+├── 03-practicas/     # Laboratorios prácticos evaluados
+└── 04-recursos/      # Material complementario y referencias
 ```
 
 ---
@@ -30,7 +30,7 @@ unidad-1-introduccion/
 
 ## 🏢 **ARQUITECTURA MONOLÍTICA**
 
-### **¿Qué es un Monolito?**
+### **¿Qué es un monolito?**
 
 ```mermaid
 graph TD
@@ -45,7 +45,7 @@ graph TD
 > **🔍 Explicación del diagrama:**  
 > Este diagrama muestra la estructura típica de una aplicación monolítica donde todas las capas están integradas en una sola unidad desplegable. El flujo va desde la interfaz de usuario (UI) hacia abajo: UI → Lógica de Negocio → Acceso a Datos → Base de Datos. Todas estas capas se despliegan juntas como una sola aplicación.
 
-### **✅ Ventajas del Monolito:**
+### **✅ Ventajas del monolito:**
 
 - **Simplicidad:** Una sola aplicación para desarrollar y desplegar
 - **Testing:** Pruebas end-to-end más directas
@@ -107,7 +107,7 @@ graph TB
 
 > *"Los microservicios son un enfoque arquitectónico para construir aplicaciones como un conjunto de servicios pequeños, autónomos que se comunican a través de APIs bien definidas."*
 
-### **🔑 Características Clave:**
+### **🔑 Características clave:**
 
 - **🎯 Una responsabilidad:** Cada servicio hace una cosa bien
 - **🔄 Desarrollo independiente:** Equipos autónomos
@@ -121,7 +121,7 @@ graph TB
 
 ## 🔗 **DESACOPLAMIENTO (COUPLING)**
 
-### **Alto Acoplamiento = Problemas:**
+### **Alto acoplamiento = problemas:**
 
 ```mermaid
 graph TD
@@ -138,7 +138,7 @@ graph TD
 
 **❌ Cambio en uno afecta a todos**
 
-### **Bajo Acoplamiento = Flexibilidad:**
+### **Bajo acoplamiento = flexibilidad:**
 
 ```mermaid
 graph TD
@@ -152,7 +152,7 @@ graph TD
 
 **✅ Servicios independientes**
 
-### **🎯 Tipos de Desacoplamiento:**
+### **🎯 Tipos de desacoplamiento:**
 
 - **Temporal:** No necesitan estar activos al mismo tiempo
 - **Espacial:** No necesitan conocer ubicaciones específicas
@@ -162,7 +162,7 @@ graph TD
 
 ## 🎯 **COHESIÓN**
 
-### **Alta Cohesión Interna:**
+### **Alta cohesión interna:**
 
 ```mermaid
 graph TD
@@ -183,7 +183,7 @@ graph TD
 > **🔍 Explicación del diagrama:**  
 > Este USER SERVICE muestra **alta cohesión** porque todas las funciones están estrechamente relacionadas con la gestión de usuarios. Existe un flujo lógico: obtener perfil → actualizar → validar datos → procesar contraseña. Todas las funciones trabajan juntas hacia un objetivo común y comparten el mismo dominio de responsabilidad.
 
-### **❌ Baja Cohesión - Evitar:**
+### **❌ Baja cohesión - evitar:**
 
 ```mermaid
 graph TD
@@ -550,7 +550,7 @@ flowchart TD
 
 ## 📚 **Actividades de aprendizaje**
 
-### 🎯 [Actividades de consolidación](actividades/README.md)
+### 🎯 [Actividades de consolidación](../02-actividades/README.md)
 
 Ejercicios para reforzar los conceptos:
 
@@ -558,23 +558,23 @@ Ejercicios para reforzar los conceptos:
 2. **Mapa Conceptual** - Visualización de componentes fundamentales  
 3. **Análisis de Casos** - Investigación de transformaciones reales
 
-### 🔬 [Prácticas de laboratorio](practicas/README.md)
+### 🔬 [Prácticas de laboratorio](../03-practicas/README.md)
 
 Dos prácticas evaluadas que preparan para el proyecto final:
 
-#### [Práctica 1.1: Análisis comparativo](practicas/practica-1-1.md)
+#### [Práctica 1.1: Análisis comparativo](../03-practicas/practica-1-1.md)
 
 - **Modalidad:** Individual
 - **Objetivo:** Desarrollar criterio técnico para selección arquitectónica
 - **Entregables:** Matriz comparativa + análisis de casos + matriz de decisión
 
-#### [Práctica 1.2: Estudio de caso](practicas/practica-1-2.md)
+#### [Práctica 1.2: Estudio de caso](../03-practicas/practica-1-2.md)
 
 - **Modalidad:** Equipos 2-3 personas
 - **Objetivo:** Analizar desacoplamiento real y crear mapa conceptual
 - **Entregables:** Análisis completo + mapa interactivo + aplicación al proyecto
 
-### 📚 [Recursos complementarios](recursos/README.md)
+### 📚 [Recursos complementarios](../04-recursos/README.md)
 
 Material de apoyo y referencias:
 

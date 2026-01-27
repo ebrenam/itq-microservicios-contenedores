@@ -1,6 +1,6 @@
 # Actividades de aprendizaje - Unidad 1
 
-## 📋 Información General
+## 📋 Información general
 
 **Objetivo:** Consolidar los conceptos fundamentales a través de análisis comparativo y casos de estudio reales.
 
@@ -19,13 +19,13 @@ Elaborar un cuadro comparativo detallado que contraste las características prin
    - Consultar al menos 2 fuentes adicionales
    - Tomar notas sobre cada arquitectura
 
-2. **Elaboración del Cuadro**
+2. **Elaboración del cuadro**
    - Utilizar la plantilla proporcionada
    - Completar cada celda con información precisa y concisa
    - Incluir ejemplos específicos donde corresponda
 
-3. **Análisis Crítico**
-   - Agregar una columna de "Casos de Uso Ideales"
+3. **Análisis crítico**
+   - Agregar una columna de "Casos de uso ideales"
    - Justificar cada recomendación
 
 ### Plantilla del cuadro comparativo
@@ -33,18 +33,18 @@ Elaborar un cuadro comparativo detallado que contraste las características prin
 | Aspecto                          | Monolito | SOA | Microservicios |
 | -------------------------------- | -------- | --- | -------------- |
 | **Definición**                   |          |     |                |
-| **Unidad de Despliegue**         |          |     |                |
-| **Base de Datos**                |          |     |                |
+| **Unidad de despliegue**         |          |     |                |
+| **Base de datos**                |          |     |                |
 | **Comunicación**                 |          |     |                |
 | **Tecnología**                   |          |     |                |
 | **Escalabilidad**                |          |     |                |
-| **Complejidad de Desarrollo**    |          |     |                |
-| **Complejidad Operacional**      |          |     |                |
-| **Tamaño de Equipo Ideal**       |          |     |                |
-| **Tiempo de Desarrollo Inicial** |          |     |                |
-| **Facilidad de Testing**         |          |     |                |
-| **Manejo de Fallos**             |          |     |                |
-| **Casos de Uso Ideales**         |          |     |                |
+| **Complejidad de desarrollo**    |          |     |                |
+| **Complejidad operacional**      |          |     |                |
+| **Tamaño de equipo ideal**       |          |     |                |
+| **Tiempo de desarrollo inicial** |          |     |                |
+| **Facilidad de testing**         |          |     |                |
+| **Manejo de fallos**             |          |     |                |
+| **Casos de uso ideales**         |          |     |                |
 
 ### Criterios de evaluación
 
@@ -69,29 +69,29 @@ Crear un mapa conceptual que visualice los componentes fundamentales de un micro
 
 ### Instrucciones
 
-1. **Identificación de Conceptos**
+1. **Identificación de conceptos**
    - Listar todos los componentes mencionados en la teoría
    - Identificar las relaciones entre conceptos
    - Priorizar por importancia y frecuencia de uso
 
-2. **Construcción del Mapa**
+2. **Construcción del mapa**
    - Utilizar herramienta digital (Miro, Lucidchart, draw.io)
    - Organizar conceptos jerárquicamente
    - Conectar con líneas etiquetadas que expliquen relaciones
 
-3. **Validación y Refinamiento**
+3. **Validación y refinamiento**
    - Revisar completitud del mapa
    - Verificar coherencia de las conexiones
    - Añadir ejemplos concretos donde sea útil
 
 ### Conceptos clave a incluir
 
-**Conceptos Centrales:**
+**Conceptos centrales:**
 
 - Microservicio
-- Bounded Context
+- Bounded context
 - API
-- Base de Datos Independiente
+- Base de datos independiente
 
 **Principios:**
 
@@ -100,16 +100,16 @@ Crear un mapa conceptual que visualice los componentes fundamentales de un micro
 - Autonomía
 - Modularidad
 
-**Características Técnicas:**
+**Características técnicas:**
 
 - Comunicación HTTP/REST
 - Event-Driven Architecture
 - Circuit Breaker
 - Service Discovery
 
-**Aspectos Organizacionales:**
+**Aspectos organizacionales:**
 
-- Equipo Autónomo
+- Equipo autónomo
 - DevOps
 - Continuous Deployment
 
@@ -150,23 +150,23 @@ Investigar y analizar en detalle la transformación arquitectónica de una empre
 
 ### Opciones de casos de estudio
 
-#### Opción A: Netflix - La Revolución del Streaming
+#### Opción A: Netflix - la revolución del streaming
 
 - **Contexto:** De DVDs por correo a streaming global
 - **Desafío:** Escalar de miles a millones de usuarios
 - **Solución:** Arquitectura cloud-native con microservicios
 
-#### Opción B: Uber - Conectando el Mundo
+#### Opción B: Uber - conectando el mundo
 
 - **Contexto:** Plataforma global de transporte
 - **Desafío:** Latencia geográfica y consistencia de datos
 - **Solución:** Microservicios distribuidos geográficamente
 
-#### Opción C: Amazon - De Libro a Todo
+#### Opción C: Amazon - de libro a todo
 
 - **Contexto:** Evolución de librería online a marketplace global
 - **Desafío:** Múltiples líneas de negocio en una plataforma
-- **Solución:** Service-oriented organization
+- **Solución:** Service-Oriented Organization
 
 ### Estructura del análisis
 
@@ -196,22 +196,22 @@ Investigar y analizar en detalle la transformación arquitectónica de una empre
 
 ### Metodología de Investigación
 
-1. **Fuentes Primarias**
+1. **Fuentes primarias**
    - Blogs técnicos oficiales de la empresa
    - Presentaciones en conferencias (QCon, AWS re:Invent)
    - Papers y case studies publicados
 
-2. **Fuentes Secundarias**
+2. **Fuentes secundarias**
    - Artículos de análisis en medios especializados
    - Libros de arquitectura que mencionen el caso
    - Entrevistas con ingenieros de la empresa
 
-3. **Documentación Técnica**
+3. **Documentación técnica**
    - Arquitectura de microservicios específicos
    - Patrones y herramientas open source derivados
    - Métricas de rendimiento publicadas
 
-### Criterios de evaluación
+### Criterios de Evaluación
 
 - **Investigación**: Calidad y variedad de fuentes
 - **Análisis técnico**: Comprensión de la arquitectura
@@ -229,12 +229,12 @@ Investigar y analizar en detalle la transformación arquitectónica de una empre
 
 ## 📅 Cronograma de actividades
 
-| Semana | Actividad          | Modalidad      |
-| ------ | ------------------ | -------------- |
-| 1      | Cuadro Comparativo | Individual     |
-| 1      | Mapa Conceptual    | Individual     |
-| 2      | Caso de Estudio    | Equipos de 2-3 |
-| 2      | Presentaciones     | Grupal         |
+| Tipo | Actividad |
+|------|----------|
+| Actividad | Cuadro comparativo arquitectónico (individual) |
+| Actividad | Mapa conceptual de microservicios (individual) |
+| Actividad | Caso de estudio transformación empresarial (equipos) |
+| Presentación | Exposición casos de estudio y conclusiones |
 
 ---
 
@@ -242,13 +242,13 @@ Investigar y analizar en detalle la transformación arquitectónica de una empre
 
 Estas actividades sientan las bases conceptuales para:
 
-- **Unidad 2:** aplicación de Domain-Driven Design y diseño de bounded contexts
+- **Unidad 2:** Aplicación de DDD y diseño de bounded contexts
 - **Unidad 3:** Selección de frameworks y tecnologías apropiadas
 - **Proyecto Final:** Justificación arquitectónica de decisiones de diseño
 
 ---
 
-## 📚 Recursos de apoyo
+## 📚 Recursos de Apoyo
 
 ### Herramientas sugeridas
 

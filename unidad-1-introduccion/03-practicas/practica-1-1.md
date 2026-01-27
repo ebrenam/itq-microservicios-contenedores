@@ -1,11 +1,12 @@
-# Práctica 1.1: Análisis Comparativo de Estilos Arquitectónicos
+# Práctica 1.1: Análisis comparativo de estilos arquitectónicos
 
 ## 🎯 Objetivo
+
 Elaborar un cuadro comparativo detallado que contraste Monolitos, SOA y Microservicios, identificando ventajas, riesgos y casos de uso mediante análisis de escenarios reales.
 
 ---
 
-## 📋 Información General
+## 📋 Información general
 
 - **Modalidad:** Individual con discusión grupal
 - **Prerrequisitos:** Lectura de material teórico de la Unidad 1
@@ -13,23 +14,25 @@ Elaborar un cuadro comparativo detallado que contraste Monolitos, SOA y Microser
 
 ---
 
-## 🔧 Preparación del Entorno
+## 🔧 Preparación del entorno
 
-### Recursos Necesarios
+### Recursos necesarios
+
 1. **Plantilla de análisis** (proporcionada)
 2. **Casos de estudio** preparados
 3. **Acceso a internet** para investigación adicional
 4. **Editor Markdown** o procesador de texto
 
-### Casos de Estudio Preparados
+### Casos de estudio preparados
+
 - **Caso A:** Sistema de E-commerce tradicional (100K usuarios)
-- **Caso B:** Plataforma de streaming de video (10M usuarios)  
+- **Caso B:** Plataforma de streaming de video (10M usuarios)
 - **Caso C:** Sistema bancario core (regulaciones estrictas)
 - **Caso D:** Startup de delivery de comida (crecimiento rápido)
 
 ---
 
-## 📚 Parte 1: Análisis Teórico Comparativo
+## 📚 Parte 1: Análisis teórico comparativo
 
 ### Instrucciones
 
@@ -40,61 +43,63 @@ Elaborar un cuadro comparativo detallado que contraste Monolitos, SOA y Microser
 ### Plantilla Extendida de Análisis
 
 ```markdown
-# Matriz Comparativa de Estilos Arquitectónicos
+# Matriz comparativa de estilos arquitectónicos
 
-## 1. Características Técnicas
-
-| Aspecto | Monolito | SOA | Microservicios |
-|---------|----------|-----|----------------|
-| **Unidad de Despliegue** | | | |
-| **Estrategia de Base de Datos** | | | |
-| **Protocolo de Comunicación** | | | |
-| **Gestión de Transacciones** | | | |
-| **Estrategia de Escalado** | | | |
-| **Manejo de Fallos** | | | |
-
-## 2. Aspectos de Desarrollo
+## 1. Características técnicas
 
 | Aspecto | Monolito | SOA | Microservicios |
 |---------|----------|-----|----------------|
-| **Complejidad Inicial** | | | |
-| **Curva de Aprendizaje** | | | |
-| **Tiempo hasta Producción** | | | |
-| **Facilidad de Testing** | | | |
-| **Gestión de Dependencias** | | | |
-| **Refactoring** | | | |
+| **Unidad de despliegue** | | |  |  |  | |
+| **Estrategia de base de datos** | | |  |  |  | |
+| **Protocolo de comunicación** | | |  |  |  | |
+| **Gestión de transacciones** | | |  |  |  | |
+| **Estrategia de escalado** | | |  |  |  | |
+| **Manejo de fallos** | | |  |  |  | |
 
-## 3. Aspectos Operacionales
-
-| Aspecto | Monolito | SOA | Microservicios |
-|---------|----------|-----|----------------|
-| **Complejidad de Despliegue** | | | |
-| **Monitoreo y Observabilidad** | | | |
-| **Gestión de Configuración** | | | |
-| **Backup y Recovery** | | | |
-| **Seguridad** | | | |
-| **Costos de Infraestructura** | | | |
-
-## 4. Aspectos Organizacionales
+## 2. Aspectos de desarrollo
 
 | Aspecto | Monolito | SOA | Microservicios |
 |---------|----------|-----|----------------|
-| **Tamaño de Equipo Ideal** | | | |
-| **Estructura Organizacional** | | | |
-| **Ownership de Código** | | | |
-| **Ciclo de Release** | | | |
-| **Coordinación entre Equipos** | | | |
-| **Especialización Técnica** | | | |
+| **Complejidad inicial** | | |  |  |  | |
+| **Curva de aprendizaje** | | |  |  |  | |
+| **Tiempo hasta producción** | | |  |  |  | |
+| **Facilidad de testing** | | |  |  |  | |
+| **Gestión de dependencias** | | |  |  |  | |
+| **Refactoring** | | |  |  |  | |
+
+## 3. Aspectos operacionales
+
+| Aspecto | Monolito | SOA | Microservicios |
+|---------|----------|-----|----------------|
+| **Complejidad de despliegue** | | |  |  |  | |
+| **Monitoreo y observabilidad** | | |  |  |  | |
+| **Gestión de configuración** | | |  |  |  | |
+| **Backup y recovery** | | |  |  |  | |
+| **Seguridad** | | |  |  |  | |
+| **Costos de infraestructura** | | |  |  |  | |
+
+## 4. Aspectos organizacionales
+
+| Aspecto | Monolito | SOA | Microservicios |
+|---------|----------|-----|----------------|
+| **Tamaño de equipo ideal** | | |  |  |  | |
+| **Estructura organizacional** | | |  |  |  | |
+| **Ownership de código** | | |  |  |  | |
+| **Ciclo de release** | | |  |  |  | |
+| **Coordinación entre equipos** | | |  |  |  | |
+| **Especialización técnica** | | |  |  |  | |
 ```
 
-### Guía de Completado
+### Guía de completado
 
 **Para cada celda, incluir:**
+
 - Descripción concisa de la característica
 - Ventaja/desventaja principal
 - Ejemplo específico o métrica cuando sea posible
 
 **Fuentes sugeridas:**
+
 - Martin Fowler - Microservices vs SOA
 - Netflix Engineering Blog
 - ThoughtWorks Technology Radar
@@ -102,14 +107,16 @@ Elaborar un cuadro comparativo detallado que contraste Monolitos, SOA y Microser
 
 ---
 
-## 🎯 Parte 2: Aplicación a Casos Reales
+## 🎯 Parte 2: Aplicación a casos reales
 
-### Actividad: Recomendación Arquitectónica
+### Actividad: Recomendación arquitectónica
 
 Para cada caso de estudio, determinar el estilo arquitectónico más apropiado y justificar la decisión.
 
-#### Caso A: E-commerce Tradicional
+#### Caso A: E-commerce tradicional
+
 **Contexto:**
+
 - 100,000 usuarios registrados
 - 10,000 pedidos/mes
 - Equipo de 8 desarrolladores
@@ -117,18 +124,20 @@ Para cada caso de estudio, determinar el estilo arquitectónico más apropiado y
 - Tiempo al mercado: 6 meses
 
 **Tu análisis:**
-```
+```text
 Arquitectura recomendada: _______________
 
 Justificación:
-1. Factor decisivo principal: 
+1. Factor decisivo principal:
 2. Ventajas específicas para este caso:
 3. Riesgos mitigables:
 4. Plan de evolución futura:
 ```
 
-#### Caso B: Plataforma de Streaming
+#### Caso B: Plataforma de streaming
+
 **Contexto:**
+
 - 10 millones de usuarios activos
 - Picos de tráfico impredecibles
 - Múltiples tipos de contenido (video, audio, texto)
@@ -136,18 +145,20 @@ Justificación:
 - Regulaciones por país
 
 **Tu análisis:**
-```
+```text
 Arquitectura recomendada: _______________
 
 Justificación:
-1. Factor decisivo principal: 
+1. Factor decisivo principal:
 2. Ventajas específicas para este caso:
 3. Riesgos mitigables:
 4. Plan de evolución futura:
 ```
 
-#### Caso C: Sistema Bancario Core
+#### Caso C: Sistema bancario core
+
 **Contexto:**
+
 - Regulaciones financieras estrictas
 - Requerimientos de auditoria completa
 - Transacciones de alta criticidad
@@ -155,18 +166,20 @@ Justificación:
 - Integración con sistemas legacy
 
 **Tu análisis:**
-```
+```text
 Arquitectura recomendada: _______________
 
 Justificación:
-1. Factor decisivo principal: 
+1. Factor decisivo principal:
 2. Ventajas específicas para este caso:
 3. Riesgos mitigables:
 4. Plan de evolución futura:
 ```
 
-#### Caso D: Startup de Delivery
+#### Caso D: Startup de delivery
+
 **Contexto:**
+
 - Crecimiento exponencial esperado
 - Múltiples ciudades en 6 meses
 - Equipo técnico de 4 personas
@@ -174,11 +187,11 @@ Justificación:
 - Inversión Series A conseguida
 
 **Tu análisis:**
-```
+```text
 Arquitectura recomendada: _______________
 
 Justificación:
-1. Factor decisivo principal: 
+1. Factor decisivo principal:
 2. Ventajas específicas para este caso:
 3. Riesgos mitigables:
 4. Plan de evolución futura:
@@ -186,20 +199,20 @@ Justificación:
 
 ---
 
-## 🧠 Parte 3: Síntesis y Reflexión
+## 🧠 Parte 3: Síntesis y reflexión
 
-### Actividad de Cierre
+### Actividad de cierre
 
 1. **Completar matriz de decisión:**
 
 | Criterio | Peso | Monolito Score | SOA Score | Microservicios Score |
 |----------|------|----------------|-----------|----------------------|
-| Complejidad Técnica | 20% | | | |
-| Tiempo al Mercado | 15% | | | |
-| Escalabilidad | 25% | | | |
-| Tamaño de Equipo | 15% | | | |
-| Presupuesto | 15% | | | |
-| Mantenibilidad | 10% | | | |
+| Complejidad técnica | 20% | | |  |  |  | |
+| Tiempo al mercado | 15% | | |  |  |  | |
+| Escalabilidad | 25% | | |  |  |  | |
+| Tamaño de equipo | 15% | | |  |  |  | |
+| Presupuesto | 15% | | |  |  |  | |
+| Mantenibilidad | 10% | | |  |  |  | |
 
 2. **Reflexión personal:**
    - ¿Cuál fue el caso más desafiante de analizar? ¿Por qué?
@@ -210,15 +223,17 @@ Justificación:
 
 ## 📝 Entregables
 
-### 1. Documento de Análisis
+### 1. Documento de análisis
+
 - **Formato:** Markdown o PDF
-- **Contenido:** 
+- **Contenido:**
   - Matriz comparativa completa
   - Análisis de 4 casos de estudio
   - Matriz de decisión con puntuaciones
   - Reflexión personal (máximo 500 palabras)
 
-### 2. Presentación Ejecutiva
+### 2. Presentación ejecutiva
+
 - **Contenido:**
   - 3 hallazgos principales del análisis
   - 1 recomendación general para toma de decisiones
@@ -226,18 +241,18 @@ Justificación:
 
 ---
 
-## ✅ Criterios de Evaluación
+## ✅ Criterios de evaluación
 
-| Criterio | Peso | Excelente (5) | Bueno (4) | Satisfactorio (3) | Insuficiente (1-2) |
-|----------|------|---------------|-----------|-------------------|-------------------|
-| **Completitud de Matriz** | 30% | Todas las celdas con información precisa y ejemplos | Mayoría completa con información correcta | Matriz básicamente completa | Información incompleta o incorrecta |
-| **Análisis de Casos** | 35% | Justificación sólida basada en criterios técnicos | Análisis correcto con justificación básica | Recomendaciones apropiadas sin profundizar | Recomendaciones incorrectas |
-| **Matriz de Decisión** | 20% | Pesos bien justificados y puntuaciones coherentes | Criterios apropiados con puntuaciones consistentes | Matriz completa pero sin justificación | Criterios o puntuaciones inconsistentes |
-| **Reflexión Personal** | 15% | Insights profundos y conexión con experiencia | Reflexión thoughtful y bien articulada | Reflexión básica pero coherente | Reflexión superficial |
+| Criterio | Excelente (5) | Bueno (4) | Satisfactorio (3) | Insuficiente (1-2) |
+|----------|---------------|-----------|-------------------|-------------------|
+| **Completitud de matriz** | Todas las celdas con información precisa y ejemplos | Mayoría completa con información correcta | Matriz básicamente completa | Información incompleta o incorrecta |
+| **Análisis de casos** | Justificación sólida basada en criterios técnicos | Análisis correcto con justificación básica | Recomendaciones apropiadas sin profundizar | Recomendaciones incorrectas |
+| **Matriz de decisión** | Pesos bien justificados y puntuaciones coherentes | Criterios apropiados con puntuaciones consistentes | Matriz completa pero sin justificación | Criterios o puntuaciones inconsistentes |
+| **Reflexión personal** | Insights profundos y conexión con experiencia | Reflexión thoughtful y bien articulada | Reflexión básica pero coherente | Reflexión superficial |
 
 ---
 
-## 🔗 Conexión con el Proyecto Final
+## 🔗 Conexión con el proyecto final
 
 Esta práctica sienta las bases para:
 
@@ -246,18 +261,20 @@ Esta práctica sienta las bases para:
 3. **Análisis de trade-offs** en diseño de microservicios
 4. **Documentación de decisiones** técnicas
 
-Los casos analizados aquí se retomarán al diseñar la "Plataforma de Ingesta y Procesamiento de Datos" del proyecto final.
+Los casos analizados aquí se retomarán al diseñar la "Plataforma de ingesta y procesamiento de datos" del proyecto final.
 
 ---
 
-## 📚 Recursos Adicionales
+## 📚 Recursos adicionales
 
-### Lecturas Complementarias
+### Lecturas complementarias
+
 - Richardson, C. "Microservices Patterns" - Chapter 1
 - Fowler, M. "Microservices Trade-Offs"
 - AWS Well-Architected Framework
 
-### Herramientas de Apoyo  
+### Herramientas de apoyo
+
 - [Architecture Decision Records (ADR)](https://github.com/joelparkerhenderson/architecture_decision_record)
 - [C4 Model for Software Architecture](https://c4model.com/)
 - [ThoughtWorks Technology Radar](https://www.thoughtworks.com/radar)

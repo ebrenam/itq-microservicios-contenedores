@@ -1,10 +1,11 @@
-# Recursos Complementarios - Unidad 1
+# Recursos complementarios - Unidad 1
 
-## 📚 Material de Referencia
+## 📚 Material de referencia
 
-### Libros Fundamentales
+### Libros fundamentales
 
-#### 📖 Lectura Obligatoria
+#### 📖 Lectura obligatoria
+
 1. **Newman, S. (2021). "Building Microservices" (2nd ed.)**
    - Capítulos 1-3: Fundamentos y conceptos
    - Enfoque: Práctico y basado en experiencia real
@@ -15,7 +16,8 @@
    - Define las características principales
    - **Disponible:** [https://martinfowler.com/articles/microservices.html](https://martinfowler.com/articles/microservices.html)
 
-#### 📚 Lectura Complementaria
+#### 📚 Lectura complementaria
+
 1. **Richardson, C. (2018). "Microservices Patterns"**
    - Capítulo 1: Escaping monolithic hell
    - Enfoque: Patrones de diseño específicos
@@ -26,11 +28,12 @@
 
 ---
 
-## 🌐 Recursos Web y Blogs
+## 🌐 Recursos web y blogs
 
-### Blogs Técnicos Oficiales
+### Blogs técnicos oficiales
 
 #### Netflix Tech Blog
+
 - **URL:** [https://netflixtechblog.com/](https://netflixtechblog.com/)
 - **Artículos clave:**
   - "Microservices at Netflix Scale"
@@ -38,6 +41,7 @@
   - "Fault Tolerance in a High Volume Distributed System"
 
 #### Uber Engineering
+
 - **URL:** [https://eng.uber.com/](https://eng.uber.com/)
 - **Artículos clave:**
   - "Introducing Domain-Oriented Microservice Architecture"
@@ -45,30 +49,34 @@
   - "Microservice Architecture at Uber"
 
 #### Amazon Architecture Center
+
 - **URL:** [https://aws.amazon.com/architecture/](https://aws.amazon.com/architecture/)
 - **Recursos clave:**
   - Well-Architected Framework
   - Microservices on AWS
   - Case studies and reference architectures
 
-### Recursos Especializados
+### Recursos especializados
 
 #### Microservices.io
+
 - **URL:** [https://microservices.io/](https://microservices.io/)
 - **Contenido:** Patrones, anti-patrones, y mejores prácticas
 - **Autor:** Chris Richardson
 
 #### High Scalability
+
 - **URL:** [http://highscalability.com/](http://highscalability.com/)
 - **Contenido:** Casos de estudio de arquitectura de grandes sistemas
 
 ---
 
-## 🎥 Videos y Conferencias
+## 🎥 Videos y conferencias
 
-### Conferencias Técnicas Recomendadas
+### Conferencias técnicas recomendadas
 
 #### QCon Presentations
+
 1. **"Microservices at Netflix Scale" - Adrian Cockcroft**
    - Enfoque: Lecciones aprendidas en transformación
 
@@ -76,169 +84,203 @@
    - Enfoque: Desafíos de escalabilidad global
 
 #### AWS re:Invent Sessions
+
 1. **"Microservices: Decomposing Applications for Deployability"**
    - Nivel: 300 (Intermediate)
    - Enfoque: Estrategias prácticas de descomposición
 
-### Cursos Online Complementarios
+### Cursos online complementarios
 
 #### Coursera - "Microservices Architecture"
+
 - **Universidad:** University of Alberta
 - **Enfoque:** Fundamentos teóricos y prácticos
 
 #### edX - "Microservices Development"
+
 - **Universidad:** IBM
 - **Enfoque:** Implementación práctica con contenedores
 
 ---
 
-## 🛠️ Herramientas de Apoyo
+## 🛠️ Herramientas de apoyo
 
-### Diagramado y Visualización
+### Diagramado y visualización
 
 #### Miro
+
 - **Tipo:** Herramienta colaborativa online
 - **Uso:** Mapas conceptuales, diagramas de arquitectura
 - **Ventajas:** Colaboración en tiempo real, templates
 - **Plan gratuito:** Disponible con limitaciones
 
 #### Lucidchart
+
 - **Tipo:** Herramienta de diagramas profesional
 - **Uso:** Arquitectura de sistemas, flowcharts
 - **Ventajas:** Integración con Google/Microsoft Office
 - **Plan educativo:** Descuentos disponibles
 
 #### Draw.io (diagrams.net)
+
 - **Tipo:** Herramienta gratuita online/offline
 - **Uso:** Todo tipo de diagramas técnicos
 - **Ventajas:** Completamente gratuito, integración con GitHub
 
-### Gestión de Documentación
+### Gestión de documentación
 
 #### Notion
+
 - **Uso:** Documentación colaborativa, bases de conocimiento
 - **Ventajas:** Multimedia, templates, colaboración
 - **Plan educativo:** Gratuito para estudiantes
 
 #### GitBook
+
 - **Uso:** Documentación técnica estructurada
 - **Ventajas:** Integración con Git, búsqueda potente
 - **Plan gratuito:** Disponible con limitaciones
 
 ---
 
-## 📊 Datasets y Casos de Estudio
+## 📊 Datasets y casos de estudio
 
-### Casos Reales Documentados
+### Casos reales documentados
 
-#### 1. Migración de Monolito a Microservicios
+#### 1. Migración de monolito a microservicios
+
 ```markdown
 **Empresa:** SoundCloud
 **Período:** 2012-2014
-**Contexto:** 
+**Contexto:**
+
 - Monolito Ruby on Rails
 - 40M usuarios registrados
 - Problemas de escalabilidad
 
 **Estrategia:**
+
 - Strangler Fig Pattern
 - Descomposición por dominio
 - Event-driven architecture
 
 **Resultados:**
+
 - 20+ microservicios
 - Mejora en time-to-market
 - Equipos autónomos
 
 **Fuentes:**
+
 - SoundCloud Tech Blog
 - QCon London 2014 presentation
 ```
 
-#### 2. Arquitectura Cloud-Native desde Cero
+#### 2. Arquitectura cloud-native desde cero
+
 ```markdown
 **Empresa:** Spotify
 **Período:** 2008-presente
 **Contexto:**
+
 - Startup de streaming musical
 - Crecimiento exponencial
 - Arquitectura distribuida desde día 1
 
 **Arquitectura:**
+
 - Squad/Tribe organization
 - 800+ microservicios
 - Event-driven communication
 
 **Lecciones:**
+
 - Importancia de cultura organizacional
 - Autonomía vs. coherencia
 - Observabilidad desde el diseño
 
 **Fuentes:**
+
 - Spotify Engineering Culture videos
 - "Spotify Model" documentation
 ```
 
-### Métricas de Referencia
+### Métricas de referencia
 
-#### Benchmarks de la Industria
+#### Benchmarks de la industria
+
 ```markdown
 **Tiempo de Despliegue:**
+
 - Monolito tradicional: 2-4 semanas
 - Microservicios maduros: Múltiples veces al día
 
 **Mean Time to Recovery (MTTR):**
+
 - Monolito: 2-4 horas
 - Microservicios con circuit breakers: 5-15 minutos
 
 **Tamaño de Equipos:**
+
 - Monolito: 8-20 desarrolladores
 - Microservicio: 2-8 desarrolladores (2 pizza teams)
 
 **Frequency of Deployment:**
+
 - Monolito: Weekly/Monthly
 - Microservicios: Daily/Multiple daily
 ```
 
 ---
 
-## 📋 Plantillas y Templates
+## 📋 Plantillas y templates
 
-### Plantilla de Análisis Arquitectónico
+### Plantilla de análisis arquitectónico
 
 ```markdown
 # Análisis Arquitectónico: [Nombre del Sistema]
 
 ## Contexto
+
 - **Dominio de negocio:**
 - **Tamaño de organización:**
 - **Volumen de usuarios/transacciones:**
 - **Criticidad del sistema:**
 
 ## Arquitectura Actual
+
 - **Estilo arquitectónico:**
 - **Tecnologías principales:**
 - **Número de equipos:**
 - **Frecuencia de despliegue:**
 
 ## Problemas Identificados
+
 ### Técnicos
-- 
+
+-
 ### Organizacionales
-- 
+
+-
 ### De negocio
-- 
+
+-
 
 ## Recomendación
+
 ### Arquitectura sugerida:
+
 ### Justificación:
+
 ### Riesgos identificados:
+
 ### Plan de migración:
-```
-
-### Template de Mapa Conceptual
 
 ```
+
+### Template de mapa conceptual
+
+```text
 Elementos requeridos:
 1. Concepto central
 2. Conceptos secundarios (máximo 8)
@@ -256,21 +298,24 @@ Categorías sugeridas:
 
 ---
 
-## 🔍 Checklist de Investigación
+## 🔍 Checklist de investigación
 
-### Antes de Analizar un Caso
+### Antes de analizar un caso
+
 - [ ] Identificar fuentes primarias (blogs oficiales, presentaciones)
 - [ ] Verificar fechas de publicación (preferir < 2 años)
 - [ ] Buscar múltiples perspectivas del mismo caso
 - [ ] Identificar métricas cuantitativas cuando sea posible
 
-### Durante el Análisis
+### Durante el análisis
+
 - [ ] Documentar fuentes consultadas
 - [ ] Distinguir entre hechos y opiniones
 - [ ] Identificar el contexto temporal de cada decisión
 - [ ] Buscar lecciones aprendidas explícitas
 
-### Validación del Análisis
+### Validación del análisis
+
 - [ ] Contrastar con otros casos similares
 - [ ] Verificar coherencia técnica de las soluciones
 - [ ] Evaluar aplicabilidad al contexto actual
@@ -278,9 +323,9 @@ Categorías sugeridas:
 
 ---
 
-## 🎯 Rúbrica de Autoevaluación
+## 🎯 Rúbrica de autoevaluación
 
-### Comprensión Conceptual
+### Compresión conceptual
 
 | Nivel            | Criterio                                                                    |
 | ---------------- | --------------------------------------------------------------------------- |
@@ -289,7 +334,7 @@ Categorías sugeridas:
 | **Avanzado**     | Puedo analizar casos reales y extraer patrones aplicables                   |
 | **Experto**      | Puedo diseñar estrategias de migración considerando contexto organizacional |
 
-### Pensamiento Crítico
+### Pensamiento crítico
 
 | Nivel            | Criterio                                                  |
 | ---------------- | --------------------------------------------------------- |
@@ -300,15 +345,15 @@ Categorías sugeridas:
 
 ---
 
-## 📚 Bibliografía Extendida
+## 📚 Bibliografía extendida
 
-### Artículos Académicos
+### Artículos académicos
 
 1. **Balalaie, A., Heydarnoori, A., & Jamshidi, P. (2016).** "Microservices Architecture Enables DevOps: Migration to a Cloud-Native Architecture." *IEEE Software*, 33(3), 42-52.
 
 2. **Taibi, D., Lenarduzzi, V., & Pahl, C. (2017).** "Processes, Motivations, and Issues for Migrating to Microservices Architectures: An Empirical Investigation." *IEEE Cloud Computing*, 4(5), 22-32.
 
-### Informes de Industria
+### Informes de industria
 
 1. **O'Reilly. (2021).** "Microservices Adoption in 2021" - Survey Report
 2. **Gartner. (2021).** "Market Guide for Microservices Infrastructure"

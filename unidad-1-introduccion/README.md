@@ -5,7 +5,7 @@
 Al finalizar esta unidad, el estudiante será capaz de:
 
 1. **Comprender** el contexto histórico que origina los microservicios
-2. **Diferenciar** entre arquitecturas monolíticas, SOA y microservicios  
+2. **Diferenciar** entre arquitecturas monolíticas, SOA y microservicios
 3. **Identificar** ventajas, riesgos y casos de uso apropiados
 4. **Analizar** transformaciones arquitectónicas reales de la industria
 5. **Evaluar** criterios para toma de decisiones arquitectónicas
@@ -14,57 +14,60 @@ Al finalizar esta unidad, el estudiante será capaz de:
 
 ## 📚 Estructura del contenido
 
-```
+```text
 unidad-1-introduccion/
-├── teoria/           # Material conceptual y fundamentos
-├── actividades/      # Ejercicios de consolidación
-├── practicas/        # Laboratorios prácticos evaluados
-└── recursos/         # Material complementario y referencias
+├── 01-teoria/        # Material teórico completo con diagramas
+├── 02-actividades/   # Ejercicios de consolidación
+├── 03-practicas/     # Laboratorios prácticos evaluados
+└── 04-recursos/      # Material complementario y referencias
 ```
 
-### 📖 [Teoría](teoria/README.md)
-Fundamentos conceptuales organizados en tres módulos:
+### 📖 [Teoría](01-teoria/README.md)
+
+**Contenido teórico completo con 15 diagramas interactivos organizados en tres módulos:**
 
 #### 1.1 Contexto histórico y evolución
 - Arquitectura Monolítica: ventajas y el "Monolito Intolerable"
 - Service-Oriented Architecture (SOA): principios y diferencias
 - Transición a Microservicios: definición y filosofía
 
-#### 1.2 Principios fundamentales  
+#### 1.2 Principios fundamentales
 - Desacoplamiento, Cohesión y Modularidad
 - Autonomía de equipos y base de datos por servicio
 - Trade-offs del estilo Microservicios
 
 #### 1.3 Casos de estudio y adopción
-- Análisis de Netflix, Uber y Amazon
+- Análisis detallado de Netflix, Uber y Amazon
 - Criterios de decisión para migración
 - Ley de Conway y estructura organizacional
 
-### 🎯 [Actividades de aprendizaje](actividades/README.md)
-Ejercicios de consolidación conceptual:
+### 🎯 [Actividades de consolidación](02-actividades/README.md)
+
+Ejercicios para reforzar los conceptos:
 
 1. **Cuadro Comparativo** - Análisis sistemático de estilos arquitectónicos
 2. **Mapa Conceptual** - Visualización de componentes fundamentales  
 3. **Análisis de Casos** - Investigación de transformaciones reales
 
-### 🔬 [Prácticas de laboratorio](practicas/README.md)
+### 🔬 [Prácticas de laboratorio](03-practicas/README.md)
+
 Dos prácticas evaluadas que preparan para el proyecto final:
 
-#### [Práctica 1.1: Análisis comparativo](practicas/practica-1-1.md)
+#### [Práctica 1.1: Análisis comparativo](03-practicas/practica-1-1.md)
 - **Modalidad:** Individual
 - **Objetivo:** Desarrollar criterio técnico para selección arquitectónica
 - **Entregables:** Matriz comparativa + análisis de casos + matriz de decisión
 
-#### [Práctica 1.2: Estudio de caso](practicas/practica-1-2.md)  
+#### [Práctica 1.2: Estudio de caso](03-practicas/practica-1-2.md)
 - **Modalidad:** Equipos 2-3 personas
 - **Objetivo:** Analizar desacoplamiento real y crear mapa conceptual
 - **Entregables:** Análisis completo + mapa interactivo + aplicación al proyecto
 
-### 📚 [Recursos Complementarios](recursos/README.md)
-Material de apoyo y referencias:
+### 📚 [Recursos complementarios](04-recursos/README.md)
 
+Material de apoyo y referencias:
 - **Bibliografía especializada** - Newman, Richardson, Fowler
-- **Blogs técnicos oficiales** - Netflix, Uber, Amazon  
+- **Blogs técnicos oficiales** - Netflix, Uber, Amazon
 - **Herramientas de diagramado** - Miro, Lucidchart, Draw.io
 - **Plantillas y templates** - Análisis, mapas conceptuales
 
@@ -72,121 +75,58 @@ Material de apoyo y referencias:
 
 ## 📅 Cronograma detallado
 
-### Semana 1: Fundamentos y principios
+### **Semana 1: Fundamentos y principios**
 
-| Día                       | Actividad                                               | Modalidad   |
-| ------------------------- | ------------------------------------------------------- | ----------- |
-| Lunes                     | **Teoría:** Contexto histórico y SOA vs Microservicios  | Presencial  |
-| Miércoles                 | **Práctica 1.1:** Análisis comparativo de arquitecturas | Laboratorio |
-| Viernes                   | **Actividades:** Cuadro comparativo + Mapa conceptual   | Presencial  |
-| **Trabajo Independiente** | Lectura Newman Cap. 1-3 + Fowler article                | Autónomo    |
+| Tipo | Actividad |
+|------|----------|
+| Teoría | Contexto histórico y SOA vs Microservicios |
+| Práctica | Análisis comparativo de arquitecturas |
+| Actividades | Cuadro comparativo + Mapa conceptual |
+| Trabajo Independiente | Lectura Newman Cap. 1-3 + Fowler article |
 
-### Semana 2: Casos de Estudio y Aplicación
+### **Semana 2: Casos de estudio y aplicación**
 
-| Día                       | Actividad                                               | Modalidad   |
-| ------------------------- | ------------------------------------------------------- | ----------- |
-| Lunes                     | **Teoría:** Casos Netflix, Uber, Amazon + Ley de Conway | Presencial  |
-| Miércoles                 | **Práctica 1.2:** Análisis de transformación (Parte 1)  | Laboratorio |
-| Viernes                   | **Práctica 1.2:** Mapa conceptual + Presentaciones      | Laboratorio |
-| **Trabajo Independiente** | Investigación de caso + preparación presentación        | Autónomo    |
-
----
-
-## 📊 Evaluación
-
-### Distribución de Puntos
-- **Práctica 1.1:** 8 puntos (40% de prácticas U1)
-- **Práctica 1.2:** 12 puntos (60% de prácticas U1)
-- **Actividades:** Formativas (no calificadas, pero obligatorias)
-
-### Criterios Transversales
-1. **Rigor técnico** (30%) - Precisión conceptual y terminología correcta
-2. **Pensamiento crítico** (25%) - Análisis de trade-offs y justificaciones  
-3. **Aplicación práctica** (25%) - Conexión con escenarios reales
-4. **Comunicación** (20%) - Claridad en documentación y presentación
+| Tipo | Actividad |
+|------|----------|
+| Teoría | Casos Netflix, Uber, Amazon + Ley de Conway |
+| Práctica | Análisis de transformación (Parte 1) |
+| Práctica | Mapa conceptual + Presentaciones |
+| Trabajo Independiente | Investigación de caso + preparación presentación |
 
 ---
 
-## 🎯 Competencias Desarrolladas
-
-### Competencias Específicas del Programa
-- **C1:** Comprender arquitecturas distribuidas y sus principios de diseño
-- **C2:** Analizar casos reales de sistemas de gran escala  
-- **C3:** Evaluar decisiones técnicas considerando contexto organizacional
-
-### Competencias Transversales
-- **Pensamiento crítico:** Análisis de trade-offs arquitectónicos
-- **Comunicación técnica:** Documentación y presentación de análisis
-- **Trabajo colaborativo:** Desarrollo de casos de estudio en equipos
-
----
-
-## 🔗 Conexión con el Proyecto Final
+##  Conexión con el proyecto final
 
 Esta unidad sienta las bases conceptuales para el **Proyecto Final: Plataforma de Ingesta y Procesamiento de Datos**:
 
-### Fundamentos Transferibles
+### **Fundamentos transferibles**
 1. **Justificación arquitectónica** → Por qué microservicios para este dominio
 2. **Bounded contexts** → Identificación de servicios independientes (3-5)
 3. **Patrones de comunicación** → Event-driven architecture
 4. **Criterios de decisión** → Selección de tecnologías (Spring Boot + Quarkus)
 
-### Casos de Referencia
+### **Casos de referencia**
 - **Netflix:** Patrones de resiliencia (Circuit Breaker, API Gateway)
 - **Uber:** Arquitectura orientada a eventos y procesamiento de datos
 - **Amazon:** Principios de service ownership y observabilidad
 
 ---
 
-## ✅ Checklist de Finalización
+## ✅ Checklist de finalización
 
-### Para Estudiantes
+### **Para estudiantes**
 Al finalizar la Unidad 1, deberías poder:
-
 - [ ] **Explicar** las diferencias entre monolito, SOA y microservicios
-- [ ] **Justificar** la selección arquitectónica para un caso específico  
+- [ ] **Justificar** la selección arquitectónica para un caso específico
 - [ ] **Identificar** patrones de desacoplamiento en casos reales
 - [ ] **Aplicar** criterios de decisión a tu proyecto final
 - [ ] **Comunicar** análisis técnicos de forma clara y estructurada
 
-### Para Docentes
+### **Para docentes**
 - [ ] **Evaluar** comprensión conceptual mediante rúbricas específicas
 - [ ] **Retroalimentar** análisis de casos y mapas conceptuales
 - [ ] **Conectar** aprendizajes con unidades siguientes
 - [ ] **Documentar** mejores prácticas de estudiantes para futuros cursos
-
----
-
-## 🔄 Mejora Continua
-
-### Feedback de Estudiantes
-- **Claridad conceptual:** ¿Los fundamentos quedaron claros?
-- **Relevancia práctica:** ¿Los casos de estudio fueron útiles?
-- **Carga de trabajo:** ¿El balance teoría/práctica fue apropiado?
-- **Preparación para U2:** ¿Te sientes preparado para diseño de APIs?
-
-### Actualizaciones Semestrales
-- **Nuevos casos de estudio** de empresas emergentes
-- **Herramientas actualizadas** para diagramado y análisis
-- **Métricas de industria** actualizadas
-- **Feedback de empleadores** sobre competencias requeridas
-
----
-
-## 📚 Recursos de Inicio Rápido
-
-### Lectura Esencial
-1. [Fowler, M. "Microservices"](https://martinfowler.com/articles/microservices.html)
-2. Newman, S. "Building Microservices" - Chapter 1
-
-### Videos Introductorios
-1. "Microservices Explained" - Tech Primers
-2. "Netflix Microservices Architecture" - InfoQ
-
-### Preparación de Herramientas
-1. Cuenta en Miro o Lucidchart
-2. Editor Markdown (Typora, Mark Text, o VS Code)
-3. Acceso a Netflix Tech Blog y Uber Engineering
 
 ---
 
