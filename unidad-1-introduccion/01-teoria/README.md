@@ -619,29 +619,7 @@ Material de apoyo y referencias:
 
 ---
 
-## 📅 **Cronograma detallado**
-
-### **Semana 1: Fundamentos y principios**
-
-| Tipo                  | Actividad                                  |
-| --------------------- | ------------------------------------------ |
-| Teoría                | Contexto histórico y SOA vs Microservicios |
-| Práctica              | Análisis comparativo de arquitecturas      |
-| Actividad             | Cuadro comparativo + Mapa conceptual       |
-| Trabajo Independiente | Lectura Newman Cap. 1-3 + Fowler article   |
-
-### **Semana 2: Casos de estudio y aplicación**
-
-| Tipo                  | Actividad                                        |
-| --------------------- | ------------------------------------------------ |
-| Teoría                | Casos Netflix, Uber, Amazon + Ley de Conway      |
-| Práctica              | Análisis de transformación empresarial           |
-| Práctica              | Mapa conceptual + Presentaciones                 |
-| Trabajo Independiente | Investigación de caso + preparación presentación |
-
----
-
-## 📊 **Evaluación**
+##  **Evaluación**
 
 ### **Criterios transversales**
 
@@ -668,27 +646,6 @@ Esta unidad sienta las bases conceptuales para el **Proyecto Final: Plataforma d
 - **Netflix:** Patrones de resiliencia (Circuit Breaker, API Gateway)
 - **Uber:** Arquitectura orientada a eventos y procesamiento de datos
 - **Amazon:** Principios de service ownership y observabilidad
-
----
-
-## ✅ **Checklist de Finalización**
-
-### **Para estudiantes**
-
-Al finalizar la Unidad 1, deberías poder:
-
-- [ ] **Explicar** las diferencias entre monolito, SOA y microservicios
-- [ ] **Justificar** la selección arquitectónica para un caso específico
-- [ ] **Identificar** patrones de desacoplamiento en casos reales
-- [ ] **Aplicar** criterios de decisión a tu proyecto final
-- [ ] **Comunicar** análisis técnicos de forma clara y estructurada
-
-### **Para docentes**
-
-- [ ] **Evaluar** comprensión conceptual mediante rúbricas específicas
-- [ ] **Retroalimentar** análisis de casos y mapas conceptuales
-- [ ] **Conectar** aprendizajes con unidades siguientes
-- [ ] **Documentar** mejores prácticas de estudiantes para futuros cursos
 
 ---
 
