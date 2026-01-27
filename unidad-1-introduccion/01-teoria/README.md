@@ -1,7 +1,5 @@
 # **UNIDAD 1: Introducción a microservicios y arquitecturas evolutivas**
 
-## **CDD-2601 | Enero 2026**
-
 ## 🎯 **Objetivos de aprendizaje**
 
 Al finalizar esta unidad, el estudiante será capaz de:
@@ -11,18 +9,6 @@ Al finalizar esta unidad, el estudiante será capaz de:
 3. **Identificar** ventajas, riesgos y casos de uso apropiados
 4. **Analizar** transformaciones arquitectónicas reales de la industria
 5. **Evaluar** criterios para toma de decisiones arquitectónicas
-
----
-
-## 📚 **Estructura del contenido**
-
-```text
-unidad-1-introduccion/
-├── 01-teoria/        # Material conceptual y fundamentos
-├── 02-actividades/   # Ejercicios de consolidación
-├── 03-practicas/     # Laboratorios prácticos evaluados
-└── 04-recursos/      # Material complementario y referencias
-```
 
 ---
 
@@ -210,6 +196,17 @@ graph TD
 ---
 
 ## 📦 **MODULARIDAD**
+
+### **Domain-Driven Design (DDD):**
+
+**DDD** (*Domain-Driven Design*) es una metodología de desarrollo de software que se enfoca en modelar el software basándose en el dominio de negocio y su lógica. Fue introducida por Eric Evans y propone organizar el código alrededor de los conceptos del dominio del problema que se está resolviendo.
+
+#### **🎯 Conceptos clave de DDD:**
+
+- **Dominio:** El área de conocimiento o actividad del negocio
+- **Modelo de Dominio:** Representación abstracta del dominio
+- **Lenguaje Ubicuo:** Vocabulario común entre técnicos y expertos del negocio
+- **Bounded Context:** Límites explícitos donde un modelo particular es válido
 
 ### **Bounded Context (DDD):**
 

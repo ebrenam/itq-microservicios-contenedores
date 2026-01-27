@@ -24,8 +24,6 @@ unidad-1-introduccion/
 
 ### 📖 [Teoría](01-teoria/README.md)
 
-**Contenido teórico completo con 15 diagramas interactivos organizados en tres módulos:**
-
 #### 1.1 Contexto histórico y evolución
 - Arquitectura Monolítica: ventajas y el "Monolito Intolerable"
 - Service-Oriented Architecture (SOA): principios y diferencias
