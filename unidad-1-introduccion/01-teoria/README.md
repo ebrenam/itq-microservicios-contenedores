@@ -331,28 +331,31 @@ graph TD
 ### **🏗️ Transformación:**
 
 ```mermaid
-flowchart TD
-    subgraph antes ["ANTES (2008)"]
-        M["DVD Monolith"]
+flowchart LR
+    subgraph antes ["🎬 ANTES (2008)"]
+        M["📀 DVD Monolith<br/>• Servicio por correo<br/>• Arquitectura única<br/>• Escalabilidad limitada"]
     end
     
-    M --> T["Transformación"]
+    M -->|"⚡ Transformación<br/>Arquitectónica"| T["🔄"]
     
-    subgraph despues ["DESPUÉS (2015)"]
-        US["User Service"]
-        VS["Video Service"]
-        RS["Recommendation Service"]
-        BS["Billing Service"]
-        AS["Analytics Service"]
-        More["... +700 servicios"]
+    subgraph despues ["🚀 DESPUÉS (2015)"]
+        direction TB
+        US["👥 User Service<br/>Perfiles y autenticación"]
+        VS["📺 Video Service<br/>Streaming y catálogo"]
+        RS["🤖 Recommendation<br/>Algoritmos ML"]
+        
+        BS["💳 Billing Service<br/>Pagos y suscripciones"]
+        AS["📊 Analytics Service<br/>Métricas y datos"]
+        More["⚙️ +700 servicios más<br/>Cada uno independiente"]
+        
+        US --- VS
+        VS --- RS
+        BS --- AS
+        AS --- More
     end
     
     T --> US
-    T --> VS
-    T --> RS
     T --> BS
-    T --> AS
-    T --> More
 ```
 
 > **🔍 Explicación del diagrama:**  
@@ -428,29 +431,63 @@ graph TD
 
 ### **🏗️ Estrategia "Two-Pizza Teams":**
 
+**¿Por qué "Two-Pizza Teams"?** Jeff Bezos, fundador de Amazon, estableció una regla simple pero poderosa: *"Si un equipo no puede ser alimentado con dos pizzas, es demasiado grande"*. Esta filosofía organizacional se traduce en equipos de **6-10 personas máximo**.
+
+#### **🎯 Características de Two-Pizza Teams:**
+
+- **Tamaño óptimo:** 6-10 miembros por equipo
+- **Autonomía completa:** Cada equipo toma sus propias decisiones técnicas
+- **Ownership end-to-end:** Responsables desde desarrollo hasta producción
+- **Comunicación eficiente:** Sin burocracia ni layers gerenciales excesivos
+- **Velocidad:** Menos coordinación = mayor agilidad
+
+#### **🚀 Beneficios del modelo:**
+
+- **Reducción de overhead** de comunicación (Ley de Conway inversa)
+- **Mayor accountability** - equipo pequeño = responsabilidad clara
+- **Innovación acelerada** - decisiones rápidas sin comités
+- **Escalabilidad organizacional** - agregar equipos sin complejidad
+
 ```mermaid
-graph TD
-    subgraph amazon["AMAZON ECOSYSTEM"]
-        PS["Product Service"]
-        CS["Cart Service"]
-        RS["Review Service"]
-        PayS["Payment Service"]
-        SS["Ship Service"]
-        TS["Track Service"]
-        AWS["AWS Service"]
-        AS["Alexa Service"]
-        PrS["Prime Service"]
-        
-        PS --> CS
-        CS --> PayS
-        PayS --> SS
-        SS --> TS
-        RS -.-> PS
-        AWS -.->|Infrastructure| PS
-        AWS -.->|Infrastructure| CS
-        AS -.->|Voice Interface| CS
-        PrS -.->|Benefits| PayS
+flowchart LR
+    subgraph core ["🛒 SERVICIOS PRINCIPALES"]
+        direction TB
+        PS["📦 Product Service<br/>Catálogo y búsqueda"]
+        CS["🛒 Cart Service<br/>Carrito de compras"]
+        PayS["💳 Payment Service<br/>Procesamiento de pagos"]
     end
+    
+    subgraph fulfillment ["📋 FULFILLMENT"]
+        direction TB
+        SS["🚚 Ship Service<br/>Logística y envío"]
+        TS["📍 Track Service<br/>Seguimiento de paquetes"]
+    end
+    
+    subgraph support ["🔧 SERVICIOS DE APOYO"]
+        direction TB
+        RS["⭐ Review Service<br/>Calificaciones"]
+        AS["🎙️ Alexa Service<br/>Interface de voz"]
+        PrS["👑 Prime Service<br/>Membresías premium"]
+    end
+    
+    subgraph infra ["☁️ INFRAESTRUCTURA"]
+        AWS["⚙️ AWS Service<br/>Cloud computing"]
+    end
+    
+    %% Flujo principal
+    PS --> CS
+    CS --> PayS
+    PayS --> SS
+    SS --> TS
+    
+    %% Servicios de apoyo
+    RS -.->|"Feedback"| PS
+    AS -.->|"Voice Orders"| CS
+    PrS -.->|"Benefits"| PayS
+    
+    %% Infraestructura
+    AWS -.->|"Hosting"| core
+    AWS -.->|"Scaling"| fulfillment
 ```
 
 > **🔍 Explicación del diagrama:**  
