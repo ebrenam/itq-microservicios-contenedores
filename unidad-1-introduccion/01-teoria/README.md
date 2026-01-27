@@ -18,7 +18,7 @@ Al finalizar esta unidad, el estudiante será capaz de:
 
 ```text
 unidad-1-introduccion/
-├── teoria/           # Material conceptual y fundamentos
+├── 01-teoria/        # Material conceptual y fundamentos
 ├── 02-actividades/   # Ejercicios de consolidación
 ├── 03-practicas/     # Laboratorios prácticos evaluados
 └── 04-recursos/      # Material complementario y referencias
@@ -90,14 +90,14 @@ graph TB
 
 ### **🔄 SOA vs MICROSERVICIOS**
 
-| **Aspecto** | **SOA** | **Microservicios** |
-|-------------|---------|-------------------|
-| **Tamaño** | Servicios grandes | Servicios pequeños |
-| **Comunicación** | ESB centralizado | HTTP/REST directo |
-| **Datos** | Bases de datos compartidas | DB por servicio |
-| **Despliegue** | Monolítico | Independiente |
-| **Governance** | Centralizada | Descentralizada |
-| **Tecnología** | Estándares pesados (SOAP) | Protocolos ligeros (REST) |
+| **Aspecto**      | **SOA**                    | **Microservicios**        |
+| ---------------- | -------------------------- | ------------------------- |
+| **Tamaño**       | Servicios grandes          | Servicios pequeños        |
+| **Comunicación** | ESB centralizado           | HTTP/REST directo         |
+| **Datos**        | Bases de datos compartidas | DB por servicio           |
+| **Despliegue**   | Monolítico                 | Independiente             |
+| **Governance**   | Centralizada               | Descentralizada           |
+| **Tecnología**   | Estándares pesados (SOAP)  | Protocolos ligeros (REST) |
 
 ---
 
@@ -528,23 +528,23 @@ flowchart TD
 
 ### **✅ VENTAJAS:**
 
-| **Aspecto** | **Beneficio** |
-|-------------|---------------|
+| **Aspecto**           | **Beneficio**                        |
+| --------------------- | ------------------------------------ |
 | **🚀 Escalabilidad** | Escalar servicios independientemente |
-| **🛠️ Tecnología** | Diversidad tecnológica por equipo |
-| **⚡ Deployment** | Releases independientes y frecuentes |
-| **🔒 Resiliencia** | Fault isolation entre servicios |
-| **👥 Equipos** | Autonomía y ownership completo |
+| **🛠️ Tecnología**  | Diversidad tecnológica por equipo    |
+| **⚡ Deployment**     | Releases independientes y frecuentes |
+| **🔒 Resiliencia**   | Fault isolation entre servicios      |
+| **👥 Equipos**       | Autonomía y ownership completo       |
 
 ### **❌ DESAFÍOS:**
 
-| **Aspecto** | **Reto** |
-|-------------|----------|
-| **🌐 Complejidad** | Distributed systems complexity |
-| **🔄 Comunicación** | Network latency y timeouts |
-| **🗃️ Datos** | Eventual consistency |
-| **🐛 Debugging** | Trazas distribuidas complejas |
-| **🚀 Deployment** | Orchestration y service discovery |
+| **Aspecto**          | **Reto**                          |
+| -------------------- | --------------------------------- |
+| **🌐 Complejidad**  | Distributed systems complexity    |
+| **🔄 Comunicación** | Network latency y timeouts        |
+| **🗃️ Datos**      | Eventual consistency              |
+| **🐛 Debugging**    | Trazas distribuidas complejas     |
+| **🚀 Deployment**   | Orchestration y service discovery |
 
 ---
 
@@ -589,20 +589,20 @@ Material de apoyo y referencias:
 
 ### **Semana 1: Fundamentos y principios**
 
-| Tipo | Actividad |
-|------|----------|
-| Teoría | Contexto histórico y SOA vs Microservicios |
-| Práctica | Análisis comparativo de arquitecturas |
-| Actividad | Cuadro comparativo + Mapa conceptual |
-| Trabajo Independiente | Lectura Newman Cap. 1-3 + Fowler article |
+| Tipo                  | Actividad                                  |
+| --------------------- | ------------------------------------------ |
+| Teoría                | Contexto histórico y SOA vs Microservicios |
+| Práctica              | Análisis comparativo de arquitecturas      |
+| Actividad             | Cuadro comparativo + Mapa conceptual       |
+| Trabajo Independiente | Lectura Newman Cap. 1-3 + Fowler article   |
 
 ### **Semana 2: Casos de estudio y aplicación**
 
-| Tipo | Actividad |
-|------|----------|
-| Teoría | Casos Netflix, Uber, Amazon + Ley de Conway |
-| Práctica | Análisis de transformación empresarial |
-| Práctica | Mapa conceptual + Presentaciones |
+| Tipo                  | Actividad                                        |
+| --------------------- | ------------------------------------------------ |
+| Teoría                | Casos Netflix, Uber, Amazon + Ley de Conway      |
+| Práctica              | Análisis de transformación empresarial           |
+| Práctica              | Mapa conceptual + Presentaciones                 |
 | Trabajo Independiente | Investigación de caso + preparación presentación |
 
 ---

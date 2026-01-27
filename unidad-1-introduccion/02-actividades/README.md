@@ -229,12 +229,12 @@ Investigar y analizar en detalle la transformación arquitectónica de una empre
 
 ## 📅 Cronograma de actividades
 
-| Tipo | Actividad |
-|------|----------|
-| Actividad | Cuadro comparativo arquitectónico (individual) |
-| Actividad | Mapa conceptual de microservicios (individual) |
-| Actividad | Caso de estudio transformación empresarial (equipos) |
-| Presentación | Exposición casos de estudio y conclusiones |
+| Tipo         | Actividad                                            |
+| ------------ | ---------------------------------------------------- |
+| Actividad    | Cuadro comparativo arquitectónico (individual)       |
+| Actividad    | Mapa conceptual de microservicios (individual)       |
+| Actividad    | Caso de estudio transformación empresarial (equipos) |
+| Presentación | Exposición casos de estudio y conclusiones           |
 
 ---
 

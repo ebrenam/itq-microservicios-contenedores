@@ -269,16 +269,16 @@ Documentar el impacto cuantitativo de la transformación:
 ```markdown
 # Impacto Cuantitativo de la Transformación
 
-| Métrica | Antes (Monolito) | Después (Microservicios) | Mejora |
-|---------|------------------|--------------------------|---------|
-| Tiempo de despliegue | | |  |  |  | |
-| Releases por mes | | |  |  |  | |
-| MTTR (minutos) | | |  |  |  | |
-| Usuarios concurrentes | | |  |  |  | |
-| Equipos de desarrollo | | |  |  |  | |
-| Tiempo onboarding (días) | | |  |  |  | |
-| Uptime (%) | | |  |  |  | |
-| Costo por transacción | | |  |  |  | |
+| Métrica                  | Antes (Monolito) | Después (Microservicios) | Mejora |
+| ------------------------ | ---------------- | ------------------------ | ------ |
+| Tiempo de despliegue     |                  |                          |        |
+| Releases por mes         |                  |                          |        |
+| MTTR (minutos)           |                  |                          |        |
+| Usuarios concurrentes    |                  |                          |        |
+| Equipos de desarrollo    |                  |                          |        |
+| Tiempo onboarding (días) |                  |                          |        |
+| Uptime (%)               |                  |                          |        |
+| Costo por transacción    |                  |                          |        |
 ```
 
 ---

@@ -47,47 +47,47 @@ Elaborar un cuadro comparativo detallado que contraste Monolitos, SOA y Microser
 
 ## 1. Características técnicas
 
-| Aspecto | Monolito | SOA | Microservicios |
-|---------|----------|-----|----------------|
-| **Unidad de despliegue** | | |  |  |  | |
-| **Estrategia de base de datos** | | |  |  |  | |
-| **Protocolo de comunicación** | | |  |  |  | |
-| **Gestión de transacciones** | | |  |  |  | |
-| **Estrategia de escalado** | | |  |  |  | |
-| **Manejo de fallos** | | |  |  |  | |
+| Aspecto                         | Monolito | SOA | Microservicios |
+| ------------------------------- | -------- | --- | -------------- |
+| **Unidad de despliegue**        |          |     |                |
+| **Estrategia de base de datos** |          |     |                |
+| **Protocolo de comunicación**   |          |     |                |
+| **Gestión de transacciones**    |          |     |                |
+| **Estrategia de escalado**      |          |     |                |
+| **Manejo de fallos**            |          |     |                |
 
 ## 2. Aspectos de desarrollo
 
-| Aspecto | Monolito | SOA | Microservicios |
-|---------|----------|-----|----------------|
-| **Complejidad inicial** | | |  |  |  | |
-| **Curva de aprendizaje** | | |  |  |  | |
-| **Tiempo hasta producción** | | |  |  |  | |
-| **Facilidad de testing** | | |  |  |  | |
-| **Gestión de dependencias** | | |  |  |  | |
-| **Refactoring** | | |  |  |  | |
+| Aspecto                     | Monolito | SOA | Microservicios |
+| --------------------------- | -------- | --- | -------------- |
+| **Complejidad inicial**     |          |     |                |
+| **Curva de aprendizaje**    |          |     |                |
+| **Tiempo hasta producción** |          |     |                |
+| **Facilidad de testing**    |          |     |                |
+| **Gestión de dependencias** |          |     |                |
+| **Refactoring**             |          |     |                |
 
 ## 3. Aspectos operacionales
 
-| Aspecto | Monolito | SOA | Microservicios |
-|---------|----------|-----|----------------|
-| **Complejidad de despliegue** | | |  |  |  | |
-| **Monitoreo y observabilidad** | | |  |  |  | |
-| **Gestión de configuración** | | |  |  |  | |
-| **Backup y recovery** | | |  |  |  | |
-| **Seguridad** | | |  |  |  | |
-| **Costos de infraestructura** | | |  |  |  | |
+| Aspecto                        | Monolito | SOA | Microservicios |
+| ------------------------------ | -------- | --- | -------------- |
+| **Complejidad de despliegue**  |          |     |                |
+| **Monitoreo y observabilidad** |          |     |                |
+| **Gestión de configuración**   |          |     |                |
+| **Backup y recovery**          |          |     |                |
+| **Seguridad**                  |          |     |                |
+| **Costos de infraestructura**  |          |     |                |
 
 ## 4. Aspectos organizacionales
 
-| Aspecto | Monolito | SOA | Microservicios |
-|---------|----------|-----|----------------|
-| **Tamaño de equipo ideal** | | |  |  |  | |
-| **Estructura organizacional** | | |  |  |  | |
-| **Ownership de código** | | |  |  |  | |
-| **Ciclo de release** | | |  |  |  | |
-| **Coordinación entre equipos** | | |  |  |  | |
-| **Especialización técnica** | | |  |  |  | |
+| Aspecto                        | Monolito | SOA | Microservicios |
+| ------------------------------ | -------- | --- | -------------- |
+| **Tamaño de equipo ideal**     |          |     |                |
+| **Estructura organizacional**  |          |     |                |
+| **Ownership de código**        |          |     |                |
+| **Ciclo de release**           |          |     |                |
+| **Coordinación entre equipos** |          |     |                |
+| **Especialización técnica**    |          |     |                |
 ```
 
 ### Guía de completado
@@ -124,6 +124,7 @@ Para cada caso de estudio, determinar el estilo arquitectónico más apropiado y
 - Tiempo al mercado: 6 meses
 
 **Tu análisis:**
+
 ```text
 Arquitectura recomendada: _______________
 
@@ -145,6 +146,7 @@ Justificación:
 - Regulaciones por país
 
 **Tu análisis:**
+
 ```text
 Arquitectura recomendada: _______________
 
@@ -166,6 +168,7 @@ Justificación:
 - Integración con sistemas legacy
 
 **Tu análisis:**
+
 ```text
 Arquitectura recomendada: _______________
 
@@ -187,6 +190,7 @@ Justificación:
 - Inversión Series A conseguida
 
 **Tu análisis:**
+
 ```text
 Arquitectura recomendada: _______________
 
@@ -205,16 +209,17 @@ Justificación:
 
 1. **Completar matriz de decisión:**
 
-| Criterio | Peso | Monolito Score | SOA Score | Microservicios Score |
-|----------|------|----------------|-----------|----------------------|
-| Complejidad técnica | 20% | | |  |  |  | |
-| Tiempo al mercado | 15% | | |  |  |  | |
-| Escalabilidad | 25% | | |  |  |  | |
-| Tamaño de equipo | 15% | | |  |  |  | |
-| Presupuesto | 15% | | |  |  |  | |
-| Mantenibilidad | 10% | | |  |  |  | |
+| Criterio            | Peso | Monolito Score | SOA Score | Microservicios Score |
+| ------------------- | ---- | -------------- | --------- | -------------------- |
+| Complejidad técnica | 20%  |                |           |                      |
+| Tiempo al mercado   | 15%  |                |           |                      |
+| Escalabilidad       | 25%  |                |           |                      |
+| Tamaño de equipo    | 15%  |                |           |                      |
+| Presupuesto         | 15%  |                |           |                      |
+| Mantenibilidad      | 10%  |                |           |                      |
 
 2. **Reflexión personal:**
+
    - ¿Cuál fue el caso más desafiante de analizar? ¿Por qué?
    - ¿Qué factor consideras más importante al tomar decisiones arquitectónicas?
    - ¿Cómo cambiarían tus recomendaciones si tuvieras que implementarlas en tu contexto laboral actual?
