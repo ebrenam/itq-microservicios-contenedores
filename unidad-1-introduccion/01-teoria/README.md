@@ -619,17 +619,6 @@ Material de apoyo y referencias:
 
 ---
 
-##  **Evaluación**
-
-### **Criterios transversales**
-
-1. **Rigor técnico** - Precisión conceptual y terminología correcta
-2. **Pensamiento crítico** - Análisis de trade-offs y justificaciones
-3. **Aplicación práctica** - Conexión con escenarios reales
-4. **Comunicación** - Claridad en documentación y presentación
-
----
-
 ## 🔗 **Conexión con el Proyecto Final**
 
 Esta unidad sienta las bases conceptuales para el **Proyecto Final: Plataforma de Ingesta y Procesamiento de Datos**:
