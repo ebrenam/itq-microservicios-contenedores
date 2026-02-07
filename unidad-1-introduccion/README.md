@@ -17,9 +17,7 @@ Al finalizar esta unidad, el estudiante será capaz de:
 ```text
 unidad-1-introduccion/
 ├── 01-teoria/        # Material teórico completo con diagramas
-├── 02-actividades/   # Ejercicios de consolidación
-├── 03-practicas/     # Laboratorios prácticos evaluados
-└── 04-recursos/      # Material complementario y referencias
+└── 02-recursos/      # Material complementario y referencias
 ```
 
 ### 📖 [Teoría](01-teoria/README.md)
@@ -39,7 +37,7 @@ unidad-1-introduccion/
 - Criterios de decisión para migración
 - Ley de Conway y estructura organizacional
 
-### 📚 [Recursos complementarios](04-recursos/README.md)
+### 📚 [Recursos complementarios](02-recursos/README.md)
 
 Material de apoyo y referencias:
 - **Bibliografía especializada** - Newman, Richardson, Fowler

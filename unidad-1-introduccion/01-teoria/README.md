@@ -505,7 +505,9 @@ flowchart LR
 
 ### **⚖️ LEY DE CONWAY:**
 
-> *"Las organizaciones que diseñan sistemas están constreñidas a producir diseños que copian las estructuras de comunicación de estas organizaciones."*
+> *"Las organizaciones que diseñan sistemas... están limitadas a producir diseños que son copias de las estructuras de comunicación de estas organizaciones".*
+
+**Más información:** [Ley de Conway](ley-conway.md)
 
 ### **Tradicional vs Microservicios:**
 
@@ -582,33 +584,9 @@ flowchart TD
 
 ---
 
-## 📚 **Actividades de aprendizaje**
+## 📚 **Recursos complementarios**
 
-### 🎯 [Actividades de consolidación](../02-actividades/README.md)
-
-Ejercicios para reforzar los conceptos:
-
-1. **Cuadro Comparativo** - Análisis sistemático de estilos arquitectónicos
-2. **Mapa Conceptual** - Visualización de componentes fundamentales  
-3. **Análisis de Casos** - Investigación de transformaciones reales
-
-### 🔬 [Prácticas de laboratorio](../03-practicas/README.md)
-
-Dos prácticas evaluadas que preparan para el proyecto final:
-
-#### [Práctica 1.1: Análisis comparativo](../03-practicas/practica-1-1.md)
-
-- **Modalidad:** Individual
-- **Objetivo:** Desarrollar criterio técnico para selección arquitectónica
-- **Entregables:** Matriz comparativa + análisis de casos + matriz de decisión
-
-#### [Práctica 1.2: Estudio de caso](../03-practicas/practica-1-2.md)
-
-- **Modalidad:** Equipos 2-3 personas
-- **Objetivo:** Analizar desacoplamiento real y crear mapa conceptual
-- **Entregables:** Análisis completo + mapa interactivo + aplicación al proyecto
-
-### 📚 [Recursos complementarios](../04-recursos/README.md)
+### 📚 [Material de apoyo](../02-recursos/README.md)
 
 Material de apoyo y referencias:
 
