@@ -287,7 +287,7 @@ graph TD
 
 ## 💾 **BASE DE DATOS POR SERVICIO**
 
-### **❌ Antipatrón - DB Compartida:**
+### **❌ Antipatrón - DB compartida:**
 
 ```mermaid
 graph TD
@@ -298,7 +298,7 @@ graph TD
 > **🔍 Explicación del diagrama:**  
 > Este antipatrón muestra dos servicios accediendo a una **base de datos compartida**. Esto viola el principio de **Database per Service** y crea acoplamiento fuerte entre servicios. Cambios en el schema afectan múltiples servicios, se requiere coordinación para deployments, y se pierde la autonomía de los equipos de desarrollo.
 
-### **✅ Patrón Correcto:**
+### **✅ Patrón correcto:**
 
 ```mermaid
 graph TD
@@ -322,7 +322,7 @@ graph TD
 
 ## 📺 **NETFLIX: De DVD a Streaming Global**
 
-### **🎬 El Desafío:**
+### **🎬 El desafío:**
 
 - **2008:** Servicio DVD por correo + streaming naciente
 - **Problema:** Monolito no podía escalar para streaming masivo
@@ -369,9 +369,9 @@ flowchart LR
 
 ---
 
-## 🚗 **UBER: Escalando la Movilidad**
+## 🚗 **UBER: Escalando la movilidad**
 
-### **🚀 Crecimiento Explosivo:**
+### **🚀 Crecimiento explosivo:**
 
 - **2010:** Startup simple de taxis
 - **2015:** Operaciones globales complejas
@@ -413,17 +413,17 @@ graph TD
 > **🔍 Explicación del diagrama:**  
 > Uber descompuso su plataforma en servicios especializados: **Trip Service** maneja rutas y cálculos de tiempo, **Driver Service** gestiona emparejamiento y seguimiento de conductores, **Payment Service** procesa pagos y precios, y **Notification Service** envía alertas. La comunicación via APIs y eventos permite que cada servicio evolucione independientemente mientras mantiene la funcionalidad integrada.
 
-### **🎯 Lecciones Aprendidas:**
+### **🎯 Lecciones aprendidas:**
 
 - **Domain-Driven Design** para definir servicios
 - **Event-driven architecture** para comunicación
-- **Circuit breakers** para resiliencia
+- **Circuit Breakers** para resiliencia
 
 ---
 
 ## 🛒 **AMAZON: La Plataforma de Plataformas**
 
-### **📈 Escala Masiva:**
+### **📈 Escala masiva:**
 
 - **Millones** de productos
 - **Cientos de millones** de usuarios
@@ -542,7 +542,7 @@ flowchart TD
 
 ## 🤔 **¿CUÁNDO USAR MICROSERVICIOS?**
 
-### **✅ Casos Apropiados:**
+### **✅ Casos apropiados:**
 
 - **Equipos grandes** (>50 desarrolladores)
 - **Dominios complejos** con múltiples bounded contexts
@@ -550,7 +550,7 @@ flowchart TD
 - **Innovación tecnológica** constante
 - **Deployment independiente** crítico
 
-### **❌ Casos NO Apropiados:**
+### **❌ Casos no apropiados:**
 
 - **Equipos pequeños** (<10 desarrolladores)
 - **Dominios simples** bien definidos
@@ -597,7 +597,7 @@ Material de apoyo y referencias:
 
 ---
 
-## 🔗 **Conexión con el Proyecto Final**
+## 🔗 **Conexión con el proyecto final**
 
 Esta unidad sienta las bases conceptuales para el **Proyecto Final: Plataforma de Ingesta y Procesamiento de Datos**:
 
@@ -616,7 +616,7 @@ Esta unidad sienta las bases conceptuales para el **Proyecto Final: Plataforma d
 
 ---
 
-## 📚 **Lecturas Recomendadas**
+## 📚 **Lecturas recomendadas**
 
 - Newman, S. - "Building Microservices" Cap. 1-3
 - Fowler, M. - "Microservices" article  

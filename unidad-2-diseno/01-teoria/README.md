@@ -7,18 +7,18 @@ Al finalizar esta unidad, el estudiante será capaz de:
 1. **Aplicar** Domain-Driven Design (DDD) para definir bounded contexts
 2. **Diseñar** APIs RESTful siguiendo principios de madurez y especificarlas con OpenAPI
 3. **Identificar** y aplicar patrones arquitectónicos: API Gateway, Saga, CQRS, Event Sourcing
-4. **Modelar** la comunicación entre microservicios usando context mapping
+4. **Modelar** la comunicación entre microservicios usando Context Mapping
 5. **Preparar** el diseño base para la plataforma de ingesta y procesamiento de datos
 
 ---
 
 ## 📚 Contenido teórico
 
-## 2.1 Domain-driven design (DDD) y contextos
+## 2.1 Domain-Driven Design (DDD) y contextos
 
 ### 2.1.1 Conceptos centrales de DDD
 
-**El Problema del Diseño Complejo**
+**El problema del diseño complejo**
 
 - Sistemas grandes con múltiples dominios de negocio
 - Necesidad de alinear el código con la realidad del negocio
@@ -38,7 +38,7 @@ Al finalizar esta unidad, el estudiante será capaz de:
 - Evoluciona con el entendimiento del dominio
 - Debe ser útil para resolver problemas reales
 
-**Lenguaje Ubicuo (Ubiquitous Language)**
+**Lenguaje ubicuo (Ubiquitous language)**
 > Un lenguaje estructurado alrededor del modelo de dominio y usado por todos los miembros del equipo para conectar todas las actividades del equipo con el software.
 
 ```mermaid
@@ -68,7 +68,7 @@ graph TD
 **Envío:** Entrega física del pedido al cliente
 ```
 
-### 2.1.2 Bounded contexts para delimitar responsabilidades
+### 2.1.2 Bounded Contexts para delimitar responsabilidades
 
 **Definición de Bounded Context**
 > Una descripción de un límite (típicamente un subsistema, o el trabajo de un equipo particular) dentro del cual un modelo particular es definido y aplicable.
@@ -125,14 +125,14 @@ graph TD
 4. **Procesos de negocio:** Diferentes workflows
 5. **Regulaciones:** Diferentes compliance requirements
 
-### 2.1.3 Context mapping: patrones de colaboración
+### 2.1.3 Context Mapping: patrones de colaboración
 
 **Más información:** [Context Mapping Patterns](context-mapping-patterns.md)
 
 **Context Map**
-> Un diagrama que muestra los bounded contexts y las relaciones entre ellos.
+> Un diagrama que muestra los Bounded Contexts y las relaciones entre ellos.
 
-**Patrones de Relación entre Contextos:**
+**Patrones de Relación entre contextos:**
 
 #### 1. Shared Kernel
 
@@ -188,13 +188,13 @@ graph TD
 ```
 
 > **🔍 Explicación del diagrama:**  
-> Este **Context Map** ilustra las relaciones estratégicas entre bounded contexts. **Catálogo** expone un **Open Host Service** a Ventas, creando una API pública estable. **Ventas** actúa como **Customer** de Pagos y Fulfillment, dirigiendo sus necesidades. El **Anticorruption Layer** protege al Catálogo del sistema legacy ERP, mientras el contexto de Pagos adopta una estrategia **Conformist** con el servicio externo de pagos. Los colores ayudan a diferenciar visualmente cada contexto.
+> Este **Context Map** ilustra las relaciones estratégicas entre Bounded Contexts. **Catálogo** expone un **Open Host Service** a Ventas, creando una API pública estable. **Ventas** actúa como **Customer** de Pagos y Fulfillment, dirigiendo sus necesidades. El **Anticorruption Layer** protege al Catálogo del sistema legacy ERP, mientras el contexto de Pagos adopta una estrategia **Conformist** con el servicio externo de pagos. Los colores ayudan a diferenciar visualmente cada contexto.
 
 ---
 
 ## 2.2 Diseño de APIs y contratos
 
-### 2.2.1 Richardson maturity model para APIs RESTful
+### 2.2.1 Richardson Maturity Model para APIs RESTful
 
 ![Model](The-Richardson-Maturity-Model-Nordic-APIs.png)
 
@@ -263,7 +263,7 @@ DELETE /appointments/123 HTTP/1.1   # Cancelar cita
 }
 ```
 
-**Ejemplo Completo: API de Productos (Nivel 2-3)**
+**Ejemplo Completo: API de productos (Nivel 2-3)**
 
 ```yaml
 # Nivel 2: Métodos HTTP correctos
@@ -552,7 +552,7 @@ content:
 **¿Qué es un API Gateway?**
 > Un servidor que actúa como punto de entrada único para múltiples microservicios, proporcionando funcionalidades transversales como enrutamiento, autenticación, rate limiting y monitoreo.
 
-**Problemas que Resuelve:**
+**Problemas que resuelve:**
 
 - **Múltiples endpoints:** Clientes no necesitan conocer ubicaciones específicas
 - **Funcionalidad transversal:** Autenticación, logging, rate limiting centralizado
@@ -581,7 +581,7 @@ graph LR
 ```
 
 > **🔍 Explicación del diagrama:**  
-> El **API Gateway** centraliza todas las interacciones entre clientes externos (Mobile, Web, Partner) y microservicios internos. Actúa como un **proxy inteligente** que aplica funcionalidades transversales: autenticación, rate limiting, transformaciones, load balancing, circuit breakers y monitoreo. Esto permite que los microservicios se enfoquen en su lógica de negocio mientras el gateway maneja aspectos operacionales comunes.
+> El **API Gateway** centraliza todas las interacciones entre clientes externos (Mobile, Web, Partner) y microservicios internos. Actúa como un **proxy inteligente** que aplica funcionalidades transversales: autenticación, rate limiting, transformaciones, Load Balancing, Circuit Breakers y monitoreo. Esto permite que los microservicios se enfoquen en su lógica de negocio mientras el gateway maneja aspectos operacionales comunes.
 
 **Ejemplo: Configuración API Gateway (Kong/Zuul style)**
 
@@ -652,18 +652,18 @@ graph TD
 
 ### 2.3.2 Saga pattern para transacciones distribuidas
 
-**El Problema de las Transacciones Distribuidas**
+**El problema de las transacciones distribuidas**
 
 - ACID no es práctico en sistemas distribuidos
 - Two-Phase Commit (2PC) es frágil y bloquea recursos
 - Necesidad de consistencia eventual
 
-**¿Qué es el Patrón Saga?**
+**¿Qué es el patrón Saga?**
 > Un patrón para gestionar transacciones de larga duración que abarca múltiples servicios mediante una secuencia de transacciones locales, cada una con su compensación correspondiente.
 
 **Tipos de Saga:**
 
-#### 1. Choreography-based saga
+#### 1. Choreography-Based Saga
 
 - Cada servicio sabe qué hacer después de su transacción
 - No hay coordinador central
@@ -690,7 +690,7 @@ sequenceDiagram
 > **🔍 Explicación del diagrama:**  
 > Esta **Saga Coreografiada** maneja una transacción distribuida de pedido e-commerce sin coordinador central. Cada servicio reacciona a eventos y produce el siguiente: Order Service crea pedido → Payment Service procesa pago → Inventory Service reserva items → Shipping Service crea envío. Cada servicio mantiene su estado local y publica eventos para el siguiente paso. Si algún paso falla, debe haber eventos de compensación para revertir cambios anteriores.
 
-#### 2. Orchestration-based saga
+#### 2. Orchestration-Based Saga
 
 - Coordinador central (Orchestrator) controla el flujo
 - Servicios solo responden a comandos del orchestrator
@@ -719,7 +719,6 @@ sequenceDiagram
 
 > **🔍 Explicación del diagrama:**  
 > Esta **Saga Orquestada** usa un **Saga Orchestrator** centralizado que coordina toda la transacción distribuida. El cliente envía una sola petición al orquestador, quien ejecuta cada paso secuencialmente: crear orden → procesar pago → reservar inventario → crear envío. A diferencia de la coreografía, aquí los servicios no se comunican directamente entre sí, sino que responden únicamente al orquestador, quien mantiene el estado completo de la transacción.
-
 
 ### 2.3.3 CQRS y Event Sourcing
 

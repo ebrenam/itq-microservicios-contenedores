@@ -17,7 +17,7 @@ Los **Context Mapping Patterns** son patrones estratégicos de Domain-Driven Des
 
 - **Bounded Context:** Límite conceptual donde un modelo de dominio específico es válido y consistente
 - **Upstream/Downstream:** Relación direccional donde upstream influye en downstream (río arriba/río abajo)
-- **Context Mapping:** Proceso de identificar y documentar las relaciones entre bounded contexts
+- **Context Mapping:** Proceso de identificar y documentar las relaciones entre Bounded Contexts
 - **Domain Model:** Representación abstracta de un dominio de negocio específico
 - **API Contract:** Acuerdo formal que define cómo dos sistemas se comunican
 - **Schema:** Estructura formal que define el formato de datos o mensajes
@@ -37,7 +37,7 @@ graph TD
 ```
 
 > **🔍 Explicación del diagrama:**  
-> El **Shared Kernel** representa código y modelo compartido entre dos bounded contexts. Context A y Context B dependen de elementos comunes del modelo. Aunque reduce duplicación, crea acoplamiento ya que cambios en el kernel afectan ambos contextos. Se recomienda para conceptos muy estables y equipos que pueden coordinarse estrechamente.
+> El **Shared Kernel** representa código y modelo compartido entre dos Bounded Contexts. Context A y Context B dependen de elementos comunes del modelo. Aunque reduce duplicación, crea acoplamiento ya que cambios en el kernel afectan ambos contextos. Se recomienda para conceptos muy estables y equipos que pueden coordinarse estrechamente.
 
 - **Cuándo usar:** Conceptos pequeños, estables y compartidos
 - **Riesgo:** Acoplamiento y sobrecarga de coordinación
