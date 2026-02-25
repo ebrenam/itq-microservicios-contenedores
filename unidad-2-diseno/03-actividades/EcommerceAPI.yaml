@@ -1,0 +1,479 @@
+openapi: 3.0.4
+info:
+  title: Product Catalog API
+  description: API REST para gestión de catálogo de productos de e-commerce
+  version: 1.0.0
+  contact:
+    name: ITQ distributed and cloud systems
+    email: ivonne.al@queretaro.tecnm.mx
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+
+servers:
+  - url: http://localhost:8080/api/v1
+    description: Servidor de desarrollo
+  - url: https://api.ecommerce.com/api/v1
+    description: Servidor de producción
+
+tags:
+  - name: products
+    description: Operaciones relacionadas con catálogo de productos
+
+paths:
+  /products:
+    post:
+      summary: Crear nuevo producto
+      description: Crea un nuevo producto en el catálogo
+      operationId: createProduct
+      tags:
+        - products
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+            example:
+              name: "Laptop Gaming"
+              description: "Laptop de alto rendimiento para gaming"
+              price: 1299.99
+              category: "Electronics"
+              inStock: true
+      responses:
+        '201':
+          description: Producto creado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductResponse'
+              example:
+                id: "prod-12345"
+                name: "Laptop Gaming"
+                description: "Laptop de alto rendimiento para gaming"
+                price: 1299.99
+                category: "Electronics"
+                inStock: true
+                sku: "LAP-GAM-001"
+                createdAt: "2024-01-15T10:30:00Z"
+        '400':
+          description: Datos de entrada inválidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '409':
+          description: Conflicto - producto ya existe
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '500':
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+
+    get:
+      summary: Buscar productos
+      description: Busca productos existentes basado en criterios
+      operationId: searchProducts
+      tags:
+        - products
+      parameters:
+        - name: category
+          in: query
+          description: Categoría del producto
+          required: false
+          schema:
+            type: string
+            enum: ["Electronics", "Clothing", "Books", "Home", "Sports"]
+          example: "Electronics"
+        - name: minPrice
+          in: query
+          description: Precio mínimo del producto
+          required: false
+          schema:
+            type: number
+            format: decimal
+            minimum: 0
+          example: 100.00
+        - name: maxPrice
+          in: query
+          description: Precio máximo del producto
+          required: false
+          schema:
+            type: number
+            format: decimal
+            minimum: 0
+          example: 2000.00
+        - name: inStock
+          in: query
+          description: Solo productos en stock
+          required: false
+          schema:
+            type: boolean
+          example: true
+        - name: search
+          in: query
+          description: Búsqueda por texto en nombre o descripción
+          required: false
+          schema:
+            type: string
+            minLength: 3
+            maxLength: 100
+          example: "laptop"
+      responses:
+        '200':
+          description: Lista de productos encontrados (puede estar vacía)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductList'
+              example:
+                data:
+                  - id: "prod-12345"
+                    name: "Laptop Gaming"
+                    price: 1299.99
+                    category: "Electronics"
+                    inStock: true
+                  - id: "prod-12346"
+                    name: "Mouse Gamer"
+                    price: 79.99
+                    category: "Electronics"
+                    inStock: false
+                pagination:
+                  total: 2
+                  page: 1
+                  limit: 20
+                  totalPages: 1
+        '400':
+          description: Parámetros de búsqueda inválidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+
+  /products/{productId}:
+    parameters:
+      - name: productId
+        in: path
+        description: ID del producto
+        required: true
+        schema:
+          type: string
+          pattern: '^prod-[0-9]+$'
+        example: "prod-12345"
+
+    get:
+      summary: Obtener producto por ID
+      description: Obtiene los detalles de un producto específico
+      operationId: getProductById
+      tags:
+        - products
+      responses:
+        '200':
+          description: Producto encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductResponse'
+              example:
+                id: "prod-12345"
+                name: "Laptop Gaming"
+                description: "Laptop de alto rendimiento para gaming"
+                price: 1299.99
+                category: "Electronics"
+                inStock: true
+                sku: "LAP-GAM-001"
+                createdAt: "2024-01-15T10:30:00Z"
+                updatedAt: "2024-01-15T10:30:00Z"
+        '404':
+          description: Producto no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+
+    put:
+      summary: Actualizar producto completo
+      description: Actualiza todos los datos de un producto existente
+      operationId: updateProduct
+      tags:
+        - products
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+            example:
+              name: "Laptop Gaming Pro"
+              description: "Laptop de alto rendimiento para gaming profesional"
+              price: 1399.99
+              category: "Electronics"
+              inStock: true
+      responses:
+        '200':
+          description: Producto actualizado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductResponse'
+        '400':
+          description: Datos de entrada inválidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '404':
+          description: Producto no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+
+    patch:
+      summary: Actualizar producto parcial
+      description: Actualiza solo algunos campos de un producto existente
+      operationId: patchProduct
+      tags:
+        - products
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductPatch'
+            example:
+              price: 1199.99
+              inStock: false
+      responses:
+        '200':
+          description: Producto actualizado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductResponse'
+        '400':
+          description: Datos de entrada inválidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '404':
+          description: Producto no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+
+    delete:
+      summary: Eliminar producto
+      description: Elimina un producto del catálogo
+      operationId: deleteProduct
+      tags:
+        - products
+      responses:
+        '200':
+          description: Producto eliminado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteConfirmation'
+              example:
+                id: "prod-12345"
+                message: "Producto eliminado exitosamente"
+                deletedAt: "2024-01-15T15:45:00Z"
+        '404':
+          description: Producto no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '409':
+          description: No se puede eliminar - producto tiene pedidos activos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+
+components:
+  schemas:
+    Product:
+      type: object
+      required:
+        - name
+        - price
+        - category
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 200
+          description: "Nombre del producto"
+          example: "Laptop Gaming"
+        description:
+          type: string
+          maxLength: 1000
+          description: "Descripción detallada del producto"
+          example: "Laptop de alto rendimiento para gaming"
+        price:
+          type: number
+          format: decimal
+          minimum: 0
+          description: "Precio del producto en USD"
+          example: 1299.99
+        category:
+          type: string
+          enum: ["Electronics", "Clothing", "Books", "Home", "Sports"]
+          description: "Categoría del producto"
+          example: "Electronics"
+        inStock:
+          type: boolean
+          description: "Indica si el producto está disponible"
+          example: true
+          default: true
+
+    ProductResponse:
+      allOf:
+        - $ref: '#/components/schemas/Product'
+        - type: object
+          required:
+            - id
+            - sku
+            - createdAt
+          properties:
+            id:
+              type: string
+              pattern: '^prod-[0-9]+$'
+              description: "ID único del producto"
+              example: "prod-12345"
+            sku:
+              type: string
+              description: "Código SKU del producto"
+              example: "LAP-GAM-001"
+            createdAt:
+              type: string
+              format: date-time
+              description: "Fecha y hora de creación"
+              example: "2024-01-15T10:30:00Z"
+            updatedAt:
+              type: string
+              format: date-time
+              description: "Fecha y hora de última actualización"
+              example: "2024-01-15T10:30:00Z"
+
+    ProductPatch:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 200
+        description:
+          type: string
+          maxLength: 1000
+        price:
+          type: number
+          format: decimal
+          minimum: 0
+        category:
+          type: string
+          enum: ["Electronics", "Clothing", "Books", "Home", "Sports"]
+        inStock:
+          type: boolean
+
+    ProductList:
+      type: object
+      required:
+        - data
+        - pagination
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductResponse'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+
+    Pagination:
+      type: object
+      required:
+        - total
+        - page
+        - limit
+        - totalPages
+      properties:
+        total:
+          type: integer
+          minimum: 0
+          description: "Total de productos"
+          example: 150
+        page:
+          type: integer
+          minimum: 1
+          description: "Página actual"
+          example: 1
+        limit:
+          type: integer
+          minimum: 1
+          maximum: 100
+          description: "Elementos por página"
+          example: 20
+        totalPages:
+          type: integer
+          minimum: 0
+          description: "Total de páginas"
+          example: 8
+
+    DeleteConfirmation:
+      type: object
+      required:
+        - id
+        - message
+        - deletedAt
+      properties:
+        id:
+          type: string
+          description: "ID del producto eliminado"
+          example: "prod-12345"
+        message:
+          type: string
+          description: "Mensaje de confirmación"
+          example: "Producto eliminado exitosamente"
+        deletedAt:
+          type: string
+          format: date-time
+          description: "Fecha y hora de eliminación"
+          example: "2024-01-15T15:45:00Z"
+
+    ApiError:
+      type: object
+      required:
+        - code
+        - message
+        - timestamp
+      properties:
+        code:
+          type: string
+          description: "Código de error"
+          example: "PRODUCT_NOT_FOUND"
+        message:
+          type: string
+          description: "Mensaje descriptivo del error"
+          example: "El producto especificado no existe"
+        details:
+          type: object
+          description: "Detalles adicionales del error"
+          additionalProperties: true
+        timestamp:
+          type: string
+          format: date-time
+          description: "Fecha y hora del error"
+          example: "2024-01-15T10:30:00Z"
+        path:
+          type: string
+          description: "Ruta donde ocurrió el error"
+          example: "/api/v1/products/prod-12345"
