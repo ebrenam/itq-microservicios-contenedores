@@ -559,6 +559,9 @@ components:
         message: "Los datos enviados no cumplen con el esquema."
         timestamp: "2024-01-15T10:30:00Z"
         path: "/api/v1/products"
+        details:
+          field: "name"
+          reason: "required"
     ApiErrorNotFound:
       summary: Producto no encontrado (404)
       value:
@@ -566,6 +569,9 @@ components:
         message: "El producto especificado no existe"
         timestamp: "2024-01-15T10:30:00Z"
         path: "/api/v1/products/prod-12345"
+        details:
+          productId: "prod-12345"
+          searchedBy: "id"
     ApiErrorConflict:
       summary: Conflicto - producto ya existe (409)
       value:
@@ -573,6 +579,9 @@ components:
         message: "El producto ya existe."
         timestamp: "2024-01-15T10:30:00Z"
         path: "/api/v1/products"
+        details:
+          existingProductId: "prod-12345"
+          conflictReason: "duplicate_name"
     ApiErrorProductHasOrders:
       summary: No se puede eliminar - producto tiene pedidos activos (409)
       value:
@@ -580,6 +589,9 @@ components:
         message: "No se puede eliminar - producto tiene pedidos activos"
         timestamp: "2024-01-15T10:30:00Z"
         path: "/api/v1/products/prod-12345"
+        details:
+          activeOrdersCount: 3
+          orderIds: ["ord-001", "ord-002", "ord-003"]
     ApiErrorInternal:
       summary: Error interno del servidor (500)
       value:
@@ -587,3 +599,6 @@ components:
         message: "Ocurrió un error inesperado."
         timestamp: "2024-01-15T10:30:00Z"
         path: "/api/v1/products"
+        details:
+          errorId: "err-2024-001"
+          traceId: "trace-abc123"
