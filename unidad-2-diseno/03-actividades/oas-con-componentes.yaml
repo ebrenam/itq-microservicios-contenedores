@@ -1,8 +1,8 @@
 openapi: 3.0.4
 info:
-  title: Product Catalog API           # Nombre de tu API
+  title: Product Catalog API
   description: API REST para gestión de catálogo de productos de e-commerce
-  version: 1.0.0                      # Versión de tu API
+  version: 1.0.0
   contact:
     name: ITQ distributed and cloud systems
     email: ivonne.al@queretaro.tecnm.mx
@@ -21,19 +21,19 @@ tags:
     description: Operaciones relacionadas con catálogo de productos
 
 paths:
-  /products:        # Ruta del endpoint
-    post:           # Método HTTP
+  /products:
+    post:
       summary: Crear nuevo producto
       description: Crea un nuevo producto en el catálogo
-      operationId: createProduct        # ID único para generación de código
+      operationId: createProduct
       tags:
-        - products                      # Asociamos con el tag creado
+        - products
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Product'  # Referencia al esquema
+              $ref: '#/components/schemas/Product'
       responses:
         '201':
           description: Producto creado exitosamente
@@ -69,7 +69,7 @@ paths:
                 apiErrorInternal:
                   $ref: '#/components/examples/ApiErrorInternal'
 
-    get:                                # Nueva operación en la misma ruta
+    get:
       summary: Buscar productos
       description: Busca productos existentes basado en criterios
       operationId: searchProducts
@@ -154,7 +154,7 @@ paths:
                 apiErrorInternal:
                   $ref: '#/components/examples/ApiErrorInternal'
 
-  /products/{productId}:              # Ruta con parámetro dinámico
+  /products/{productId}:
     get:
       summary: Obtener producto por ID
       description: Obtiene los detalles de un producto específico
@@ -162,10 +162,10 @@ paths:
       tags:
         - products
       parameters:
-        - name: productId               # Parámetro de la ruta
-          in: path                      # Ubicación: en la URL
+        - name: productId
+          in: path
           description: ID del producto a obtener
-          required: true                # Los parámetros path son siempre obligatorios
+          required: true
           schema:
             type: string
             pattern: '^prod-[0-9]+$'
@@ -196,17 +196,17 @@ paths:
                 apiErrorInternal:
                   $ref: '#/components/examples/ApiErrorInternal'
 
-    put:                                # Actualización completa
+    put:
       summary: Actualizar producto completo
       description: Actualiza todos los datos de un producto existente
       operationId: updateProduct
       tags:
         - products
       parameters:
-        - name: productId               # Parámetro de la ruta
-          in: path                      # Ubicación: en la URL
+        - name: productId
+          in: path
           description: ID del producto a actualizar
-          required: true                # Los parámetros path son siempre obligatorios
+          required: true
           schema:
             type: string
             pattern: '^prod-[0-9]+$'
@@ -252,7 +252,7 @@ paths:
                 apiErrorInternal:
                   $ref: '#/components/examples/ApiErrorInternal'
 
-    patch:                              # Actualización parcial
+    patch:
       summary: Actualizar producto parcial
       description: Actualiza solo algunos campos de un producto existente
       operationId: patchProduct
@@ -303,15 +303,15 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiError'          
+                $ref: '#/components/schemas/ApiError'
               examples:
                 apiErrorInternal:
                   $ref: '#/components/examples/ApiErrorInternal'
 
-    delete:                             # Eliminación
+    delete:
       summary: Eliminar producto
       description: Elimina un producto del catálogo
-      operationId: deleteProduct 
+      operationId: deleteProduct
       tags:
         - products
       parameters:
