@@ -1,0 +1,1552 @@
+openapi: 3.0.4
+info:
+  title: E-commerce API
+  description: API REST para gestión de catálogo, clientes, pedidos, carrito, pagos y envíos en un sistema de e-commerce.
+  version: 1.0.0
+  contact:
+    name: ITQ distributed and cloud systems
+    email: contacto@itq.edu.mx
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+
+servers:
+  - url: http://localhost:8080/api/v1
+    description: Servidor de desarrollo
+  - url: https://api.ecommerce.com/api/v1
+    description: Servidor de producción
+
+tags:
+  - name: products
+    description: Operaciones sobre productos
+  - name: customers
+    description: Operaciones sobre clientes
+  - name: orders
+    description: Operaciones sobre pedidos
+  - name: cart
+    description: Operaciones sobre carrito
+  - name: payments
+    description: Operaciones sobre pagos
+  - name: shipments
+    description: Operaciones sobre envíos
+paths:
+  /products:
+    post:
+      summary: Crear nuevo producto
+      description: Crea un nuevo producto en el catálogo
+      operationId: createProduct
+      tags:
+        - products
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+      responses:
+        '201':
+          description: Producto creado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductResponse'
+        '400':
+          description: Datos de entrada inválidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+              examples:
+                apiErrorInvalidInput:
+                  $ref: '#/components/examples/ApiErrorInvalidInput'
+        '409':
+          description: Conflicto - producto ya existe
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+              examples:
+                apiErrorConflict:
+                  $ref: '#/components/examples/ApiErrorConflict'
+        '500':
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+              examples:
+                apiErrorInternal:
+                  $ref: '#/components/examples/ApiErrorInternal'
+
+    get:
+      summary: Buscar productos
+      description: Busca productos existentes basado en criterios
+      operationId: searchProducts
+      tags:
+        - products
+      parameters:
+        - name: category
+          in: query
+          description: Categoría del producto
+          required: false
+          schema:
+            type: string
+            enum: ["Electronics", "Clothing", "Books", "Home", "Sports"]
+          example: "Electronics"
+        - name: minPrice
+          in: query
+          description: Precio mínimo del producto
+          required: false
+          schema:
+            type: number
+            format: double
+            minimum: 0
+          example: 100.00
+        - name: maxPrice
+          in: query
+          description: Precio máximo del producto
+          required: false
+          schema:
+            type: number
+            format: double
+            minimum: 0
+          example: 2000.00
+        - name: inStock
+          in: query
+          description: Solo productos en stock
+          required: false
+          schema:
+            type: boolean
+          example: true
+        - name: page
+          in: query
+          description: Número de página (por defecto 1)
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+          example: 1
+        - name: limit
+          in: query
+          description: Elementos por página (por defecto 20, máximo 100)
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 20
+          example: 20
+      responses:
+        '200':
+          description: Lista de productos encontrados (puede estar vacía)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductList'
+        '400':
+          description: Datos de entrada inválidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+              examples:
+                apiErrorInvalidInput:
+                  $ref: '#/components/examples/ApiErrorInvalidInput'
+        '500':
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+              examples:
+                apiErrorInternal:
+                  $ref: '#/components/examples/ApiErrorInternal'
+
+  /products/{productId}:
+    get:
+      summary: Obtener producto por ID
+      description: Obtiene los detalles de un producto específico
+      operationId: getProductById
+      tags:
+        - products
+      parameters:
+        - name: productId
+          in: path
+          description: ID del producto a obtener
+          required: true
+          schema:
+            type: string
+            pattern: '^prod-[0-9]+$'
+          example: "prod-12345"
+      responses:
+        '200':
+          description: Producto encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductResponse'
+        '404':
+          description: Producto no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+              examples:
+                apiErrorNotFound:
+                  $ref: '#/components/examples/ApiErrorNotFound'
+        '500':
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+              examples:
+                apiErrorInternal:
+                  $ref: '#/components/examples/ApiErrorInternal'
+
+    put:
+      summary: Actualizar producto completo
+      description: Actualiza todos los datos de un producto existente
+      operationId: updateProduct
+      tags:
+        - products
+      parameters:
+        - name: productId
+          in: path
+          description: ID del producto a actualizar
+          required: true
+          schema:
+            type: string
+            pattern: '^prod-[0-9]+$'
+          example: "prod-12345"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+      responses:
+        '200':
+          description: Producto actualizado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductResponse'
+        '400':
+          description: Datos de entrada inválidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+              examples:
+                apiErrorInvalidInput:
+                  $ref: '#/components/examples/ApiErrorInvalidInput'
+        '404':
+          description: Producto no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+              examples:
+                apiErrorNotFound:
+                  $ref: '#/components/examples/ApiErrorNotFound'
+        '409':
+          description: Conflicto - producto ya existe
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+              examples:
+                apiErrorConflict:
+                  $ref: '#/components/examples/ApiErrorConflict'
+        '500':
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+              examples:
+                apiErrorInternal:
+                  $ref: '#/components/examples/ApiErrorInternal'
+
+    patch:
+      summary: Actualizar producto parcial
+      description: Actualiza solo algunos campos de un producto existente
+      operationId: patchProduct
+      tags:
+        - products
+      parameters:
+        - name: productId
+          in: path
+          description: ID del producto a actualizar
+          required: true
+          schema:
+            type: string
+            pattern: '^prod-[0-9]+$'
+          example: "prod-12345"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductPatch'
+      responses:
+        '200':
+          description: Producto actualizado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductResponse'
+        '400':
+          description: Datos de entrada inválidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+              examples:
+                apiErrorInvalidInput:
+                  $ref: '#/components/examples/ApiErrorInvalidInput'
+        '404':
+          description: Producto no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+              examples:
+                apiErrorNotFound:
+                  $ref: '#/components/examples/ApiErrorNotFound'
+        '409':
+          description: Conflicto - producto ya existe
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+              examples:
+                apiErrorConflict:
+                  $ref: '#/components/examples/ApiErrorConflict'
+        '500':
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+              examples:
+                apiErrorInternal:
+                  $ref: '#/components/examples/ApiErrorInternal'
+
+    delete:
+      summary: Eliminar producto
+      description: Elimina un producto del catálogo
+      operationId: deleteProduct
+      tags:
+        - products
+      parameters:
+        - name: productId
+          in: path
+          description: ID del producto a eliminar
+          required: true
+          schema:
+            type: string
+            pattern: '^prod-[0-9]+$'
+          example: "prod-12345"
+      responses:
+        '200':
+          description: Producto eliminado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteConfirmation'
+        '404':
+          description: Producto no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+              examples:
+                apiErrorNotFound:
+                  $ref: '#/components/examples/ApiErrorNotFound'
+        '409':
+          description: No se puede eliminar - producto tiene pedidos activos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+              examples:
+                apiErrorProductHasOrders:
+                  $ref: '#/components/examples/ApiErrorProductHasOrders'
+        '500':
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+              examples:
+                apiErrorInternal:
+                  $ref: '#/components/examples/ApiErrorInternal'
+
+  /customers:
+    post:
+      summary: Registrar cliente
+      description: Crea un nuevo cliente en el sistema
+      operationId: createCustomer
+      tags:
+        - customers
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Customer'
+      responses:
+        '201':
+          description: Cliente registrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+        '400':
+          description: Datos inválidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '409':
+          description: Conflicto - cliente ya existe
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+              examples:
+                apiErrorConflict:
+                  $ref: '#/components/examples/ApiErrorConflict'
+        '500':
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+              examples:
+                apiErrorInternal:
+                  $ref: '#/components/examples/ApiErrorInternal'
+
+  /customers/{customerId}:
+    get:
+      summary: Obtener perfil de cliente
+      description: Obtiene la información completa de un cliente por su ID
+      operationId: getCustomer
+      tags:
+        - customers
+      parameters:
+        - name: customerId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Perfil encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+        '404':
+          description: Cliente no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '500':
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+              examples:
+                apiErrorInternal:
+                  $ref: '#/components/examples/ApiErrorInternal'
+
+    put:
+      summary: Actualizar perfil de cliente
+      description: Actualiza la información completa de un cliente existente
+      operationId: updateCustomer
+      tags:
+        - customers
+      parameters:
+        - name: customerId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Customer'
+      responses:
+        '200':
+          description: Perfil actualizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+        '400':
+          description: Datos inválidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '404':
+          description: Cliente no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '500':
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+              examples:
+                apiErrorInternal:
+                  $ref: '#/components/examples/ApiErrorInternal'
+
+  /orders:
+    post:
+      summary: Crear pedido
+      description: Crea un nuevo pedido en el sistema
+      operationId: createOrder
+      tags:
+        - orders
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+      responses:
+        '201':
+          description: Pedido creado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '400':
+          description: Datos inválidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '409':
+          description: Conflicto - pedido ya existe
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+              examples:
+                apiErrorConflict:
+                  $ref: '#/components/examples/ApiErrorConflict'
+        '500':
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+              examples:
+                apiErrorInternal:
+                  $ref: '#/components/examples/ApiErrorInternal'
+
+    get:
+      summary: Listar pedidos
+      description: Obtiene una lista paginada de pedidos con filtros opcionales
+      operationId: listOrders
+      tags:
+        - orders
+      parameters:
+        - name: customerId
+          in: query
+          schema:
+            type: string
+        - name: page
+          in: query
+          schema:
+            type: integer
+        - name: limit
+          in: query
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Lista de pedidos
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Order'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+        '400':
+          description: Parámetros inválidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '500':
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+              examples:
+                apiErrorInternal:
+                  $ref: '#/components/examples/ApiErrorInternal'
+
+  /orders/{orderId}:
+    get:
+      summary: Detalle de pedido
+      description: Obtiene los detalles completos de un pedido por su ID
+      operationId: getOrder
+      tags:
+        - orders
+      parameters:
+        - name: orderId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Pedido encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '404':
+          description: Pedido no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '500':
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+              examples:
+                apiErrorInternal:
+                  $ref: '#/components/examples/ApiErrorInternal'
+
+    put:
+      summary: Cancelar pedido
+      description: Cancela un pedido existente
+      operationId: cancelOrder
+      tags:
+        - orders
+      parameters:
+        - name: orderId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reason:
+                  type: string
+      responses:
+        '200':
+          description: Pedido cancelado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '400':
+          description: Datos inválidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '404':
+          description: Pedido no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '500':
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+              examples:
+                apiErrorInternal:
+                  $ref: '#/components/examples/ApiErrorInternal'
+
+  /cart:
+    get:
+      summary: Obtener carrito actual
+      description: Obtiene el carrito de compras actual de un cliente
+      operationId: getCart
+      tags:
+        - cart
+      parameters:
+        - name: customerId
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Carrito encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'
+        '404':
+          description: Carrito no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '500':
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+              examples:
+                apiErrorInternal:
+                  $ref: '#/components/examples/ApiErrorInternal'
+
+  /cart/items:
+    post:
+      summary: Agregar producto al carrito
+      description: Agrega un producto al carrito de compras
+      operationId: addCartItem
+      tags:
+        - cart
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CartItem'
+      responses:
+        '200':
+          description: Producto agregado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'
+        '400':
+          description: Datos inválidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '409':
+          description: Conflicto - producto ya en carrito
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+              examples:
+                apiErrorConflict:
+                  $ref: '#/components/examples/ApiErrorConflict'
+        '500':
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+              examples:
+                apiErrorInternal:
+                  $ref: '#/components/examples/ApiErrorInternal'
+
+  /cart/items/{productId}:
+    delete:
+      summary: Remover producto del carrito
+      description: Remueve un producto del carrito de compras
+      operationId: removeCartItem
+      tags:
+        - cart
+      parameters:
+        - name: productId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Producto removido
+        '404':
+          description: Producto no encontrado en carrito
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '500':
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+              examples:
+                apiErrorInternal:
+                  $ref: '#/components/examples/ApiErrorInternal'
+
+  /cart/checkout:
+    post:
+      summary: Proceder a checkout
+      description: Inicia el proceso de checkout del carrito
+      operationId: checkoutCart
+      tags:
+        - cart
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                paymentMethod:
+                  type: string
+                  enum: [credit_card, paypal, bank_transfer]
+      responses:
+        '200':
+          description: Checkout exitoso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '400':
+          description: Datos inválidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '409':
+          description: Conflicto - checkout no posible
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+              examples:
+                apiErrorConflict:
+                  $ref: '#/components/examples/ApiErrorConflict'
+        '500':
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+              examples:
+                apiErrorInternal:
+                  $ref: '#/components/examples/ApiErrorInternal'
+
+  /payments:
+    post:
+      summary: Procesar pago
+      description: Procesa un pago para un pedido
+      operationId: processPayment
+      tags:
+        - payments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payment'
+      responses:
+        '201':
+          description: Pago procesado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+        '400':
+          description: Datos inválidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '409':
+          description: Conflicto - pago ya procesado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+              examples:
+                apiErrorConflict:
+                  $ref: '#/components/examples/ApiErrorConflict'
+        '500':
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+              examples:
+                apiErrorInternal:
+                  $ref: '#/components/examples/ApiErrorInternal'
+
+  /payments/{paymentId}:
+    get:
+      summary: Detalle de pago
+      description: Obtiene los detalles de un pago por su ID
+      operationId: getPayment
+      tags:
+        - payments
+      parameters:
+        - name: paymentId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Pago encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+        '404':
+          description: Pago no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '500':
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+              examples:
+                apiErrorInternal:
+                  $ref: '#/components/examples/ApiErrorInternal'
+
+  /shipments/{orderId}:
+    get:
+      summary: Seguimiento de envío
+      description: Obtiene el estado de envío de un pedido
+      operationId: getShipment
+      tags:
+        - shipments
+      parameters:
+        - name: orderId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Envío encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Shipment'
+        '404':
+          description: Envío no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '500':
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+              examples:
+                apiErrorInternal:
+                  $ref: '#/components/examples/ApiErrorInternal'
+
+components:
+  # securitySchemes:
+  #   bearerAuth:
+  #     type: http
+  #     scheme: bearer
+  #     bearerFormat: JWT
+  schemas:
+    Product:
+      type: object
+      required:
+        - name
+        - price  
+        - category
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 200
+          description: "Nombre del producto"
+          example: "Laptop Gaming"
+        description:
+          type: string
+          maxLength: 1000
+          description: "Descripción detallada del producto"
+          example: "Laptop de alto rendimiento para gaming"
+        price:
+          type: number
+          format: double
+          minimum: 0
+          description: "Precio del producto en USD"
+          example: 1299.99
+        category:
+          type: string
+          enum: ["Electronics", "Clothing", "Books", "Home", "Sports"]
+          description: "Categoría del producto"
+          example: "Electronics"
+        inStock:
+          type: boolean
+          description: "Indica si el producto está disponible"
+          example: true
+          default: true
+
+    ProductResponse:
+      allOf:
+        - $ref: '#/components/schemas/Product'
+        - type: object
+          required:
+            - id
+            - sku
+            - createdAt
+            - inStock
+          properties:
+            id:
+              type: string 
+              pattern: '^prod-[0-9]+$'
+              description: "ID único del producto"
+              example: "prod-12345"
+            sku:
+              type: string
+              description: "Código SKU del producto"
+              example: "LAP-GAM-001"
+            createdAt:
+              type: string
+              format: date-time
+              description: "Fecha y hora de creación"
+              example: "2024-01-15T10:30:00Z"
+            updatedAt:
+              type: string
+              format: date-time
+              description: "Fecha y hora de última actualización"
+              example: "2024-01-15T10:30:00Z"
+
+    ProductPatch:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 200
+        description:
+          type: string
+          maxLength: 1000
+        price:
+          type: number
+          format: double
+          minimum: 0
+        category:
+          type: string
+          enum: ["Electronics", "Clothing", "Books", "Home", "Sports"]
+        inStock:
+          type: boolean
+
+    ProductList:
+      type: object
+      required:
+        - data
+        - pagination
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductResponse'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+
+    Pagination:
+      type: object
+      required:
+        - total
+        - page
+        - limit
+        - totalPages
+      properties:
+        total:
+          type: integer
+          minimum: 0
+          description: "Total de productos"
+          example: 150
+        page:
+          type: integer
+          minimum: 1
+          description: "Página actual"
+          example: 1
+        limit:
+          type: integer
+          minimum: 1
+          maximum: 100
+          description: "Elementos por página"
+          example: 20
+        totalPages:
+          type: integer
+          minimum: 0
+          description: "Total de páginas"
+          example: 8
+
+    DeleteConfirmation:
+      type: object
+      required:
+        - id
+        - message
+        - deletedAt
+      properties:
+        id:
+          type: string
+          description: "ID del producto eliminado"
+          example: "prod-12345"
+        message:
+          type: string
+          description: "Mensaje de confirmación"
+          example: "Producto eliminado exitosamente"
+        deletedAt:
+          type: string
+          format: date-time
+          description: "Fecha y hora de eliminación"
+          example: "2024-01-15T15:45:00Z"
+
+    ApiError:
+      type: object
+      description: "Estructura estándar para errores de la API"
+      required:
+        - code
+        - message
+        - timestamp
+      properties:
+        code:
+          type: string
+          description: |
+            Código de error.
+            Valores comunes en esta API:
+            - INVALID_INPUT (400)
+            - PRODUCT_NOT_FOUND (404)
+            - PRODUCT_EXISTS (409 - conflicto en creación)
+            - PRODUCT_HAS_ORDERS (409 - conflicto en eliminación)
+            - INTERNAL_ERROR (500)
+          enum:
+            - INVALID_INPUT
+            - PRODUCT_NOT_FOUND
+            - PRODUCT_EXISTS
+            - PRODUCT_HAS_ORDERS
+            - INTERNAL_ERROR
+          example: "PRODUCT_NOT_FOUND"
+        message:
+          type: string
+          description: "Mensaje descriptivo del error"
+          example: "El producto especificado no existe"
+        details:
+          type: object
+          description: "Detalles adicionales del error"
+          additionalProperties: true
+        timestamp:
+          type: string
+          format: date-time
+          description: "Fecha y hora del error"
+          example: "2024-01-15T10:30:00Z"
+        path:
+          type: string
+          description: "Ruta donde ocurrió el error"
+          example: "/api/v1/products/prod-12345"
+
+    Customer:
+      type: object
+      description: "Información del cliente"
+      required: [email, name, phone, address]
+      properties:
+        id:
+          type: string
+          pattern: '^cust-[0-9]+$'
+          description: "ID único del cliente"
+          example: "cust-98765"
+        name:
+          type: string
+          minLength: 1
+          maxLength: 100
+          description: "Nombre completo del cliente"
+          example: "Juan García López"
+        email:
+          type: string
+          format: email
+          description: "Correo electrónico del cliente"
+          example: "juan.garcia@example.com"
+        address:
+          type: string
+          minLength: 5
+          maxLength: 300
+          description: "Dirección de envío completa"
+          example: "Calle Principal 123, Apt 4B, México, QRO 76000"
+        phone:
+          type: string
+          pattern: '^[+]?[0-9]{10,15}$'
+          description: "Número telefónico de contacto"
+          example: "+52 4421234567"
+        createdAt:
+          type: string
+          format: date-time
+          description: "Fecha y hora de registro del cliente"
+          example: "2024-01-10T08:15:00Z"
+        updatedAt:
+          type: string
+          format: date-time
+          description: "Fecha y hora de última actualización"
+          example: "2024-01-15T14:30:00Z"
+
+    Order:
+      type: object
+      description: "Información detallada de un pedido"
+      required: [customerId, items, status, total]
+      properties:
+        id:
+          type: string
+          pattern: '^order-[0-9]+$'
+          description: "ID único del pedido"
+          example: "order-54321"
+        customerId:
+          type: string
+          pattern: '^cust-[0-9]+$'
+          description: "ID del cliente que realizó el pedido"
+          example: "cust-98765"
+        items:
+          type: array
+          minItems: 1
+          description: "Lista de artículos en el pedido"
+          items:
+            $ref: '#/components/schemas/OrderItem'
+        status:
+          type: string
+          enum: [pending, paid, shipped, delivered, cancelled]
+          description: |
+            Estado del pedido:
+            - pending: Pedido creado, esperando pago
+            - paid: Pago confirmado
+            - shipped: Pedido en tránsito
+            - delivered: Entregado al cliente
+            - cancelled: Pedido cancelado
+          example: "paid"
+        total:
+          type: number
+          format: double
+          minimum: 0
+          description: "Monto total del pedido en USD"
+          example: 1599.97
+        shippingAddress:
+          type: string
+          minLength: 5
+          maxLength: 300
+          description: "Dirección de envío para este pedido"
+          example: "Calle Principal 123, Apt 4B, México, QRO 76000"
+        createdAt:
+          type: string
+          format: date-time
+          description: "Fecha y hora de creación del pedido"
+          example: "2024-01-15T10:00:00Z"
+        updatedAt:
+          type: string
+          format: date-time
+          description: "Fecha y hora de última actualización del pedido"
+          example: "2024-01-16T14:30:00Z"
+
+    OrderItem:
+      type: object
+      description: "Artículo individual en un pedido"
+      required: [productId, quantity, price]
+      properties:
+        productId:
+          type: string
+          pattern: '^prod-[0-9]+$'
+          description: "ID del producto"
+          example: "prod-12345"
+        quantity:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          description: "Cantidad de unidades del producto"
+          example: 2
+        price:
+          type: number
+          format: double
+          minimum: 0
+          description: "Precio unitario del producto en el momento de la compra"
+          example: 1299.99
+        subtotal:
+          type: number
+          format: double
+          minimum: 0
+          description: "Subtotal (quantity × price)"
+          example: 2599.98
+
+    Cart:
+      type: object
+      description: "Carrito de compras del cliente"
+      required: [customerId, items, total]
+      properties:
+        id:
+          type: string
+          pattern: '^cart-[0-9]+$'
+          description: "ID único del carrito"
+          example: "cart-11111"
+        customerId:
+          type: string
+          pattern: '^cust-[0-9]+$'
+          description: "ID del cliente propietario del carrito"
+          example: "cust-98765"
+        items:
+          type: array
+          minItems: 0
+          description: "Lista de artículos en el carrito"
+          items:
+            $ref: '#/components/schemas/CartItem'
+        total:
+          type: number
+          format: double
+          minimum: 0
+          description: "Monto total del carrito en USD"
+          example: 1599.97
+        itemCount:
+          type: integer
+          minimum: 0
+          description: "Cantidad total de items en el carrito"
+          example: 2
+        createdAt:
+          type: string
+          format: date-time
+          description: "Fecha y hora de creación del carrito"
+          example: "2024-01-15T10:00:00Z"
+        updatedAt:
+          type: string
+          format: date-time
+          description: "Fecha y hora de última actualización"
+          example: "2024-01-16T14:30:00Z"
+
+    CartItem:
+      type: object
+      description: "Artículo en el carrito de compras"
+      required: [productId, quantity, price]
+      properties:
+        productId:
+          type: string
+          pattern: '^prod-[0-9]+$'
+          description: "ID del producto"
+          example: "prod-12345"
+        quantity:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          description: "Cantidad de unidades en el carrito"
+          example: 2
+        price:
+          type: number
+          format: double
+          minimum: 0
+          description: "Precio unitario del producto"
+          example: 1299.99
+        subtotal:
+          type: number
+          format: double
+          minimum: 0
+          description: "Subtotal (quantity × price)"
+          example: 2599.98
+        addedAt:
+          type: string
+          format: date-time
+          description: "Fecha y hora cuando se agregó al carrito"
+          example: "2024-01-15T10:05:00Z"
+
+    Payment:
+      type: object
+      description: "Información de pago de un pedido"
+      required: [orderId, amount, method, status]
+      properties:
+        id:
+          type: string
+          pattern: '^pay-[0-9]+$'
+          description: "ID único del pago"
+          example: "pay-77777"
+        orderId:
+          type: string
+          pattern: '^order-[0-9]+$'
+          description: "ID del pedido asociado"
+          example: "order-54321"
+        amount:
+          type: number
+          format: double
+          minimum: 0
+          description: "Monto del pago en USD"
+          example: 1599.97
+        method:
+          type: string
+          enum: [credit_card, paypal, bank_transfer, debit_card]
+          description: |
+            Método de pago utilizado:
+            - credit_card: Tarjeta de crédito
+            - debit_card: Tarjeta de débito
+            - paypal: PayPal
+            - bank_transfer: Transferencia bancaria
+          example: "credit_card"
+        status:
+          type: string
+          enum: [pending, completed, failed, refunded]
+          description: |
+            Estado del pago:
+            - pending: Pago pendiente de procesar
+            - completed: Pago completado exitosamente
+            - failed: Pago fallido
+            - refunded: Pago reembolsado
+          example: "completed"
+        transactionId:
+          type: string
+          description: "ID de transacción del proveedor de pago"
+          example: "TXN-2024-001-ABC123"
+        currency:
+          type: string
+          enum: [USD, MXN, EUR]
+          description: "Moneda del pago"
+          example: "USD"
+        createdAt:
+          type: string
+          format: date-time
+          description: "Fecha y hora del pago"
+          example: "2024-01-16T09:00:00Z"
+        completedAt:
+          type: string
+          format: date-time
+          description: "Fecha y hora de completación del pago"
+          example: "2024-01-16T09:05:00Z"
+
+    Shipment:
+      type: object
+      description: "Información de envío de un pedido"
+      required: [orderId, status, carrier]
+      properties:
+        id:
+          type: string
+          pattern: '^ship-[0-9]+$'
+          description: "ID único del envío"
+          example: "ship-99999"
+        orderId:
+          type: string
+          pattern: '^order-[0-9]+$'
+          description: "ID del pedido asociado"
+          example: "order-54321"
+        status:
+          type: string
+          enum: [pending, shipped, in_transit, delivered, returned, lost]
+          description: |
+            Estado del envío:
+            - pending: Preparando envío
+            - shipped: Enviado con transportista
+            - in_transit: En tránsito
+            - delivered: Entregado al cliente
+            - returned: Devuelto al remitente
+            - lost: Paquete perdido
+          example: "delivered"
+        carrier:
+          type: string
+          enum: [fedex, dhl, ups, local_delivery, postal]
+          description: "Empresa transportista"
+          example: "fedex"
+        trackingNumber:
+          type: string
+          minLength: 5
+          maxLength: 50
+          description: "Número de seguimiento del envío"
+          example: "FDX1234567890"
+        estimatedDelivery:
+          type: string
+          format: date
+          description: "Fecha estimada de entrega"
+          example: "2024-01-20"
+        shippedAt:
+          type: string
+          format: date-time
+          description: "Fecha y hora del envío"
+          example: "2024-01-16T15:00:00Z"
+        deliveredAt:
+          type: string
+          format: date-time
+          description: "Fecha y hora de entrega"
+          example: "2024-01-18T14:30:00Z"
+        weight:
+          type: number
+          format: double
+          minimum: 0
+          description: "Peso del paquete en kilogramos"
+          example: 2.5
+        dimensions:
+          type: string
+          description: "Dimensiones del paquete (largo x ancho x alto en cm)"
+          example: "30 x 20 x 15"
+
+  examples:
+    ApiErrorInvalidInput:
+      summary: Datos de entrada inválidos (400)
+      value:
+        code: "INVALID_INPUT"
+        message: "Los datos enviados no cumplen con el esquema."
+        timestamp: "2024-01-15T10:30:00Z"
+        path: "/api/v1/products"
+        details:
+          field: "name"
+          reason: "required"
+    ApiErrorNotFound:
+      summary: Producto no encontrado (404)
+      value:
+        code: "PRODUCT_NOT_FOUND"
+        message: "El producto especificado no existe"
+        timestamp: "2024-01-15T10:30:00Z"
+        path: "/api/v1/products/prod-12345"
+        details:
+          productId: "prod-12345"
+          searchedBy: "id"
+    ApiErrorConflict:
+      summary: Conflicto - producto ya existe (409)
+      value:
+        code: "PRODUCT_EXISTS"
+        message: "El producto ya existe."
+        timestamp: "2024-01-15T10:30:00Z"
+        path: "/api/v1/products"
+        details:
+          existingProductId: "prod-12345"
+          conflictReason: "duplicate_name"
+    ApiErrorProductHasOrders:
+      summary: No se puede eliminar - producto tiene pedidos activos (409)
+      value:
+        code: "PRODUCT_HAS_ORDERS"
+        message: "No se puede eliminar - producto tiene pedidos activos"
+        timestamp: "2024-01-15T10:30:00Z"
+        path: "/api/v1/products/prod-12345"
+        details:
+          activeOrdersCount: 3
+          orderIds: ["ord-001", "ord-002", "ord-003"]
+    ApiErrorInternal:
+      summary: Error interno del servidor (500)
+      value:
+        code: "INTERNAL_ERROR"
+        message: "Ocurrió un error inesperado."
+        timestamp: "2024-01-15T10:30:00Z"
+        path: "/api/v1/products"
+        details:
+          errorId: "err-2024-001"
+          traceId: "trace-abc123"
