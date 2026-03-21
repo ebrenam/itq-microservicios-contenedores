@@ -1,0 +1,1200 @@
+# ========= Project =========
+# ChatBot Institucional
+# ========= Members =========
+# Medina Jurado Emmanuel
+# Ramos Pichardo Estaban Rodrigo
+# Rangel Vranckx Miguel
+# Soria Ortiz Juan Uriel
+# Zullo Bolivar Jean Piero Nicolas
+# Salinas Olvera Jonathan Josue
+# Segura Mendoza Gael Alejandro
+# Herrera Garcia Jose Salvador
+# ===========================
+
+
+openapi: 3.0.4
+
+info:
+  title: ChatBot Institucional para el ITQ
+  description: API REST para dar asesoramiento y guia a la comunidad del TecNM Querétaro
+  version: 1.0.0
+  contact:
+    name: Departamento de Sistemas
+    email: lc22140544@queretaro.tecnm.mx
+  license:
+    name: Lovable
+    url: https://lovable.tecnm.mx
+
+servers:
+  - url: http://localhost:8080/api/v1
+    description: Servidor local para las pruebas
+  - url: http://api.tecnm.queretaro.com/chatbot/v1
+    description: Servidor de produccion
+  
+tags:
+  - name: consults
+    description: Interactions related endpoints between users and chatbot
+  - name: users
+    description: User related operations
+  - name: documents
+    description: General documents operations
+  - name: departments
+    description: TecNM area management and extensions
+  - name: responses
+    description: Obtain an answers previusly generated
+
+paths:
+  /consults:
+    post:
+      summary: Make interactions between chatbtot - user
+      description: Send a prompt to obtain a response
+      operationId: createConsult
+      tags:
+      - consults
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - controlNumber
+              - prompt
+              properties:
+                controlNumber:
+                  type: string
+                  description: "Student identifier to save in their history"
+                  example: "C22140544"
+                prompt:
+                  type: string
+                  description: "The doubt or question that the user asks"
+                  example: "Which documents do I require to start my Social Service?"
+      responses:
+        '201':
+          description: Succesful consult
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - response
+                - idConsult
+                properties:
+                  response:
+                    type: string
+                    example: "You will need the following documents: [...]"
+                  idConsult:
+                    type: string
+                    example: "Social Service area"
+        '400':
+          description: Error sending request to server
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - responseError
+                properties:
+                  responseError:
+                    type: string
+                    example: "Error proccesing sending request. If the problem continues, contact the site owner"
+        '500':
+          description: AI Engine Internal Error (RAG)
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - responseError
+                properties:
+                  responseError:
+                    type: string
+                    example: "The assistant did not process your request, please try again later"
+
+  /consults/{idConsult}/feedback:
+    post:
+      summary: Send feedback for the response
+      description: Allows the user to rate whether the chatbot's response was helpful or not.
+      operationId: sendFeedback
+      tags:
+        - consults
+      parameters:
+        - name: idConsult
+          in: path
+          required: true
+          schema:
+            type: string
+          example: "cons987654321"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - isHelpful
+              properties:
+                isHelpful:
+                  type: boolean
+                  description: "True if the response was useful, False if it was incorrect or unhelpful"
+                  example: true
+      responses:
+        '200':
+          description: Feedback saved successfully
+
+  /history/{controlNumber}:
+    get:
+      summary: Obtain user history consults
+      description: Allows user to obtain past queries consults (paginated)
+      operationId: getConsultHistory
+      tags:
+        - consults
+      parameters:
+        - name: controlNumber
+          in: path
+          required: true
+          schema:
+            type: string
+          example: "C22140544"
+        - name: limit
+          in: query
+          description: Maximum number of records to return
+          required: false
+          schema:
+            type: integer
+            default: 20
+        - name: page
+          in: query
+          description: Results page to query
+          required: false
+          schema:
+            type: integer
+            default: 1
+      responses:
+        '200':
+          description: Consults history obtained succesfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  totalRecords:
+                    type: integer
+                    example: 45
+                  history:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        idConsult:
+                          type: string
+                        prompt:
+                          type: string
+                          example: "Which documents do I require to start my Social Service?"
+                        response:
+                          type: string
+                          example: "You will need the following documents: [...]"
+                        date:
+                          type: string
+                          format: date-time
+                          example: "2024-01-15T10:30:00Z"
+
+  /documents/vectorize:
+    post:
+      summary: RAG proccesing
+      description: se realiza la vectorizacion de los documentos
+      operationId: procesaRAG
+      tags:
+        - RAG
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - matriz
+              properties:
+                matriz:
+                  type: string
+                  description: "informacion abstraida y documentada en forma de vectores"
+                  example: "[SERVICIO SOCIAL, FECHAS: , STATUS: ]"
+      responses:
+        '201':
+          description: vectorizacion completada
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  STATUS:
+                    type: string
+                    example: "completado"
+                  created_vector:
+                    type: string
+                    example: "size 1500"
+
+  /documents:
+    get:
+      summary: Search documents
+      description: Retrieves the list of general documents or filters by category.
+      operationId: searchDocuments
+      tags:
+        - documents
+      parameters:
+        - name: category
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: ["Tramites", "Convocatorias", "Calendario"]
+          example: "Tramites"
+    
+      responses:
+        '200':
+          description: List of documents found successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    title:
+                      type: string
+                    url:
+                      type: string
+        '400':
+          description: Incorrect category
+          content: 
+            application/json:
+              schema:
+                type: object
+                required:
+                  - code
+                  - message
+                  - timestamp
+                properties:
+                  code:
+                    type: string
+                    example: "INVALID_INPUT"
+                  message:
+                    type: string
+                    example: "Data does not match the schema"
+                  timestamp:
+                    type: string
+                    format: date-time
+                    example: "2024-01-15T10:30:00Z"
+                  path:
+                    type: string
+                    example: "/api/v1/products"
+    post:
+      summary: Create a new document
+      description: Allows creating new documents to upload them to the system
+      operationId: createDocument
+      tags:
+        - documents
+      
+      requestBody:
+        description: Data of the document to be created
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - title
+                - category
+                - content
+              properties:
+                title:
+                  type: string
+                  example: "Convocatoria Becas"
+                category:
+                  type: string
+                  enum: ["Tramites", "Convocatorias", "Calendario"]
+                  example: "Convocatorias"
+                content:
+                  type: string
+                  description: "Information"
+                  example: "Required documents for the scholarship"
+                file_url:
+                  type: string
+                  format: uri
+                  example: "https://itq.edu.mx/becas.pdf"
+      responses:
+        '201':
+          description: Document created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: "doc-100"
+        '400':
+          description: Invalid data
+        '401':
+          description: Unauthorized personnel
+            
+  /documents/{documentId}:
+    parameters:
+      - name: documentId
+        in: path
+        required: true
+        description: "Unique ID of the document"
+        schema:
+          type: string
+          pattern: '^doc-[0-9]+$'
+    get:
+      summary: Get specific document
+      description: Returns information for a single specific document
+      operationId: getDocumentById
+      tags:
+        - documents
+      responses:
+        '200':
+          description: Document found successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: "doc-101"
+                  title:
+                    type: string
+                    example: "Proceso de Titulacion"
+                  content:
+                    type: string
+                    example: "The steps for graduation at ITQ are:"
+                  category:
+                    type: string
+                    enum: ["Tramites", "Convocatorias", "Calendario"]
+                  updated_at:
+                    type: string
+                    format: date-time
+                    example: "2026-03-15T10:00:00Z"
+        '404':
+          description: Information for this ID was not found
+
+    patch:
+      summary: Update a document
+      description: Allows modifying a single specific document
+      operationId: updateDocument
+      tags:
+        - documents
+      requestBody:
+        description: Document data to be updated
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  example: "New title"
+                content:
+                  type: string
+                  example: "Content with corrected dates"
+                category:
+                  type: string
+                  enum: ["Tramites", "Convocatorias", "Calendario"]
+      responses:
+        '200':
+          description: Document updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+        '404':
+          description: Could not update because the document does not exist
+        '400':
+          description: Error in sent data 
+
+    delete:
+      summary: Delete a document
+      description: Deletes a document from the system
+      operationId: deleteDocument
+      tags:
+        - documents
+      responses:
+        '204':
+          description: Document successfully deleted
+        '404':
+          description: Could not delete because the ID does not exist
+        '403':
+          description: Forbidden - You do not have permission
+
+  /users/login:
+    post:
+      summary: login
+      operationId: userLogin
+      tags:
+        - users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - controlNumber
+              - password
+              - email
+              properties:
+                controlNumber:
+                  type: string
+                  example: "C22140544"
+                password:
+                  type: string
+                  pattern: '^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{8,}$'
+                  description: "The password must be at least 8 characters long, should contain an upper leter, a lower letter and a number"
+                  example: Qwerty123
+                email:
+                  type: string
+                  pattern: '^[a-z]{2}[0-9]{8}@queretaro\.tecnm\.mx$'
+                  format: email
+                  description: "It should have at most 2 letters, 8 digits and @queretaro.tecnm.mx"
+                  example: l25189135@queretaro.tecnm.mx
+      responses:
+        '201':
+          description: login succesful
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - controlNumber
+                - password
+                - email
+                properties:
+                  controlNumber:
+                    type: string
+                    example: "C22140544"
+                  password:
+                    type: string
+                    pattern: '^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{8,}$'
+                    description: "The password must be at least 8 characters long, should contain an upper leter, a lower letter and a number"
+                    example: Qwerty123
+                  email:
+                    type: string
+                    pattern: '^[a-z]{2}[0-9]{8}@queretaro\.tecnm\.mx$'
+                    format: email
+                    description: "It should have at most 2 letters, 8 digits and @queretaro.tecnm.mx"
+                    example: l25189135@queretaro.tecnm.mx
+        '400':
+          description: Invalid input data
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - code
+                - message
+                - timestamp
+                properties:
+                  code:
+                    type: string
+                    example: "INVALID_INPUT"
+                  message:
+                    type: string
+                    example: "The sended data does not match the schema"
+                  timestamp:
+                    type: string
+                    format: date-time
+                    example: "2024-01-15T10:30:00Z"
+                  path:
+                    type: string
+                    example: "/chatbot/v1/products"
+        '409':
+          description: Conflict - the user already exists
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - code
+                  - message
+                  - timestamp
+                properties:
+                  code:
+                    type: string
+                    description: "Error code"
+                    example: "USER_ALREADY_EXISTS exists"
+                  message:
+                    type: string
+                    description: "Descriptive error message"
+                    example: "The user already exists"
+                  timestamp:
+                    type: string
+                    format: date-time
+                    description: "Date and time of the error"
+                    example: "2024-01-15T10:30:00Z"
+                  path:
+                    type: string
+                    description: "Route where the error occurred"
+                    example: "/api/v1/users"
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - code
+                  - message
+                  - timestamp
+                properties:
+                  code:
+                    type: string
+                    description: "Error code"
+                    example: "INTERNAL_ERROR"
+                  message:
+                    type: string
+                    description: "Descriptive error message"
+                    example: "An unexpected error occurred."
+                  timestamp:
+                    type: string
+                    format: date-time
+                    description: "Date and time of the error"
+                    example: "2024-01-15T10:30:00Z"
+                  path:
+                    type: string
+                    description: "Route where the error occurred"
+                    example: "/api/v1/users"
+
+
+  /users/{controlNumber}:
+    parameters:
+    - name: controlNumber
+      in: path
+      required: true
+      schema:
+        type: string
+
+    post:
+      summary: Create a new user
+      description: Creates a new user given a control number
+      operationId: createUser
+      tags:
+      - users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - controlNumber
+              - password
+              - email
+              - createdAt
+              properties:
+                controlNumber:
+                  type: string
+                  example: "C22140544"
+                password:
+                  type: string
+                  pattern: '^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{8,}$'
+                  description: "The password must be at least 8 characters long, should contain an upper leter, a lower letter and a number"
+                  example: Qwerty123
+                email:
+                  type: string
+                  pattern: '^[a-z]{2}[0-9]{8}@queretaro\.tecnm\.mx$'
+                  format: email
+                  description: "It should have at most 2 letters, 8 digits and @queretaro.tecnm.mx"
+                  example: l25189135@queretaro.tecnm.mx
+      responses:
+        '201':
+          description: User successfully created
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - controlNumber
+                - password
+                - email
+                properties:
+                  controlNumber:
+                    type: string
+                    example: "C22140544"
+                  password:
+                    type: string
+                    pattern: '^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{8,}$'
+                    description: "The password must be at least 8 characters long, should contain an upper leter, a lower letter and a number"
+                    example: Qwerty123
+                  email:
+                    type: string
+                    pattern: '^[a-z]{2}[0-9]{8}@queretaro\.tecnm\.mx$'
+                    format: email
+                    description: "It should have at most 2 letters, 8 digits and @queretaro.tecnm.mx"
+                    example: l25189135@queretaro.tecnm.mx
+        '401':
+          description: Unauthorized access
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - code
+                  - message
+                  - timestamp
+                properties:
+                  code:
+                    type: string
+                    description: "Error code"
+                    example: "UNAUTHORIZED_ACCESS"
+                  message:
+                    type: string
+                    description: "Descriptive error message"
+                    example: "Unauthorized access credentials"
+                  timestamp:
+                    type: string
+                    format: date-time
+                    description: "Date and time of the error"
+                    example: "2024-01-15T10:30:00Z"
+                  path:
+                    type: string
+                    description: "Route where the error occurred"
+                    example: "/api/v1/users/login"
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - code
+                  - message
+                  - timestamp
+                properties:
+                  code:
+                    type: string
+                    description: "Error code"
+                    example: "INTERNAL_ERROR"
+                  message:
+                    type: string
+                    description: "Descriptive error message"
+                    example: "An unexpected error occurred."
+                  timestamp:
+                    type: string
+                    format: date-time
+                    description: "Date and time of the error"
+                    example: "2024-01-15T10:30:00Z"
+                  path:
+                    type: string
+                    description: "Route where the error occurred"
+                    example: "/api/v1/users"
+    get:
+      summary: Get user by ID
+      description: It searches for existing users based on the given criteria
+      operationId: searchUsers
+      tags:
+        - users
+      parameters:
+        - name: email
+          in: query 
+          description: "Email of the given user"
+          required: false
+          schema:
+            type: string
+            pattern: '^[a-z]{2}[0-9]{8}@queretaro\.tecnm\.mx$'
+            format: email
+            description: "It should have at most 2 letters, 8 digits and @queretaro.tecnm.mx"
+          example: l25189135@queretaro.tecnm.mx
+        - name: name
+          in: query
+          description: "Name or names of the given user"
+          required: false
+          schema:
+            type: string
+          example: "Juan Sebastian"
+        - name: fatherLastName
+          in: query
+          description: "Father last name of the given user"
+          required: false
+          schema:
+            type: string
+          example: "Perez"
+        - name: motherLastName
+          in: query
+          description: "Mother last name of the given userr"
+          required: false
+          schema:
+            type: string
+          example: "Lopez"
+      responses:
+        '200':
+          description: Lista de productos encontrados (puede estar vacía)
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - pagination
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                      - controlNumber
+                      - email
+                      - name
+                      - fatherLastName
+                      - motherLastName
+                      - createdAt
+                      - updatedAt
+                      properties:
+                        controlNumber:
+                          type: string
+                          example: "C22140544"
+                        email:
+                          type: string
+                          pattern: '^[a-z]{2}[0-9]{8}@queretaro\.tecnm\.mx$'
+                          format: email
+                          description: "It should have at most 2 letters, 8 digits and @queretaro.tecnm.mx"
+                          example: l25189135@queretaro.tecnm.mx
+                        name:
+                          type: string
+                          description: "Name or names of the given user"
+                          example: "Juan Sebastian"
+                        fatherLastName:
+                          description: "Father last name of the given userr"
+                          type: string
+                          example: "Lopez"
+                        motherLastName:
+                          description: "Mother last name of the given userr"
+                          type: string
+                          example: "Lopez"
+                        createdAt:
+                          type: string
+                          format: date-time
+                          description: "Craation date and time"
+                          example: "2024-01-15T10:30:00Z"
+                        updatedAt:
+                          type: string
+                          format: date-time
+                          description: "Last update date and time"
+                          example: "2024-01-15T10:30:00Z"
+                  pagination:
+                    type: object
+                    required:
+                      - total
+                      - page
+                      - limit
+                      - totalPages
+                    properties:
+                      total:
+                        type: integer
+                        example: 2
+                      page:
+                        type: integer
+                        example: 1
+                      limit:
+                        type: integer
+                        example: 20
+                      totalPages:
+                        type: integer
+                        example: 1
+        '400':
+          description: Invalid input data
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - code
+                - message
+                - timestamp
+                properties:
+                  code:
+                    type: string
+                    example: "INVALID_INPUT"
+                  message:
+                    type: string
+                    example: "The sended data does not match the schema"
+                  timestamp:
+                    type: string
+                    format: date-time
+                    example: "2024-01-15T10:30:00Z"
+                  path:
+                    type: string
+                    example: "/chatbot/v1/products"
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - code
+                  - message
+                  - timestamp
+                properties:
+                  code:
+                    type: string
+                    description: "Error code"
+                    example: "INTERNAL_ERROR"
+                  message:
+                    type: string
+                    description: "Descriptive error message"
+                    example: "An unexpected error occurred."
+                  timestamp:
+                    type: string
+                    format: date-time
+                    description: "Date and time of the error"
+                    example: "2024-01-15T10:30:00Z"
+                  path:
+                    type: string
+                    description: "Route where the error occurred"
+                    example: "/api/v1/users"
+    patch:
+      summary: Partial update of the user
+      operationId: patchUsers
+      tags:
+        - users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  pattern: '^[a-z]{2}[0-9]{8}@queretaro\.tecnm\.mx$'
+                  format: email
+                  description: "It should have at most 2 letters, 8 digits and @queretaro.tecnm.mx"
+                  example: l25189135@queretaro.tecnm.mx
+                password:
+                  type: string
+                  pattern: '^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{8,}$'
+                  description: "The password must be at least 8 characters long, should contain an upper leter, a lower letter and a number"
+                  example: Qwerty123
+      responses:
+        '200':
+          description: Student succesfully updated
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - controlNumber
+                - email
+                - password
+                - updatedAt
+                properties:
+                  controlNumber:
+                    type: string
+                    description: "Student id"
+                    example: "C22140544"
+                  email:
+                    type: string
+                    pattern: '^[a-z]{2}[0-9]{8}@queretaro\.tecnm\.mx$'
+                    format: email
+                    description: "It should have at most 2 letters, 8 digits and @queretaro.tecnm.mx"
+                    example: br25189135@queretaro.tecnm.mx
+                  password:
+                    type: string
+                    pattern: '^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{8,}$'
+                    description: "The password must be at least 8 characters long, should contain an upper leter, a lower letter and a number"
+                    example: Qwerty123 
+                  updatedAt:
+                    type: string
+                    format: date-time
+                    description: "Last update date and time"
+                    example: "2024-01-15T10:30:00Z"
+        '400':
+          description: Invalid input data
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - code
+                - message
+                - timestamp
+                properties:
+                  code:
+                    type: string
+                    example: "INVALID_INPUT"
+                  message:
+                    type: string
+                    example: "The sended data does not match the schema"
+                  timestamp:
+                    type: string
+                    format: date-time
+                    example: "2024-01-15T10:30:00Z"
+                  path:
+                    type: string
+                    example: "/chatbot/v1/products"
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - code
+                  - message
+                  - timestamp
+                properties:
+                  code:
+                    type: string
+                    example: "USER_NOT_FOUND"
+                  message:
+                    type: string
+                    example: "The specified student doesnt exist"
+                  timestamp:
+                    type: string
+                    format: date-time
+                    example: "2024-01-15T10:30:00Z"
+                  path:
+                    type: string
+                    example: "/chatbot/v1/users/C22140544"
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - code
+                  - message
+                  - timestamp
+                properties:
+                  code:
+                    type: string
+                    description: "Error code"
+                    example: "INTERNAL_ERROR"
+                  message:
+                    type: string
+                    description: "Descriptive error message"
+                    example: "An unexpected error occurred."
+                  timestamp:
+                    type: string
+                    format: date-time
+                    description: "Date and time of the error"
+                    example: "2024-01-15T10:30:00Z"
+                  path:
+                    type: string
+                    description: "Route where the error occurred"
+                    example: "/api/v1/users"
+    delete: 
+      summary: Delete user
+      description: Deletes a user given a control number
+      operationId: deleteUser
+      tags: 
+        - users
+      parameters:
+        - name: controlNumber
+          in: path
+          description: User ID to delete
+          required: true
+          schema:
+            type: string
+            pattern: '^(l|c)[0-9]{9}$'
+            example: "C22140544"
+      responses:
+        '200':
+          description: User deleted succesfully
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - controlNumber
+                  - message
+                  - deletedAt
+                properties:
+                  controlNumber:
+                    type: string
+                    example: "l23140174"
+                  message:
+                    type: string
+                    example: "User deleted sucesfulyl"
+                  deletedAt:
+                    type: string
+                    format: date-time
+                    example: "2024-01-15T15:45:00Z"
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - code
+                  - message
+                  - timestamp
+                properties:
+                  code:
+                    type: string
+                    example: "USER_NOT_FOUND"
+                  message:
+                    type: string
+                    example: "The user does not exists"
+                  timestamp:
+                    type: string
+                    format: date-time
+                    example: "2024-01-15T10:30:00Z"
+                  path:
+                    type: string
+                    example: "/api/v1/users"
+            
+  /departments:
+    get:
+      summary: Obtain area information
+      operationId: getDepartments
+      tags:
+        - departments
+      responses:
+        '200':
+          description: List of departments obtained succesfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      example: "DEP-001"
+                    name:
+                      type: string
+                      example: "Social Service"
+                    extension:
+                      type: string
+                      description: "Contact extension"
+                      example: "1234"
+                    department:
+                      type: string
+                      example: "Social Service"
+    post:
+      summary: Create a new department
+      operationId: createDepartment
+      tags:
+        - departments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - extension
+                - department
+              properties:
+                name:
+                  type: string
+                  description: Department name
+                  example: "Complementary activities"
+                extension:
+                  type: string
+                  description: "442-001-7000 SS Department"
+                department:
+                  type: string
+                  example: "Extracurricular Activities department"
+      responses:
+        '201':
+          description: Department succesfully created
+
+  /departments/{id}:
+    patch:
+      summary: Partially modify an area
+      operationId: updateDepartment
+      tags:
+        - departments
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nombre:
+                  type: string
+                extension:
+                  type: string
+                  description: "442-001-7000 SS Department"
+                department:
+                  type: string
+      responses:
+        '200':
+          description: Updated correctly
+  /responses:
+    get:
+      summary: Obtain a response
+      description: Returns a specific response generated for a user
+      operationId: getUserResponse
+      tags: 
+        - responses
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: USER ID
+
+        - name: responseId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID for the response
+
+      responses:
+        '200':
+          description: Response finded 
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: "resp-101"
+
+                  userId:
+                    type: string
+                    example: "C22140544"
+
+                  text:
+                    type: string
+                    example: " you must hand in your presentation letter to the social service  departament. "
+
+                  source:
+                    type: string
+                    example: "Manual of Social Service"
+
+                  department:
+                    type: string
+                    example: "Social Service"
+
+                  createdAt:
+                    type: string
+                    format: date-time
+                    example: "2026-03-16T10:30:00Z"
+
+        '404':
+          description: Respuesta no encontrada
