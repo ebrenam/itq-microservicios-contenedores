@@ -360,6 +360,12 @@ paths:
 
 components:
   schemas:
+    Category:
+      type: string
+      enum: [ELECTRONICS, CLOTHING, BOOKS, HOME, SPORTS]
+      description: "Categoría del producto"
+      example: "Electronics"
+
     Product:
       type: object
       required:
@@ -385,10 +391,7 @@ components:
           description: "Precio del producto en USD"
           example: 1299.99
         category:
-          type: string
-          enum: ["Electronics", "Clothing", "Books", "Home", "Sports"]
-          description: "Categoría del producto"
-          example: "Electronics"
+          $ref: '#/components/schemas/Category'
         inStock:
           type: boolean
           description: "Indica si el producto está disponible"
