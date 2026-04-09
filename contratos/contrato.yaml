@@ -1,0 +1,386 @@
+openapi: 3.0.4
+info:
+  title: Gestion de herramientas ITQ
+  description: Sistema gestor de herramientas enfocado en la automatización de préstamos en el Instituto Tecnológico de Querétaro.
+  version: 1.0.0
+  contact:
+    name: ITQ distributed and cloud systems
+    email: l23200335@queretaro.tecnm.mx
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+
+servers:
+  - url: 
+    description: Servidor de desarrollo
+  - url: 
+    description: Servidor de producción del sistema de préstamos
+
+tags:
+  - name: Usuarios
+    description: Gestión de alumnos y administradores, autenticación y roles.
+  - name: Inventario
+    description: Control de disponibilidad y estado físico del equipo de laboratorio.
+  - name: Herramientas
+    description: Operaciones de préstamo y devolución.
+  - name: Historial
+    description: Historial de préstamos y gestión de sanciones por adeudos.
+
+paths:
+  # --- MÓDULO DE USUARIOS (ALUMNOS) ---
+  /usuarios/registro:
+    post:
+      summary: Registrar nuevo alumno
+      tags: [Usuarios]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UsuarioRegistro'
+      responses:
+        '201':
+          description: Registro exitoso.
+        '400':
+          description: Datos de entrada inválidos.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '409':
+          description: El número de control ya existe.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+  
+  #Consulta de usuarios
+  /usuarios:
+    get:
+      summary: Obtener lista de usuarios registrados
+      tags: [Usuarios]
+      responses:
+        '200':
+          description: Lista de usuarios.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Usuario'
+
+  /usuarios/{numberControl}:
+    get:
+      summary: Obtener información de un usuario
+      tags: [Usuarios]
+      parameters:
+        - name: numberControl
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Número de control del alumno
+      responses:
+        '200':
+          description: Información del usuario encontrada.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Usuario'
+        '404':
+          description: Usuario no encontrado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+
+    patch:
+      summary: Actualizar contraseña del usuario
+      tags: [Usuarios]
+      parameters:
+        - name: numberControl
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [password]
+              properties:
+                password:
+                  type: string
+                  format: password
+                  description: Nueva contraseña del usuario
+      responses:
+        '200':
+          description: Contraseña actualizada correctamente.
+        '404':
+          description: Usuario no encontrado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+                
+  # --- MÓDULO ADMINISTRATIVO ---
+  /admin/auth/registro:
+    post:
+      summary: Registrar nuevo administrador
+      tags: [Usuarios]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Admin'
+      responses:
+        '201':
+          description: Administrador creado exitosamente.
+        '403':
+          description: No tienes permisos para realizar esta acción.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+
+  /admin/auth/login:
+    post:
+      summary: Login administrativo
+      tags: [Usuarios]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [user, password]
+              properties:
+                user: { type: string }
+                password: { type: string, format: password }
+      responses:
+        '200':
+          description: Token generado.
+        '401':
+          description: Credenciales incorrectas.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+
+  /admin/materiales:
+    get:
+      summary: Ver inventario completo
+      tags: [Inventario]
+      responses:
+        '200':
+          description: Lista de materiales.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Material'
+    post:
+      summary: Agregar equipo nuevo
+      tags: [Inventario]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Material'
+      responses:
+        '201':
+          description: Material registrado.
+        '500':
+          description: Error interno al guardar en BD.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+
+  /admin/materiales/{idMaterial}:
+    patch:
+      summary: Actualizar estado de equipo (Mantenimiento/Baja)
+      tags: [Inventario]
+      parameters:
+        - name: idMaterial
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estado: { type: string, enum: [Disponible, Mantenimiento, Baja] }
+                cantidadDisponible: { type: integer }
+      responses:
+        '200':
+          description: Estado actualizado.
+        '404':
+          description: El material no existe.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+
+  # --- MÓDULO DE PRÉSTAMOS Y SANCIONES ---
+  /prestamos:
+    post:
+      summary: Solicitar préstamo de equipo
+      tags: [Herramientas]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [numberControl, idMaterial]
+              properties:
+                numberControl: { type: string }
+                idMaterial: { type: string }
+      responses:
+        '201':
+          description: Préstamo autorizado.
+        '403':
+          description: Usuario sancionado o sin disponibilidad de material.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+
+    get:
+      summary: Consultar préstamos registrados
+      tags: [Herramientas]
+      responses:
+        '200':
+          description: Lista de préstamos registrados.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    idPrestamo: { type: string, example: "PREST-001" }
+                    numberControl: { type: string, example: "23200335" }
+                    idMaterial: { type: string, example: "MULT-01" }
+                    fechaPrestamo: { type: string, format: date-time }
+                    estado: { type: string, example: "Activo" }
+
+  /prestamos/{idPrestamo}/devolucion:
+    patch:
+      summary: Registrar devolución de material
+      tags: [Herramientas]
+      parameters:
+        - name: idPrestamo
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Identificador del préstamo
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                estadoMaterial:
+                  type: string
+                  enum: [Disponible, Dañado, Extraviado]
+                  example: Disponible
+      responses:
+        '200':
+          description: Devolución registrada correctamente.
+        '404':
+          description: Préstamo no encontrado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+
+  /admin/sanciones:
+    get:
+      summary: Listar alumnos sancionados
+      tags: [Historial]
+      responses:
+        '200':
+          description: Lista de sanciones.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Sancion'
+    post:
+      summary: Aplicar sanción tras devolución fallida
+      tags: [Historial]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Sancion'
+      responses:
+        '201':
+          description: Sanción aplicada.
+
+components:
+  schemas:
+    UsuarioRegistro:
+      type: object
+      required: [name, password, numberControl]
+      properties:
+        name: { type: string, example: "Juan Pérez" }
+        password: { type: string, format: password }
+        numberControl: { type: string, example: "23200335" }
+    
+    Usuario:
+      type: object
+      required: [name, numberControl]
+      properties:
+        name: { type: string, example: "Juan Pérez" }
+        numberControl: { type: string, example: "23200335" }
+    Admin:
+      type: object
+      required: [name, user, password, employeeId]
+      properties:
+        name: { type: string }
+        user: { type: string }
+        password: { type: string, format: password }
+        employeeId: { type: string, example: "EMP-99" }
+        departamento: { type: string, example: "Laboratorio Electrónica" }
+
+    Material:
+      type: object
+      required: [idMaterial, nombre, cantidadDisponible]
+      properties:
+        idMaterial: { type: string, example: "MULT-01" }
+        nombre: { type: string, example: "Multímetro" }
+        estado: { type: string, example: "Disponible" }
+        cantidadDisponible: { type: integer, example: 5 }
+
+    Sancion:
+      type: object
+      required: [numberControl, motivo, fechaInicio]
+      properties:
+        idSancion: { type: integer }
+        numberControl: { type: string }
+        motivo: { type: string, example: "No entregó a tiempo" }
+        fechaInicio: { type: string, format: date }
+        montoMulta: { type: number, format: double }
+
+    ApiError:
+      type: object
+      required: [code, message, timestamp]
+      properties:
+        code: { type: string, description: "Código de error interno" }
+        message: { type: string, description: "Explicación legible del error" }
+        timestamp: { type: string, format: date-time }
+        path: { type: string, description: "URL que generó el error" }
