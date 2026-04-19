@@ -10,9 +10,11 @@
     - [Capa de Presentación/API (Controller)](#capa-de-presentaciónapi-controller)
     - [Capa de Negocio (Service)](#capa-de-negocio-service)
     - [Capa de Persistencia (Model/Entity)](#capa-de-persistencia-modelentity)
-  - [3. ☕ Java 21 y Evolución del Lenguaje](#3--java-21-y-evolución-del-lenguaje)
+  - [3. ☕ Java 25 y la Modernización del Lenguaje](#3--java-25-y-la-modernización-del-lenguaje)
     - [Clase Tradicional (POJO)](#clase-tradicional-pojo)
-    - [Java Record (Introducido en Java 14, mejorado en 21)](#java-record-introducido-en-java-14-mejorado-en-21)
+    - [Java Record (Estándar moderno en Java 25)](#java-record-estándar-moderno-en-java-25)
+    - [Diferencias principales](#diferencias-principales)
+    - [¿Por qué enfocarnos en clases tradicionales?](#por-qué-enfocarnos-en-clases-tradicionales)
   - [4. 💾 Persistencia con JPA](#4--persistencia-con-jpa)
     - [Concepto de ORM (Object-Relational Mapping)](#concepto-de-orm-object-relational-mapping)
     - [Spring Data JPA: Abstracción de Consultas](#spring-data-jpa-abstracción-de-consultas)
@@ -55,9 +57,9 @@ Spring Initializr es una herramienta web (start.spring.io) que genera la estruct
 
 ```
 Usuario selecciona:
-├── Lenguaje: Java 21
-├── Framework: Spring Boot 3.x
-├── Dependencias: Spring Web, Spring Data JPA, H2
+├── Lenguaje: Java 25
+├── Framework: Spring Boot 4.x
+├── Dependencias: Spring Web, Spring Boot Actuator, Validation
 └── Genera proyecto
 
 Resultado:
@@ -121,30 +123,30 @@ Service ── Consultas ──> Model/Entity ── SQL ──> Base de Datos
 
 ---
 
-## 3. ☕ Java 21 y Evolución del Lenguaje
+## 3. ☕ Java 25 y la Modernización del Lenguaje
 
-Java 21 representa la evolución moderna del lenguaje, introduciendo características que simplifican el desarrollo orientado a objetos. En este curso, nos centramos en clases tradicionales para asegurar una comprensión sólida de los fundamentos OOP.
+Java 25 consolida la era de la "programación concisa", donde el lenguaje elimina el ruido visual sin perder su esencia orientada a objetos. Aunque las versiones actuales ofrecen herramientas automáticas, en este curso nos centramos en las clases tradicionales para asegurar que comprendas los fundamentos de la POO (Programación Orientada a Objetos) antes de usar las simplificaciones modernas.
 
 ### Clase Tradicional (POJO)
 
-Un POJO (Plain Old Java Object) es una clase simple que sigue principios básicos de OOP:
+Un **POJO** (_Plain Old Java Object_) es la base del diseño de software en Java. Representa una estructura donde tú, como desarrollador, tienes control total sobre cada componente:
 
 ```java
 public class Product {
-    // Atributos (estado)
+    // Atributos (Estado: representan la información del objeto)
     private String name;
     private Double price;
     
-    // Constructor (inicialización)
+    // Constructor (Inicialización: define cómo nace el objeto)
     public Product(String name, Double price) {
         this.name = name;
         this.price = price;
     }
     
-    // Constructor vacío (requerido por frameworks)
+    // Constructor vacío (Requerido por frameworks de persistencia y serialización)
     public Product() {}
     
-    // Métodos de acceso (getters/setters)
+    // Métodos de acceso (Getters/Setters: implementan el encapsulamiento)
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
     
@@ -154,30 +156,39 @@ public class Product {
 ```
 
 **Elementos clave:**
-- **Atributos:** Representan el estado del objeto.
-- **Constructores:** Inicializan el objeto.
-- **Getters/Setters:** Permiten acceso controlado a atributos (encapsulamiento).
 
-### Java Record (Introducido en Java 14, mejorado en 21)
+- **Atributos:** Definen qué sabe el objeto.
+- **Constructores:** Garantizan que el objeto se cree en un estado válido.
+- **Encapsulamiento:** Protege los datos mediante modificadores de acceso (`private`) y métodos controlados.
+
+### Java Record (Estándar moderno en Java 25)
 
 Un Record es una clase especial para objetos inmutables, diseñada para datos que no cambian:
 
 ```java
 public record ProductDTO(String name, Double price) {
-    // Constructor, getters y métodos equals/hashCode generados automáticamente
+    // El constructor canónico, los getters, equals, hashCode 
+    // y toString se generan automáticamente en tiempo de compilación.
 }
 ```
 
 **Diferencias principales:**
 
-| Aspecto | Clase Tradicional | Java Record |
-|---------|-------------------|-------------|
-| **Mutabilidad** | Mutable (setters) | Inmutable (sin setters) |
-| **Boilerplate** | Requiere getters/setters manuales | Generados automáticamente |
-| **Constructores** | Múltiples posibles | Uno canónico generado |
-| **Uso recomendado** | Entidades de BD (cambian) | DTOs, respuestas API (no cambian) |
+### Diferencias principales
 
-**¿Por qué enfocarnos en clases tradicionales?** Los estudiantes con bases débiles de OOP necesitan comprender explícitamente atributos, constructores y métodos de acceso. Los Records, aunque poderosos para inmutabilidad, pueden ocultar estos conceptos fundamentales. Recomendamos Records para DTOs una vez dominadas las clases tradicionales.
+|**Aspecto**|**Clase Tradicional (POJO)**|**Java Record (Java 25)**|
+|---|---|---|
+|**Mutabilidad**|**Mutable:** Los datos pueden cambiar mediante setters.|**Inmutable:** Los datos son `final` y no pueden cambiar.|
+|**Código Manual**|Alto (requiere getters, setters, toString, etc.).|Mínimo (una sola línea de declaración).|
+|**Herencia**|Flexible: Puede extender otras clases.|Restringida: No puede extender otras clases (hereda de `Record`).|
+|**Uso Ideal**|Entidades de Base de Datos y lógica de negocio compleja.|DTOs, respuestas de API y Value Objects.|
+
+---
+### ¿Por qué enfocarnos en clases tradicionales?
+
+A pesar de que Java 25 permite escribir menos código, los estudiantes necesitan comprender explícitamente cómo funcionan los **atributos, constructores y el flujo de datos**.
+
+Los **Records** son herramientas de productividad que "ocultan" la infraestructura del objeto. Si aprendes a usar Records sin entender las clases tradicionales, tendrás dificultades para trabajar con lógica personalizada o frameworks que aún dependen de la mutabilidad controlada. Recomendamos migrar a Records una vez que hayas dominado el ciclo de vida de un objeto tradicional.
 
 ---
 

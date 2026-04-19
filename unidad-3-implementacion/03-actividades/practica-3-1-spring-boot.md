@@ -321,7 +321,7 @@ Con el `pom.xml` configurado, vamos a generar las clases.
 
 4. **Desactivar generación de modelos:** Comentar el plugin que permite generar los modelos.
 
-¡Listo! Ahora tu proyecto "conoce" las estructuras de datos (Modelos/POJOs) definidas en tu API. 
+¡Listo! Ahora tu proyecto "conoce" las estructuras de datos (Modelos/POJOs) definidas en tu API.
 
 ---
 
@@ -422,7 +422,7 @@ Supongamos que tu OAS define un endpoint `POST /products` que recibe un `Product
             }
             
             // Simulamos buscar la reserva en la base de datos
-            // En un caso real, aquí harías: reservationService.findById(reservationId)
+            // En un caso real, aquí harías: productService.findById(productId)
             
             // Simulamos que encontramos la reserva
             ProductResponse productResponse = new ProductResponse();
@@ -562,7 +562,7 @@ Los controladores no deben tener lógica de negocio (cálculos, acceso a base de
         {
             System.out.println("Controller - Product recibido: " + productRequest.getName());
 
-            // El controller delega la lógica al servicio
+            // El controller delega la lógica al service
             ProductResponse productResponse = productService.createProduct(productRequest);
         
             // Devolvemos la respuesta con el código 201 (CREATED)
@@ -589,7 +589,7 @@ Los controladores no deben tener lógica de negocio (cálculos, acceso a base de
                 return ResponseEntity.badRequest().body(errorResponse);
             }
             
-            // El controller delega la lógica al servicio
+            // El controller delega la lógica al service
             ProductResponse productResponse = productService.getProductById(productId.toString());
 
             // Devolvemos la consulta con código 200 (OK)
@@ -628,7 +628,7 @@ Ahora es posible tener más información de salud del servicio.
 
 3. **Abrir Postman.**
 
-4. **Probar el `POST /reservations`:**
+4. **Probar el `POST /products`:**
 
     - **Método:** `POST`
 

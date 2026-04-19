@@ -15,7 +15,7 @@
     - [Capa Model (Persistencia de Datos)](#capa-model-persistencia-de-datos)
   - [4. 💾 Acceso a Datos](#4--acceso-a-datos)
     - [Hibernate ORM con Panache](#hibernate-orm-con-panache)
-  - [5. ☕ Java 21 y Modelado](#5--java-21-y-modelado)
+  - [5. ☕ Java 25 y Modelado](#5--java-25-y-modelado)
     - [Clase Tradicional (POJO)](#clase-tradicional-pojo)
     - [Java Record (Inmutabilidad Moderna)](#java-record-inmutabilidad-moderna)
   - [6. 📋 Tabla Comparativa de Anotaciones Jakarta EE](#6--tabla-comparativa-de-anotaciones-jakarta-ee)
@@ -76,9 +76,9 @@ El Quarkus Portal es la herramienta oficial para generar proyectos base. Funcion
 **Flujo de generación:**
 ```
 Usuario configura:
-├── Lenguaje: Java 21
+├── Lenguaje: Java 25
 ├── Build Tool: Maven
-├── Extensiones: REST, JPA, H2
+├── Extensiones: REST, Hibernate Validator
 └── Genera proyecto
 
 Resultado:
@@ -191,7 +191,7 @@ public class Product extends PanacheEntity {
 
 ---
 
-## 5. ☕ Java 21 y Modelado
+## 5. ☕ Java 25 y Modelado
 
 ### Clase Tradicional (POJO)
 
