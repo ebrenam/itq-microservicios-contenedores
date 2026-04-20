@@ -22,7 +22,6 @@ Al completar esta unidad, el estudiante será capaz de:
 
 - **Implementar testing** de APIs con herramientas automatizadas
 - **Configurar observabilidad** con métricas, logs y trazas distribuidas
-- **Establecer CI/CD** básico para microservicios
 - **Documentar APIs** interactivas con Swagger UI
 
 ---
@@ -43,11 +42,14 @@ unidad-3-implementacion/
 │   ├── 04-java-bean.md
 │   ├── 05-pojo-java-bean-spring-bean.md
 │   ├── 06-slf4j-java-util-logging.md
+│   ├── 07-maven.md
+│   ├── 08-maven-vs-gradle.md
+│   ├── maven.png
 │   ├── oas-ecommerce-complete.yaml
 │   └── oas-ecommerce-product.yaml
 ├── 03-actividades/        # Ejercicios prácticos
-│   ├── practica-3-1-spring-boot.md
-│   ├── practica-3-2-quarkus.md
+│   ├── 01-creacion-proyecto-spring-boot.md
+│   ├── 02-creacion-proyecto-quarkus.md
 │   └── README.md
 └── README.md                 # Esta vista general
 ```
@@ -89,7 +91,7 @@ unidad-3-implementacion/
 
 ## 🛠️ Prácticas de laboratorio
 
-### **[Práctica 3.1: Product Catalog API con Spring Boot](03-actividades/practica-3-1-spring-boot.md)**
+### **[Práctica 3.1: Product Catalog API con Spring Boot](03-actividades/01-creacion-proyecto-spring-boot.md)**
 
 **Objetivo:** Implementar sistema de catálogo de productos usando Spring Boot API-First
 
@@ -98,22 +100,13 @@ unidad-3-implementacion/
 - Proyecto Spring Boot completo con OpenAPI
 - Controladores REST con validación
 - Capa de servicio y manejo de errores
-- Documentación interactiva con Swagger UI
 
-**Evaluación:** Actividades formativas complementarias
-
-### **[Práctica 3.2: Product Catalog API con Quarkus](03-actividades/practica-3-2-quarkus.md)**
+### **[Práctica 3.2: Product Catalog API con Quarkus](03-actividades/02-creacion-proyecto-quarkus.md)**
 
 **Objetivo:** Reimplementar el mismo sistema de catálogo de productos usando Quarkus y JAX-RS
 
-**Entregables:**
-
 - Proyecto Quarkus con generación de código OpenAPI
 - Resources JAX-RS con CDI
-- Testing automatizado y métricas
-- Comparativo de rendimiento vs Spring Boot
-
-**Evaluación:** Actividades formativas complementarias
 
 ---
 
@@ -130,7 +123,7 @@ unidad-3-implementacion/
 
 Esta unidad proporciona la **implementación técnica** de los microservicios diseñados en unidades anteriores:
 
-### **Preparación para Unidad 4 (Resiliencia)**
+### **Preparación para Unidad 4 (Resiliencia y Observabilidad)**
 
 - 🎯 **Servicios implementados** listos para patrones de resiliencia
 - 🎯 **Métricas y observabilidad** base para circuit breakers
@@ -175,16 +168,144 @@ Esta unidad proporciona la **implementación técnica** de los microservicios di
 
 ---
 
+## � Material de Apoyo y Referencias
+
+### **Libros Recomendados**
+
+#### **Spring Boot**
+1. **"Spring Boot in Action"** - Craig Walls (2016)
+   - Referencia completa de Spring Boot con ejemplos prácticos
+   - Cobertura de integración, testing y deployment
+   - Disponible en Amazon, O'Reilly, editorial Prentice Hall
+
+2. **"Spring Microservices in Action"** - John Carnell & Illary Huaylupo (2ª edición, 2021)
+   - Patrones y prácticas para microservicios con Spring Boot
+   - Incluye Service Discovery, Load Balancing, Configuration
+   - Editorial Manning
+
+3. **"Mastering Spring Cloud"** - Piotr Mińkowski (2ª edición, 2019)
+   - Spring Cloud para arquitecturas distribuidas
+   - Cloud-native patterns con Spring
+   - Editorial Packt Publishing
+
+#### **Quarkus**
+1. **"Quarkus in Action"** - Jason Porter & Daniel Oh (2023)
+   - Guía completa de Quarkus desde lo básico
+   - Cloud-native Java applications
+   - Editorial Manning
+
+2. **"Building Microservices with Quarkus"** - Alex Soto & Jason Porter (2023)
+   - Patrones específicos para Quarkus
+   - Performance optimization y native compilation
+   - O'Reilly
+
+#### **APIs REST y OpenAPI**
+1. **"RESTful API Design Rulebook"** - Mark Masse (2011)
+   - Principios fundamentales de diseño REST
+   - Mejores prácticas y anti-patterns
+   - Editorial O'Reilly
+
+2. **"Designing APIs with Swagger and OpenAPI"** - Josh Ponelat & Lukas Rosenstock (2020)
+   - Especificación OpenAPI 3.0
+   - Tools y generación de código
+   - Editorial Manning
+
+### **Cursos en Línea Recomendados**
+
+#### **Spring Boot (Video tutoriales)**
+- **Udemy**: "Spring Boot Microservices" - Bharath Thippireddy
+  - Tiempo: 15+ horas | Nivel: Intermedio | Lenguaje: Inglés
+  - URL: https://www.udemy.com/course/microservices-with-spring-boot-and-spring-cloud/
+
+- **Coursera**: "Microservices Architecture" - IBM
+  - Tiempo: 10 horas | Nivel: Intermedio | Acceso: Auditoria gratuita disponible
+  - URL: https://www.coursera.org/learn/microservices-architecture
+
+- **YouTube**: "Spring Boot Tutorial" - telusko
+  - Playlist completa de Spring Boot
+  - URL: https://www.youtube.com/playlist?list=PLsyeobzWxl7rJFbKPrFsPREMqxME0sI7b
+
+#### **Quarkus (Video tutoriales)**
+- **Red Hat Developers**: "Getting Started with Quarkus" (Official)
+  - Contenido oficial en YouTube
+  - URL: https://www.youtube.com/watch?v=DXNfRr3lJYo
+
+- **YouTube**: "Quarkus Framework Tutorial" - Code Decode
+  - Introducción práctica a Quarkus
+  - URL: https://www.youtube.com/watch?v=iHFUIqj_A7o
+
+- **Linux Academy / A Cloud Guru**: "Quarkus Mastery"
+  - Nivel: Intermedio a Avanzado
+  - Con laboratorios prácticos
+
+#### **API-First Development**
+- **Postman Learning Center**: "API Fundamentals"
+  - Acceso gratuito, tutoriales interactivos
+  - URL: https://learning.postman.com/docs/getting-started/introduction/
+
+- **OpenAPI Initiative**: "OpenAPI Documentation"
+  - Documentación oficial y ejemplos
+  - URL: https://www.openapis.org/
+
+### **Documentación Oficial**
+
+#### **Spring Boot**
+- [Spring Boot Official Documentation](https://spring.io/projects/spring-boot)
+- [Spring Web MVC Documentation](https://docs.spring.io/spring-framework/reference/web/webmvc.html)
+- [Spring Boot Actuator](https://spring.io/guides/gs/actuator-service/)
+
+#### **Quarkus**
+- [Quarkus Official Guide](https://quarkus.io/guides/)
+- [Quarkus API Reference](https://quarkus.io/api/)
+- [JAX-RS with Quarkus](https://quarkus.io/guides/rest-json)
+
+#### **OpenAPI y Swagger**
+- [OpenAPI 3.0 Specification](https://spec.openapis.org/oas/v3.0.3)
+- [Swagger Editor](https://editor.swagger.io/)
+- [OpenAPI Generator](https://openapi-generator.tech/)
+
+### **Herramientas Online**
+
+1. **Swagger Editor** - https://editor.swagger.io/
+   - Editor visual para especificaciones OpenAPI
+   - Preview en tiempo real
+
+2. **OpenAPI Generator** - https://start.openapi-generator.tech/
+   - Generador de código desde especificaciones
+
+3. **Postman** - https://www.postman.com/
+   - Testing de APIs
+   - Colecciones de ejemplos
+
+4. **GitHub Copilot** - https://github.com/features/copilot
+   - Asistencia en codificación
+   - Sugerencias contextuales
+
+### **Blogs y Artículos Técnicos**
+
+- **Spring Blog**: https://spring.io/blog
+- **Baeldung** (Spring & Java): https://www.baeldung.com/
+- **DZone** (Microservices): https://dzone.com/
+- **RedHat Developer** (Quarkus): https://developers.redhat.com/products/quarkus
+
+### **Repositorios de Referencia en GitHub**
+
+- **Spring Boot Examples**: https://github.com/spring-projects/spring-boot/tree/main/spring-boot-samples
+- **Quarkus Examples**: https://github.com/quarkusio/quarkus-quickstarts
+- **OpenAPI Generator Examples**: https://github.com/OpenAPITools/openapi-generator/tree/master/samples
+
+### **Comunidades y Foros**
+
+- **Stack Overflow**
+  - Tags: `spring-boot`, `quarkus`, `openapi`, `java-microservices`
+  
+- **Reddit**
+  - r/java, r/springframework, r/microservices
+  
+- **Spring Community** - https://spring.io/community
+  
+- **Quarkus Community** - https://quarkus.io/community/
+
 ---
 
-**Preparado por:** Profesor del Curso
-**Fecha:** Diciembre 2025
-**Versión:** 1.0
-
----
-
-**Navegación:**
-
-- ← [Unidad 2: Diseño y Modelado](../unidad-2-diseno/README.md)
-- → [Unidad 4: Resiliencia y Fault Tolerance](../unidad-4-resiliencia/README.md)
-- ↑ [Índice General del Curso](../README.md)
+**Anterior:** [← Unidad 2: Diseño](../unidad-2-diseno/README.md) | **Siguiente:** [Unidad 4: Contenedores →](../unidad-4-contenedores/README.md)

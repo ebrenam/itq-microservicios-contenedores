@@ -55,7 +55,7 @@ Generaremos la estructura base del proyecto.
 
 La organización es fundamental.
 
-1. **Colocar el OAS:** Dentro de la carpeta `src/main/resources`, crea una nueva carpeta llamada `api`. Copia tu archivo (ej. `openapi.yaml`) dentro de ella.
+1. **Colocar el OAS:** Dentro de la carpeta `src/main/resources`, crea una nueva carpeta llamada `api`. Copia tu archivo (ej. [**openapi.yaml**](../02-recursos/oas-ecommerce-product.yaml).) dentro de ella.
 
     - Ruta final: `src/main/resources/api/openapi.yaml`
 

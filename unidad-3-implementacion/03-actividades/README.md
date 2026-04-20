@@ -18,9 +18,8 @@ Las prácticas de la Unidad 3 están diseñadas para que los estudiantes impleme
 
 ## 📚 Lista de prácticas
 
-### [Práctica 3.1: Implementación con Spring Boot](practica-3-1-spring-boot.md)
+### [Práctica 3.1: Implementación con Spring Boot](01-creacion-proyecto-spring-boot.md)
 
--   **Modalidad:** Individual
 -   **Objetivo:** Desarrollar un microservicio RESTful para el catálogo de productos utilizando **Spring Boot** y el enfoque API-First.
 -   **Entregables:**
     -   Proyecto Spring Boot completo con el código generado desde OpenAPI.
@@ -28,9 +27,8 @@ Las prácticas de la Unidad 3 están diseñadas para que los estudiantes impleme
     -   Capa de servicio (`@Service`) para la lógica de negocio.
     -   Documentación interactiva con Swagger UI.
 
-### [Práctica 3.2: Implementación con Quarkus](practica-3-2-quarkus.md)
+### [Práctica 3.2: Implementación con Quarkus](02-creacion-proyecto-quarkus.md)
 
--   **Modalidad:** Individual
 -   **Objetivo:** Reimplementar el mismo microservicio de catálogo de productos utilizando **Quarkus** para comparar el desarrollo, rendimiento y características Cloud-Native.
 -   **Entregables:**
     -   Proyecto Quarkus completo con el código generado desde OpenAPI.
