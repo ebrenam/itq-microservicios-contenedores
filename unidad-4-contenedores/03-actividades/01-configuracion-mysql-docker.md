@@ -358,7 +358,7 @@ docker start mysql-quarkus
 **Esperar unos segundos y verificar:**
 
 ```bash
-docker logs mysql-quarkus | tail -5
+docker logs --tail 5 mysql-quarkus
 ```
 
 #### 6.3.4 Verificar persistencia después del reinicio
