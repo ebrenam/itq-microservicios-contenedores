@@ -1,0 +1,784 @@
+openapi: 3.0.4
+info:
+  title: Sistema Financiero Integral (FinanTec)
+  description: API REST para la gestión de usuarios, tarjetas, préstamos, pagos y movimientos.
+  version: 1.0.0
+  contact:
+    name: MARS
+    email: mars@gmail.com
+
+servers:
+  - url: http://localhost:8080/api/v1
+    description: Servidor de desarrollo
+  - url: https://api.finatec.com/api/v1
+    description: Servidor de producción
+
+tags:
+  - name: usuarios
+    description: Operaciones relacionadas con el registro, autenticación y consulta de usuarios
+  - name: tarjetas
+    description: Operaciones relacionadas con el alta, baja y consulta de tarjetas
+  - name: prestamos
+    description: Operaciones relacionadas con el registro y consulta de préstamos
+  - name: pagos
+    description: Operaciones relacionadas con el registro de pagos de tarjetas y préstamos
+  - name: movimientos
+    description: Operaciones relacionadas con ingresos, gastos e historial financiero
+
+paths:
+  /usuarios:
+    post:
+      summary: Registrar nuevo usuario
+      description: Registra un nuevo usuario en el sistema financiero
+      operationId: createUser
+      tags:
+        - usuarios
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Usuario'
+      responses:
+        '201':
+          description: Usuario registrado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsuarioResponse'
+        '400':
+          description: Datos de entrada inválidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '409':
+          description: El usuario ya existe
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '500':
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+
+  /usuarios/login:
+    post:
+      summary: Iniciar sesión
+      description: Permite autenticar a un usuario registrado en el sistema
+      operationId: loginUser
+      tags:
+        - usuarios
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: Inicio de sesión exitoso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '401':
+          description: Credenciales inválidas
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '500':
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+
+  /tarjetas:
+    post:
+      summary: Dar de alta tarjeta
+      description: Registra una nueva tarjeta de crédito o débito para un usuario
+      operationId: createCard
+      tags:
+        - tarjetas
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Tarjeta'
+      responses:
+        '201':
+          description: Tarjeta registrada exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TarjetaResponse'
+        '400':
+          description: Datos de entrada inválidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '500':
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+
+  /tarjetas/{tarjetaId}/cancelar:
+    patch:
+      summary: Dar de baja tarjeta
+      description: Cancela una tarjeta registrada en el sistema
+      operationId: deactivateCard
+      tags:
+        - tarjetas
+      parameters:
+        - name: tarjetaId
+          in: path
+          description: ID de la tarjeta a cancelar
+          required: true
+          schema:
+            type: integer
+          example: 101
+      responses:
+        '200':
+          description: Tarjeta cancelada exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TarjetaResponse'
+        '404':
+          description: Tarjeta no encontrada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '500':
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+
+  /tarjetas/{tarjetaId}/saldo:
+    get:
+      summary: Visualizar saldo disponible
+      description: Consulta el saldo disponible de una tarjeta registrada
+      operationId: getCardBalance
+      tags:
+        - tarjetas
+      parameters:
+        - name: tarjetaId
+          in: path
+          description: ID de la tarjeta a consultar
+          required: true
+          schema:
+            type: integer
+          example: 101
+      responses:
+        '200':
+          description: Saldo disponible consultado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SaldoTarjetaResponse'
+        '404':
+          description: Tarjeta no encontrada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '500':
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+
+  /prestamos:
+    post:
+      summary: Dar de alta préstamo
+      description: Registra un nuevo préstamo para un usuario
+      operationId: createLoan
+      tags:
+        - prestamos
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Prestamo'
+      responses:
+        '201':
+          description: Préstamo registrado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PrestamoResponse'
+        '400':
+          description: Datos de entrada inválidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '500':
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+
+  /prestamos/{prestamoId}/cancelar:
+    patch:
+      summary: Dar de baja préstamo
+      description: Cancela un préstamo registrado en el sistema
+      operationId: cancelLoan
+      tags:
+        - prestamos
+      parameters:
+        - name: prestamoId
+          in: path
+          description: ID del préstamo a cancelar
+          required: true
+          schema:
+            type: integer
+          example: 201
+      responses:
+        '200':
+          description: Préstamo cancelado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PrestamoResponse'
+        '404':
+          description: Préstamo no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '500':
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+
+  /prestamos/{prestamoId}/deuda:
+    get:
+      summary: Visualizar deuda pendiente
+      description: Consulta la deuda pendiente de un préstamo
+      operationId: getPendingDebt
+      tags:
+        - prestamos
+      parameters:
+        - name: prestamoId
+          in: path
+          description: ID del préstamo a consultar
+          required: true
+          schema:
+            type: integer
+          example: 201
+      responses:
+        '200':
+          description: Deuda pendiente consultada exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeudaPrestamoResponse'
+        '404':
+          description: Préstamo no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '500':
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+
+  /pagos/prestamos:
+    post:
+      summary: Registrar pago de préstamo
+      description: Registra un pago realizado a un préstamo existente
+      operationId: registerLoanPayment
+      tags:
+        - pagos
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PagoPrestamo'
+      responses:
+        '201':
+          description: Pago de préstamo registrado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PagoResponse'
+        '400':
+          description: Datos de entrada inválidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '404':
+          description: Préstamo no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '500':
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+
+  /pagos/tarjetas:
+    post:
+      summary: Registrar pago de tarjeta
+      description: Registra un pago realizado a una tarjeta existente
+      operationId: registerCardPayment
+      tags:
+        - pagos
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PagoTarjeta'
+      responses:
+        '201':
+          description: Pago de tarjeta registrado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PagoResponse'
+        '400':
+          description: Datos de entrada inválidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '404':
+          description: Tarjeta no encontrada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '500':
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+
+  /movimientos/ingresos:
+    post:
+      summary: Registrar ingreso
+      description: Registra un ingreso en el historial financiero del usuario
+      operationId: registerIncome
+      tags:
+        - movimientos
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Ingreso'
+      responses:
+        '201':
+          description: Ingreso registrado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MovimientoResponse'
+        '400':
+          description: Datos de entrada inválidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '500':
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+
+  /movimientos/gastos:
+    post:
+      summary: Registrar gasto
+      description: Registra un gasto en el historial financiero del usuario
+      operationId: registerExpense
+      tags:
+        - movimientos
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Gasto'
+      responses:
+        '201':
+          description: Gasto registrado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MovimientoResponse'
+        '400':
+          description: Datos de entrada inválidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '500':
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+
+  /movimientos/historial:
+    get:
+      summary: Consultar historial de movimientos
+      description: Consulta el historial de ingresos y gastos registrados por el usuario
+      operationId: getMovementsHistory
+      tags:
+        - movimientos
+      parameters:
+        - name: usuarioId
+          in: query
+          description: ID del usuario a consultar
+          required: true
+          schema:
+            type: integer
+          example: 1
+      responses:
+        '200':
+          description: Historial consultado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HistorialMovimientosResponse'
+        '400':
+          description: Parámetros inválidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '500':
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+
+components:
+  schemas:
+    Usuario:
+      type: object
+      required:
+        - nombre
+        - correo
+        - password
+      properties:
+        nombre:
+          type: string
+          minLength: 1
+          maxLength: 200
+          description: Nombre completo del usuario
+          example: "Melina Ayala"
+        correo:
+          type: string
+          format: email
+          description: Correo electrónico del usuario
+          example: "melina@gmail.com"
+        password:
+          type: string
+          format: password
+          minLength: 8
+          description: Contraseña de acceso del usuario
+          example: "MiPassword123"
+
+    UsuarioResponse:
+      allOf:
+        - $ref: '#/components/schemas/Usuario'
+        - type: object
+          required:
+            - id
+          properties:
+            id:
+              type: integer
+              description: ID único del usuario
+              example: 1
+
+    LoginRequest:
+      type: object
+      required:
+        - correo
+        - password
+      properties:
+        correo:
+          type: string
+          format: email
+          example: "melina@gmail.com"
+        password:
+          type: string
+          format: password
+          example: "MiPassword123"
+
+    LoginResponse:
+      type: object
+      required:
+        - mensaje
+      properties:
+        mensaje:
+          type: string
+          example: "Inicio de sesión exitoso"
+
+    Tarjeta:
+      type: object
+      required:
+        - usuarioId
+        - banco
+        - tipo
+      properties:
+        usuarioId:
+          type: integer
+          description: ID del usuario propietario de la tarjeta
+          example: 1
+        banco:
+          type: string
+          description: Nombre del banco emisor
+          example: "BBVA"
+        tipo:
+          type: string
+          enum:
+            - Credito
+            - Debito
+          description: Tipo de tarjeta
+          example: "Credito"
+
+    TarjetaResponse:
+      allOf:
+        - $ref: '#/components/schemas/Tarjeta'
+        - type: object
+          required:
+            - id
+            - estatus
+          properties:
+            id:
+              type: integer
+              example: 101
+            estatus:
+              type: string
+              example: "Activa"
+
+    SaldoTarjetaResponse:
+      type: object
+      required:
+        - tarjetaId
+        - saldoDisponible
+      properties:
+        tarjetaId:
+          type: integer
+          example: 101
+        saldoDisponible:
+          type: number
+          format: double
+          example: 3500.00
+
+    Prestamo:
+      type: object
+      required:
+        - usuarioId
+        - monto
+        - plazoMeses
+      properties:
+        usuarioId:
+          type: integer
+          description: ID del usuario solicitante
+          example: 1
+        monto:
+          type: number
+          format: double
+          minimum: 0
+          description: Monto solicitado
+          example: 10000.00
+        plazoMeses:
+          type: integer
+          minimum: 1
+          description: Plazo del préstamo en meses
+          example: 12
+
+    PrestamoResponse:
+      allOf:
+        - $ref: '#/components/schemas/Prestamo'
+        - type: object
+          required:
+            - id
+            - estatus
+          properties:
+            id:
+              type: integer
+              example: 201
+            estatus:
+              type: string
+              example: "Activo"
+
+    DeudaPrestamoResponse:
+      type: object
+      required:
+        - prestamoId
+        - deudaPendiente
+      properties:
+        prestamoId:
+          type: integer
+          example: 201
+        deudaPendiente:
+          type: number
+          format: double
+          example: 8500.00
+
+    PagoPrestamo:
+      type: object
+      required:
+        - prestamoId
+        - monto
+      properties:
+        prestamoId:
+          type: integer
+          example: 201
+        monto:
+          type: number
+          format: double
+          minimum: 0
+          example: 1200.00
+
+    PagoTarjeta:
+      type: object
+      required:
+        - tarjetaId
+        - monto
+      properties:
+        tarjetaId:
+          type: integer
+          example: 101
+        monto:
+          type: number
+          format: double
+          minimum: 0
+          example: 600.00
+
+    PagoResponse:
+      type: object
+      required:
+        - id
+        - mensaje
+      properties:
+        id:
+          type: integer
+          example: 301
+        mensaje:
+          type: string
+          example: "Pago registrado exitosamente"
+
+    Ingreso:
+      type: object
+      required:
+        - usuarioId
+        - monto
+        - descripcion
+      properties:
+        usuarioId:
+          type: integer
+          example: 1
+        monto:
+          type: number
+          format: double
+          minimum: 0
+          example: 5000.00
+        descripcion:
+          type: string
+          maxLength: 300
+          example: "Depósito de nómina"
+
+    Gasto:
+      type: object
+      required:
+        - usuarioId
+        - monto
+        - descripcion
+      properties:
+        usuarioId:
+          type: integer
+          example: 1
+        monto:
+          type: number
+          format: double
+          minimum: 0
+          example: 350.00
+        descripcion:
+          type: string
+          maxLength: 300
+          example: "Pago de servicios"
+
+    MovimientoResponse:
+      type: object
+      required:
+        - id
+        - mensaje
+      properties:
+        id:
+          type: integer
+          example: 401
+        mensaje:
+          type: string
+          example: "Movimiento registrado exitosamente"
+
+    HistorialMovimientosResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 401
+              tipo:
+                type: string
+                example: "Ingreso"
+              monto:
+                type: number
+                format: double
+                example: 5000.00
+              descripcion:
+                type: string
+                example: "Depósito de nómina"
+
+    ApiError:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: string
+          example: "INVALID_INPUT"
+        message:
+          type: string
+          example: "Los datos enviados no cumplen con el esquema."
